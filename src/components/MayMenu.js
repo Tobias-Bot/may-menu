@@ -37,6 +37,38 @@ class MayMenu extends React.Component {
           title: "Музыкальная беседа",
           url: "https://vk.me/join/FAo2ANp5R1v3_06Ve78hkHpsQzpNehEGFP4=",
         },
+        {
+          background:
+            "https://64.media.tumblr.com/ec3633ff37e3bddc5e8b6b6fe1376578/tumblr_p738c6E3231x51jolo1_500.gifv",
+          text:
+            "Готовим, делимся рецептами разных вкусностей и просто общаемся",
+          title: "Вкусности",
+          url: "https://vk.me/join/RjL4M8AlvN4bRI_s3KcUeO3WXq516udElHQ=",
+        },
+        {
+          background:
+            "https://64.media.tumblr.com/2153d49613276273faefe3438880a18b/tumblr_pc8zo8RRNl1spz2y6o1_500.gifv",
+          text:
+            "Делимся друг с другом своими фоточками",
+          title: "Фоточки",
+          url: "https://vk.me/join/QvXRyOR1rxso55Cb_7vcIV17cJ/7QYNsDl0=",
+        },
+        {
+          background:
+            "https://64.media.tumblr.com/680601d1f7347176cbf6fcb8f4f5ae95/tumblr_pnyv74Wo6A1rbud4zo1_500.gifv",
+          text:
+            "Делимся новостями, учимся беречь планету, а также просто общаемся",
+          title: "Природа и экология",
+          url: "https://vk.me/join/sIc/OP9ga/1jiL0z8zj5qVKKaNpKyX5ZnnA=",
+        },
+        {
+          background:
+            "https://64.media.tumblr.com/923914778b43c8d313638fe5dab99956/tumblr_oksyacQXZQ1t0y865o1_540.gifv",
+          text:
+            "Читаем, смотрим и обсуждаем книги и фильмы",
+          title: "Книги и фильмы",
+          url: "https://vk.me/join/Guq2MpQmtbo3OxN1oX72xfdAcM_E522CPwQ=",
+        },
       ],
       apps: [
         {
