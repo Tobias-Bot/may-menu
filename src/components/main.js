@@ -67,9 +67,11 @@ class Main extends React.Component {
       src = "https://64.media.tumblr.com/fb6257322a3e73e7aa7247ba2b678163/tumblr_pp3mmshJhz1xvjko7o1_1280.gifv";
     }
 
-    if (moment >= 22 && moment < 6) {
+    if (moment >= 22 || moment < 6) {
       src = "https://64.media.tumblr.com/e393e16e2c542a4f3949aa880980fcc5/9741c9e166cefc10-b1/s540x810/983ca0fc2a6aa7c48679cde31a14dc810272f16e.gifv";
     }
+
+    console.log(src);
 
     return (
       <div>

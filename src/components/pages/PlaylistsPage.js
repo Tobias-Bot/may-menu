@@ -34,7 +34,7 @@ class PlaylistsPage extends React.Component {
             <img
               src={playlist.cover}
               className="card-img-top"
-              style={{ borderRadius: "10px 10px 0 0", maxHeight: "400px" }}
+              style={{ borderRadius: "10px 10px 0 0", maxHeight: "430px" }}
               alt="playlist-cover"
             />
           ) : (
