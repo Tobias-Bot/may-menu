@@ -1,0 +1,83 @@
+.inputCard {
+  position: relative;
+  width: 100%;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+  background-color: #ffe3e0;
+}
+
+.inputTitle {
+  width: 100%;
+  margin: 5px 0;
+  padding: 5px;
+  color: rgba(0, 0, 0, 0.8);
+  font-size: 25px;
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  outline: none;
+}
+
+.inputText {
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 110px;
+  margin: 10px 0;
+  padding: 5px;
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 18px;
+  background-color: rgba(0, 0, 0, 0);
+  resize: none;
+  border: none;
+  outline: none;
+}
+
+.inputCover {
+  width: 100%;
+  margin: 5px 0;
+  padding: 5px;
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 16px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  resize: none;
+  border: none;
+  outline: none;
+}
+
+.suggestBtn {
+    position: relative;
+    width: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 20px 0;
+    padding: 3px 5px;
+    font-weight: 500;
+    font-size: 20px;
+    border-radius: 8px;
+    background-color: #fac2bc;
+    color: rgba(0, 0, 0, 0.8);
+    box-shadow: 0px 3px 10px black;
+}
+.suggestBtn:hover,
+.suggestBtn:focus {
+    outline: none;
+}
+
+.successText {
+  width: 100%;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.successIcon {
+  width: 100%;
+  font-size: 80px;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.4);
+}

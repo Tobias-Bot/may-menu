@@ -1,0 +1,28 @@
+.DateBlock {
+    position: absolute;
+    width: 100%;
+    top: 10px;
+    left: 30px;
+}
+
+.Timer {
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 20px;
+    font-size: 50px;
+    font-weight: 500;
+    color: #ffc2bb;
+    text-shadow: -6px 6px 15px black;
+}
+
+.Day {
+    position: relative;
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    font-size: 25px;
+    font-weight: 500;
+    color: #ffc2bb;
+    text-shadow: -3px 5px 10px black;
+}
