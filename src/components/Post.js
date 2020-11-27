@@ -8,8 +8,10 @@ class Post extends React.Component {
     this.state = {
       id: this.props.content.id,
       title: this.props.content.title,
+      color: this.props.content.color,
       img: this.props.content.img,
       url: this.props.content.url,
+
     };
 
     this.savePost = this.savePost.bind(this);
@@ -68,10 +70,10 @@ class Post extends React.Component {
               </a>
             </button>
           </div>
-          <div className="postTitle" style={{ color: data.textColor }}>
+          <div className="postTitle">
             {data.title}
           </div>
-          <Image url={data.img} alt="article's cover" />
+          <Image data={data} alt="article's cover" />
           <div className="postFooter"></div>
         </div>
       </div>

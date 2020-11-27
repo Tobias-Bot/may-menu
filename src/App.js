@@ -15,7 +15,7 @@ import ChatsPage from "./components/pages/ChatsPage";
 import StreamsPage from "./components/pages/StreamsPage";
 // import MoviePage from "./components/pages/MoviePage";
 // import SuggestChatPage from "./components/pages/suggestPages/SuggestChatPage.js";
-// import BookmarksPage from "./components/BookmarksPage.js";
+import BookmarksPage from "./components/BookmarksPage.js";
 import PlaylistsPage from "./components/pages/PlaylistsPage.js";
 // import SuggestPage from "./components/pages/SuggestPage.js";
 import AppsPage from "./components/pages/AppsPage";
@@ -39,7 +39,7 @@ class App extends React.Component {
       <div>
         <NavLink className="linkStyle" to="/may-posts">
           <div className="btnInfo">
-            <i class="fas fa-signature"></i> статьи
+            <i className="fas fa-signature"></i> статьи
           </div>
         </NavLink>
         <NavLink className="linkStyle" to="/may-chats">
@@ -136,6 +136,9 @@ class App extends React.Component {
                   </Route>
                   <Route path="/may-apps">
                     <AppsPage />
+                  </Route>
+                  <Route path="/may-bookmarks">
+                    <BookmarksPage />
                   </Route>
                 </Switch>
               </div>

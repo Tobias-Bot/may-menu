@@ -3,6 +3,7 @@ import React from "react";
 import Post from "../Post";
 
 import articles from "../../components/data/articles";
+import { NavLink } from "react-router-dom";
 
 class PostsPage extends React.Component {
   constructor(props) {
@@ -163,6 +164,18 @@ class PostsPage extends React.Component {
 
     return (
       <div>
+        <div className="row mt-2 mb-2">
+          <a className="linkStyle" href="https://vk.com/warmay/article">
+            <div className="btnInfoRe">
+              <i className="fas fa-rss"></i> новые
+            </div>
+          </a>
+          <NavLink className="linkStyle" to="/may-bookmarks">
+            <div className="btnInfoRe">
+              <i className="fas fa-bookmark"></i> сохраненные
+            </div>
+          </NavLink>
+        </div>
         <div className="row">
           <div className="col">{posts1}</div>
           <div className="col">{posts2}</div>
