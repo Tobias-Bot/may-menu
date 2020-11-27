@@ -9,7 +9,7 @@ import "./App.css";
 import logo from "./pics/logo.png";
 
 import Main from "./components/main.js";
-// import AuthPage from "./components/pages/AuthPage";
+import PostsPage from "./components/pages/PostsPage";
 // import NewsPage from "./components/pages/NewsPage";
 import ChatsPage from "./components/pages/ChatsPage";
 import StreamsPage from "./components/pages/StreamsPage";
@@ -37,6 +37,11 @@ class App extends React.Component {
   render() {
     let bar = (
       <div>
+        <NavLink className="linkStyle" to="/may-posts">
+          <div className="btnInfo">
+            <i class="fas fa-signature"></i> статьи
+          </div>
+        </NavLink>
         <NavLink className="linkStyle" to="/may-chats">
           <div className="btnInfo">
             <i className="fas fa-comment"></i> чаты
@@ -116,6 +121,9 @@ class App extends React.Component {
                 <Switch>
                   <Route exact path="/">
                     <Main onModal={this.setModal} />
+                  </Route>
+                  <Route path="/may-posts">
+                    <PostsPage />
                   </Route>
                   <Route path="/may-chats">
                     <ChatsPage />
