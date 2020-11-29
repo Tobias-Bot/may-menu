@@ -1,5 +1,12 @@
 const articles = [
     {
+        id: 6,
+        title: "Как правильно говорить с человеком о селфхарме, чтобы помочь ему?", 
+        color: "#D7DF6D",
+        img: "https://sun9-52.userapi.com/impg/TLfrdpOjjxdQSByJqtGompZEUCwitLNrhMM8nQ/st720G64eRA.jpg?size=720x946&quality=96&proxy=1&sign=739b5e6901ed1b57c0e51090663e8a3c",
+        url: "https://vk.com/wall-160404048_158841",
+    },
+    {
         id: 5,
         title: "Как помочь человеку, если у него агрессия, апатия, страх или тревога?", 
         color: "#9FE0CA",
