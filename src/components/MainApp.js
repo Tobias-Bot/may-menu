@@ -16,6 +16,7 @@ import BookmarksPage from "./BookmarksPage.js";
 import PlaylistsPage from "./pages/PlaylistsPage.js";
 import SuggestPage from "./pages/SuggestPage.js";
 import AppsPage from "./pages/AppsPage";
+import SearchPage from "./pages/SearchPage";
 
 class MainApp extends React.Component {
   constructor(props) {
@@ -136,12 +137,15 @@ class MainApp extends React.Component {
                   <Route exact path="/suggest">
                     <SuggestPage />
                   </Route>
+                  <Route exact path="/search">
+                    <SearchPage />
+                  </Route>
                 </Switch>
               </div>
             </div>
 
             <div className="footer">
-              <NavLink className="linkStyle" to="/">
+              <NavLink className="linkStyle" to="/search">
                 <div className="btnFooter">
                   <i className="fas fa-search"></i>
                 </div>

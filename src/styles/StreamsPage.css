@@ -74,6 +74,7 @@
 }
 
 .streamComeInBtn {
+  -webkit-appearance: none;
   position: relative;
   display: inline-block;
   z-index: 1;

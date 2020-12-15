@@ -1,6 +1,7 @@
 body {
   /* background: url('') center/150% no-repeat; */
   overflow: hidden;
+  background-color: rgb(25, 25, 34);
 }
 
 .col {
@@ -17,19 +18,6 @@ body {
 
 .card {
   border-radius: 10px;
-}
-
-@media (max-width: 900px) {
-  .card-columns {
-    margin: 0 15px;
-  }
-}
-
-@media (min-width: 900px) {
-  .col {
-    padding-right: 8px;
-    padding-left: 8px;
-  }
 }
 
 ::-webkit-scrollbar-track {
@@ -78,7 +66,7 @@ body {
 }
 
 .header {
-  position: relative;
+  position: fixed;
   z-index: 1;
   width: 70px;
   height: 58px;
@@ -87,7 +75,7 @@ body {
 }
 
 .headerLineTop {
-  position: absolute;
+  position: fixed;
   z-index: 2;
   width: 100%;
   height: 8px;
@@ -95,7 +83,7 @@ body {
 }
 
 .headerLineBot {
-  position: absolute;
+  position: fixed;
   z-index: 1;
   width: 100%;
   height: 51px;
@@ -130,7 +118,7 @@ body {
   padding: 2px 12px 0px 12px;
   color: #cbcfff;
   border-radius: 100px;
-  box-shadow: 0px 2px 5px black;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.7);
   transition: 0.1s all;
 }
 .btnInfo:hover {
@@ -169,6 +157,7 @@ body {
   position: fixed;
   width: 100%;
   height: calc(100% - 110px);
+  margin-top: 55px;
   overflow-x: hidden;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
@@ -219,10 +208,11 @@ body {
   overflow: hidden;
   color: #ffa6d6;
   text-align: center;
-  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.9);
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.6);
   transition: 0.3s all;
 }
-.btnFooterMain:hover {
+.btnFooterMain:hover,
+.btnFooterMain:focus {
   cursor: pointer;
   color: rgba(0, 0, 0, 0.9);
   background-color: #d2d5ff;
