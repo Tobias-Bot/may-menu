@@ -4,6 +4,8 @@ import chats from "../data/chats";
 
 import Chat from "../Chat";
 
+import "../../styles/ChatsPage.css"
+
 class ChatsPage extends React.Component {
   constructor(props) {
     super(props);

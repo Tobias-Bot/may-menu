@@ -21,14 +21,14 @@ class Chat extends React.Component {
           <div className="picBlackout">
             <div className="chatTitle">{chat.title}</div>
             <div className="chatText">{chat.text}</div>
-            <button className="chatComeInBtn">
-              <a
-                style={{ textDecoration: "none", color: "white" }}
-                href={chat.url}
-              >
-                войти
-              </a>
-            </button>
+            <a
+              className="linkStyle"
+              href={chat.url}
+            >
+              <button className="chatComeInBtn" style={{ borderColor: chat.color }}>
+                <span style={{ color: chat.color }}>войти</span>
+              </button>
+            </a>
           </div>
         </div>
       </div>

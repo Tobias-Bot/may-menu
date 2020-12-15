@@ -5,6 +5,8 @@ import Post from "../Post";
 import articles from "../../components/data/articles";
 import { NavLink } from "react-router-dom";
 
+import "../../styles/PostsPage.css";
+
 class PostsPage extends React.Component {
   constructor(props) {
     super(props);
@@ -164,7 +166,7 @@ class PostsPage extends React.Component {
 
     return (
       <div>
-        <div className="row mt-2 mb-2">
+        <div className="headerRe">
           <a className="linkStyle" href="https://vk.com/warmay/article">
             <div className="btnInfoRe">
               <i className="fas fa-rss"></i> новые
@@ -176,9 +178,11 @@ class PostsPage extends React.Component {
             </div>
           </NavLink>
         </div>
-        <div className="row">
-          <div className="col">{posts1}</div>
-          <div className="col">{posts2}</div>
+        <div className="postsWrapper">
+          <div className="row">
+            <div className="col">{posts1}</div>
+            <div className="col">{posts2}</div>
+          </div>
         </div>
       </div>
     );

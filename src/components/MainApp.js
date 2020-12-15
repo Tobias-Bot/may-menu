@@ -96,25 +96,21 @@ class MainApp extends React.Component {
         </div>
 
         <div>
-          <img
-            className="background"
-            src="https://images.wallpaperscraft.ru/image/oblaka_poristyj_nebo_125791_3840x2400.jpg"
-            alt="background"
-          />
-          <div className="wrapper">
-            <HashRouter>
-              <div className="headerLineTop"></div>
-              <div className="headerLineBot">{bar}</div>
-              <div className="header">
-                <a className="linkStyle" href="https://vk.com/warmay">
-                  <img id="logo" src={logo} alt="logo" />
-                </a>
-              </div>
-              <div
-                className="body"
-                id="contentWindow"
-                onScroll={this.PostsLoader}
-              >
+          <HashRouter>
+            <div className="headerLineTop"></div>
+            <div className="headerLineBot">{bar}</div>
+            <div className="header">
+              <a className="linkStyle" href="https://vk.com/warmay">
+                <img id="logo" src={logo} alt="logo" />
+              </a>
+            </div>
+
+            <div
+              className="body"
+              id="contentWindow"
+              onScroll={this.PostsLoader}
+            >
+              <div className="wrapper">
                 <Switch>
                   <Route exact path="/">
                     <Main onModal={this.setModal} />
@@ -142,29 +138,36 @@ class MainApp extends React.Component {
                   </Route>
                 </Switch>
               </div>
+            </div>
 
-              <div className="footer">
-                <NavLink className="linkStyle" to="/">
-                  <div className="btnFooter">
-                    <i className="fas fa-home"></i>
-                    <div className="btnFooterTitle">домой</div>
-                  </div>
-                </NavLink>
-                <NavLink className="linkStyle" to="/suggest">
-                  <div className="btnFooterMain">
-                    <i className="fas fa-pencil-alt"></i>
-                    <div className="btnFooterMainTitle">пост</div>
-                  </div>
-                </NavLink>
-                <NavLink className="linkStyle" to="/may-apps">
-                  <div className="btnFooter">
-                    <i className="fas fa-th-large"></i>
-                    <div className="btnFooterTitle">приложения</div>
-                  </div>
-                </NavLink>
-              </div>
-            </HashRouter>
-          </div>
+            <div className="footer">
+              <NavLink className="linkStyle" to="/">
+                <div className="btnFooter">
+                  <i className="fas fa-search"></i>
+                </div>
+              </NavLink>
+              <NavLink className="linkStyle" to="/">
+                <div className="btnFooter">
+                  <i className="fas fa-home"></i>
+                </div>
+              </NavLink>
+              <NavLink className="linkStyle" to="/suggest">
+                <div className="btnFooterMain">
+                  <i className="fas fa-pencil-alt"></i>
+                </div>
+              </NavLink>
+              <NavLink className="linkStyle" to="/may-apps">
+                <div className="btnFooter">
+                  <i className="fas fa-th-large"></i>
+                </div>
+              </NavLink>
+              <NavLink className="linkStyle" to="/">
+                <div className="btnFooter">
+                  <i className="fas fa-info-circle"></i>
+                </div>
+              </NavLink>
+            </div>
+          </HashRouter>
         </div>
       </div>
     );

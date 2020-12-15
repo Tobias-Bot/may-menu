@@ -11,7 +11,6 @@ class Post extends React.Component {
       color: this.props.content.color,
       img: this.props.content.img,
       url: this.props.content.url,
-
     };
 
     this.savePost = this.savePost.bind(this);
@@ -44,35 +43,44 @@ class Post extends React.Component {
   }
 
   render() {
+    let data = this.props.content;
+
     const mark = this.isImportant() ? (
-      <button className="postReadBtn" onClick={this.deletePost}>
+      <button
+        className="postReadBtn"
+        style={{ borderColor: data.color }}
+        onClick={this.deletePost}
+      >
         <i className="fas fa-bookmark"></i>
       </button>
     ) : (
-      <button className="postReadBtn" onClick={this.savePost}>
+      <button
+        className="postReadBtn"
+        style={{ borderColor: data.color }}
+        onClick={this.savePost}
+      >
         <i className="far fa-bookmark"></i>
       </button>
     );
-
-    let data = this.props.content;
 
     return (
       <div>
         <div className="postView" style={{ backgroundColor: data.color }}>
           <div className="postHeader">
             {mark}
-            <button className="postReadBtn">
-              <a
-                style={{ textDecoration: "none", color: "white" }}
-                href={data.url}
+            <a
+              style={{ textDecoration: "none", color: "white" }}
+              href={data.url}
+            >
+              <button
+                className="postReadBtn"
+                style={{ borderColor: data.color }}
               >
                 читать
-              </a>
-            </button>
+              </button>
+            </a>
           </div>
-          <div className="postTitle">
-            {data.title}
-          </div>
+          <div className="postTitle">{data.title}</div>
           <Image data={data} alt="article's cover" />
           <div className="postFooter"></div>
         </div>

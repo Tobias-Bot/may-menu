@@ -4,6 +4,8 @@ import streams from "../data/streams";
 
 import randArr from "../functions/randArr";
 
+import "../../styles/StreamsPage.css"
+
 class StreamsPage extends React.Component {
   constructor(props) {
     super(props);
@@ -34,14 +36,11 @@ class StreamsPage extends React.Component {
           <div className="streamPicBlackout">
             <div className="streamTitle">{stream.title}</div>
             <div className="streamText">{stream.text}</div>
-            <button className="streamComeInBtn">
-              <a
-                style={{ textDecoration: "none", color: "white" }}
-                href={stream.url}
-              >
+            <a href={stream.url}>
+              <button className="streamComeInBtn">
                 {stream.date !== "live" ? "перейти" : "присоединиться"}
-              </a>
-            </button>
+              </button>
+            </a>
             <div className="streamDate">
               {stream.date !== "live" ? (
                 <div>

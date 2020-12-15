@@ -4,6 +4,8 @@ import playlists from "../data/playlists";
 
 import randArr from "../functions/randArr";
 
+import "../../styles/PlaylistsPage.css"
+
 class PlaylistsPage extends React.Component {
   constructor(props) {
     super(props);
@@ -29,19 +31,28 @@ class PlaylistsPage extends React.Component {
 
     response = playlists.map((playlist, i) => {
       return (
-        <div className="card mt-3 mb-4 playlist" style={{backgroundColor: playlist.color}} key={playlist.title + i}>
+        <div
+          className="card mt-4 mb-4 playlist"
+          style={{ backgroundColor: playlist.color }}
+          key={playlist.title + i}
+        >
           {playlist.cover ? (
             <img
               src={playlist.cover}
               className="card-img-top"
-              style={{ borderRadius: "10px 10px 0 0", maxHeight: "430px" }}
+              style={{ borderRadius: "10px 10px 0 0", padding: "1px" }}
               alt="playlist-cover"
             />
           ) : (
             ""
           )}
           <a href={playlist.url}>
-            <button className="btnPlaylist">слушать</button>
+            <button
+              className="btnPlaylist"
+              style={{ color: playlist.color, borderColor: playlist.color }}
+            >
+              слушать
+            </button>
           </a>
           <div className="card-body">
             <h5 className="card-title">{playlist.title}</h5>

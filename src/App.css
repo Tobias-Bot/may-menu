@@ -4,8 +4,15 @@ body {
 }
 
 .col {
-  padding-right: 6px;
-  padding-left: 6px;
+  padding-right: 8px;
+  padding-left: 8px;
+}
+
+@media (min-width: 750px) {
+  .col {
+    padding-right: 11px;
+    padding-left: 11px;
+  }
 }
 
 .card {
@@ -32,19 +39,19 @@ body {
 ::-webkit-scrollbar-thumb {
   -webkit-border-radius: 0px;
   border-radius: 0px;
-  background-color: #ffe3e0;
+  background-color: #abb0ff;
 }
 
 ::-webkit-scrollbar {
   width: 3px;
-  height: 4px;
+  height: 2px;
 }
 
 #logo {
   position: absolute;
   width: 64px;
-  top: -3px;
-  left: -3px;
+  top: -5px;
+  left: -5px;
 }
 
 .modal {
@@ -52,23 +59,13 @@ body {
 }
 
 .wrapper {
-  position: fixed;
+  position: relative;
+  width: 100%;
+  padding: 5px 10px 20px 10px;
   left: 50%;
   transform: translateX(-50%);
-  max-width: 900px;
-  width: 100%;
-  height: 100%;
-  border-radius: 5px;
-  background-color: rgb(27, 27, 36);
-  box-shadow: 0 5px 55px black;
-}
-
-@media (min-width: 900px) {
-  .wrapper {
-    margin-top: 40px;
-    height: 91%;
-    border-radius: 10px;
-  }
+  max-width: 750px;
+  overflow: hidden;
 }
 
 .background {
@@ -83,25 +80,18 @@ body {
 .header {
   position: relative;
   z-index: 1;
-  width: 74px;
-  height: 63px;
-  background: #0f0f0f;
+  width: 70px;
+  height: 58px;
+  background: linear-gradient(180deg, #ff8fcb, #abb0ff);
   border-radius: 0 0 100px 0;
-  background: rgb(17, 17, 17);
 }
 
 .headerLineTop {
   position: absolute;
   z-index: 2;
   width: 100%;
-  height: 12px;
-  background: rgb(17, 17, 17);
-}
-
-@media (min-width: 900px) {
-  .headerLineTop {
-    border-radius: 0 10px 0 0;
-  }
+  height: 8px;
+  background: linear-gradient(45deg, #ff8fcb, #abb0ff);
 }
 
 .headerLineBot {
@@ -110,13 +100,13 @@ body {
   width: 100%;
   height: 51px;
   white-space: nowrap;
-  margin-top: 12px;
+  margin-top: 8px;
   padding: 4px 10px 5px 70px;
   -webkit-overflow-scrolling: touch;
   overflow: hidden;
   overflow-x: scroll;
-  background-color: rgba(255, 234, 254, 0.1);
-  box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.5);
+  background-color: rgb(37, 37, 51);
+  box-shadow: 0px 3px 10px black;
 }
 
 .MainPageCover {
@@ -134,21 +124,20 @@ body {
   display: inline-block;
   height: 30px;
   text-align: center;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 500;
-  margin: 3px 6px;
-  padding: 1px 12px 2px 12px;
-  color: #ffe3e0;
-  background-color: rgba(0, 0, 0, 0.8);
-  border: 1.5px solid #ffe3e0;
+  margin: 5px 6px 0px 6px;
+  padding: 2px 12px 0px 12px;
+  color: #cbcfff;
   border-radius: 100px;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.8);
+  box-shadow: 0px 2px 5px black;
   transition: 0.1s all;
 }
 .btnInfo:hover {
   cursor: pointer;
-  background-color: #ffe3e0;
   color: rgba(0, 0, 0, 0.9);
+  background: linear-gradient(45deg, #ff8fcb, #a1a8ff);
+  outline: none;
 }
 
 .btnInfoRe {
@@ -158,32 +147,32 @@ body {
   text-align: center;
   font-size: 16px;
   font-weight: 500;
-  margin: 3px 6px;
-  padding: 2px 12px 2px 12px;
-  color: rgba(0, 0, 0, 0.8);
-  background-color: #ffe3e0;
-  border: 1px solid rgba(0, 0, 0, 0.9);
-  border-radius: 100px;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.8);
+  margin: 5px 5px 0px 3px;
+  padding: 2px 12px 0px 12px;
+  background-color: rgb(50, 50, 75);
+  border-radius: 10px;
+  color: #d2d5ff;
+  transition: 0.1s all;
 }
 .btnInfoRe:hover {
   cursor: pointer;
+  background-color: black;
+}
+
+.headerRe {
+  position: relative;
+  width: 100%;
+  margin: 12px 0px;
 }
 
 .body {
   position: fixed;
   width: 100%;
-  height: calc(100% - 118px);
+  height: calc(100% - 110px);
   overflow-x: hidden;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  padding: 10px 17px 50px 17px;
-}
-
-@media (min-width: 900px) {
-  .body {
-    padding: 0 35px 25px 35px;
-  }
+  background-color: rgb(25, 25, 34);
 }
 
 .footer {
@@ -191,60 +180,53 @@ body {
   z-index: 1;
   bottom: 0;
   text-align: center;
-  border-radius: 20px 20px 0 0;
-  border-top: 1px solid #ffe3e0;
+  border-radius: 15px 15px 0 0;
+  border-top: 2px solid #ff9dd1;
   width: 100%;
-  padding: 2px 0 0 0;
-  background-color: rgb(17, 17, 17);
-  box-shadow: 0px -1px 10px rgba(0, 0, 0, 0.5);
-}
-
-@media (min-width: 900px) {
-  .footer {
-    border-radius: 0 0 10px 10px;
-  }
+  padding: 3px 0 5px 0;
+  background-color: rgb(37, 37, 51);
+  box-shadow: 0px -3px 10px black;
 }
 
 .btnFooter {
   position: relative;
   display: inline-block;
-  width: 30%;
-  margin: 0 1%;
-  padding: 2px 0;
+  min-width: 55px;
+  min-height: 30px;
+  margin: 0 5px;
+  padding: 4px 0;
   font-size: 20px;
-  border-radius: 10px;
+  border-radius: 15px;
   overflow: hidden;
-  color: #ffe3e0;
+  color: #d2d5ff;
   text-align: center;
-  transition: 0.2s all;
+  transition: 0.1s all;
 }
 .btnFooter:hover {
   cursor: pointer;
-}
-
-.btnFooterTitle {
-  position: relative;
-  font-size: 12px;
-  font-weight: 500;
-}
-.btnFooterTitle:hover {
-  cursor: pointer;
+  color: rgba(0, 0, 0, 0.9);
+  background-color: rgb(255, 150, 206);
+  outline: none;
 }
 
 .btnFooterMain {
   position: relative;
   display: inline-block;
-  width: 18%;
-  margin: 0 1%;
-  font-size: 25px;
-  border-radius: 10px;
+  width: 65px;
+  margin: 2px 10px;
+  font-size: 28px;
+  border-radius: 18px;
   overflow: hidden;
-  color: #ffe3e0;
+  color: #ffa6d6;
   text-align: center;
-  transition: 0.2s all;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.9);
+  transition: 0.3s all;
 }
 .btnFooterMain:hover {
   cursor: pointer;
+  color: rgba(0, 0, 0, 0.9);
+  background-color: #d2d5ff;
+  outline: none;
 }
 
 .btnFooterMainTitle {
@@ -254,7 +236,7 @@ body {
 }
 
 .modal-content {
-  background-color: white;
+  background-color: #d2d5ff;
   color: rgba(0, 0, 0, 0.8);
 }
 
@@ -273,17 +255,6 @@ body {
   background-color: rgba(17, 17, 17, 0);
 }
 
-.sendPostBtn {
-  padding: 5px 10px;
-  font-size: 18px;
-  font-weight: 500;
-  border-color: white;
-  border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.9);
-  color: white;
-  box-shadow: rgba(0, 0, 0, 0.5);
-}
-
 .centeredText {
   width: 100%;
   text-align: center;
@@ -298,15 +269,15 @@ body {
   text-align: center;
   border-radius: 10px;
   padding: 10px 10px;
-  background-color: #ffe3e0;
+  background-color: rgb(37, 37, 51);
+  color: #cbcfff;
   box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.8);
-  transition: 0.1s all;
+  transition: 0.2s all;
 }
 .icon:hover {
   cursor: pointer;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.8);
-  box-shadow: 0px 1px 20px #ffe3e0;
+  color: rgba(0, 0, 0, 0.9);
+  background-color: #adb4ff;
 }
 
 .iconTitle {
@@ -317,8 +288,7 @@ body {
   font-size: 12px;
   padding: 3px;
   border-radius: 30px;
-  background-color: rgb(0, 0, 0, 0.05);
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.5);
 }
 
 @media (min-width: 900px) {
@@ -338,253 +308,9 @@ body {
   border-radius: 10px 10px 10px 10px;
   background-color: rgba(0, 0, 0, 0.6);
 }
-.btnsTitle:active,
+.btnsTitle:hover,
 .btnsTitle:focus {
   outline: none;
-}
-
-.tab {
-  margin: 0px 10px;
-  font-size: 19px;
-  font-weight: 500;
-  text-shadow: 5px -5px 5px black;
-}
-
-.chatView {
-  position: relative;
-  width: 100%;
-  height: 200px;
-  margin: 25px 0;
-  border-radius: 10px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.8);
-}
-
-@media (min-width: 900px) {
-  .chatView {
-    height: 250px;
-  }
-}
-
-.picBlackout {
-  position: absolute;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  padding: 15px;
-  border-radius: 10px;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.3);
-}
-
-.chatTitle {
-  position: relative;
-  z-index: 1;
-  max-width: 80%;
-  font-weight: 500;
-  font-size: 24px;
-  color: white;
-}
-
-@media (min-width: 900px) {
-  .chatTitle {
-    font-weight: 600;
-    font-size: 27px;
-  }
-}
-
-.chatText {
-  position: relative;
-  z-index: 1;
-  overflow-x: hidden;
-  overflow-y: auto;
-  max-height: 70%;
-  max-width: 80%;
-  margin-top: 15px;
-  font-size: 18px;
-  color: white;
-}
-
-@media (min-width: 900px) {
-  .chatTitle {
-    font-size: 23px;
-  }
-}
-
-.chatComeInBtn {
-  position: absolute;
-  z-index: 1;
-  right: 10px;
-  top: 8px;
-  font-weight: 500;
-  padding: 3px 8px;
-  border-radius: 6px;
-  border: 1.5px solid white;
-  padding: 1px 10px;
-  background-color: rgba(0, 0, 0, 0.5);
-  outline: none;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
-}
-.chatComeInBtn:active,
-.chatComeInBtn:focus {
-  outline: none;
-}
-
-.playlist {
-  background-color: rgba(17, 17, 17);
-  color: white;
-  box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.8);
-}
-
-.btnPlaylist {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  font-size: 16px;
-  font-weight: 500;
-  background-color: rgba(17, 17, 17, 0.5);
-  color: white;
-  border-radius: 5px;
-  border: 1.5px solid white;
-  padding: 1px 10px;
-  box-shadow: 0px 3px 5px black;
-  outline: none;
-}
-.btnPlaylist:active,
-.btnPlaylist:focus {
-  outline: none;
-}
-
-.postView {
-  position: relative;
-  width: 100%;
-  margin: 15px 0;
-  color: black;
-  border-radius: 6px;
-  background-color: white;
-  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.8);
-}
-
-@media (min-width: 900px) {
-  .postView {
-    margin: 25px 0;
-  }
-}
-
-.postTitle {
-  position: relative;
-  width: 100%;
-  padding: 10px 15px 10px 10px;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 20px;
-  color: black;
-  overflow-wrap: break-word;
-}
-
-@media (min-width: 900px) {
-  .postTitle {
-    font-size: 20px;
-    line-height: 25px;
-  }
-}
-
-.postReadBtn {
-  position: relative;
-  float: right;
-  min-width: 30px;
-  top: 6px;
-  right: 5px;
-  margin-left: 3px;
-  padding: 3px 10px;
-  font-weight: 500;
-  font-size: 15px;
-  border-radius: 6px;
-  border: 1.5px solid white;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.7);
-  outline: none;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
-}
-.postReadBtn:active,
-.postReadBtn:focus {
-  outline: none;
-}
-
-.postCover {
-  position: relative;
-  width: 100%;
-  border-radius: 6px;
-  padding: 2px;
-}
-
-.postHeader {
-  position: relative;
-  width: 100%;
-  height: 45px;
-  top: 0;
-  right: 0;
-  padding-left: 6px;
-  margin-bottom: 5px;
-  z-index: 2;
-  border-radius: 3px 3px 0 0;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
-  background-color: rgba(0, 0, 0, 0.2);
-}
-
-.postViews {
-  position: absolute;
-  display: inline;
-  margin-top: 12px;
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(0, 0, 0, 0.5);
-}
-
-@media (min-width: 900px) {
-  .postViews {
-    font-size: 16px;
-    font-weight: 600;
-    margin-top: 8px;
-  }
-}
-
-.postCounts {
-  position: relative;
-  display: inline;
-  margin-right: 10px;
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(0, 0, 0, 0.5);
-}
-
-@media (min-width: 900px) {
-  .postCounts {
-    font-size: 13px;
-    font-weight: 600;
-  }
-}
-
-.postFooter {
-  position: relative;
-  width: 100%;
-  height: 10px;
-  bottom: 0;
-  right: 0;
-  padding-left: 10px;
-  padding-top: 2px;
-  margin-top: 5px;
-  z-index: 2;
-  border-radius: 0 0 3px 3px;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.5);
-  background-color: rgba(0, 0, 0, 0.2);
-}
-
-@media (min-width: 900px) {
-  .postFooter {
-    height: 30px;
-    padding-left: 10px;
-  }
 }
 
 .spinner-border {
@@ -594,7 +320,7 @@ body {
   margin-left: 45%;
   width: 3rem;
   height: 3rem;
-  color: rgb(187, 114, 255);
+  color: rgb(170, 139, 255);
 }
 
 .pageHint {
@@ -603,174 +329,8 @@ body {
   padding: 5px 10px;
   border-radius: 8px;
   text-align: center;
-  font-size: 16px;
-  font-weight: 500;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.3);
-}
-
-.textPage {
-  width: 100%;
-  margin: 25px 0;
-  padding: 15px 10px;
-  border-radius: 8px;
-  background-color: rgba(0, 0, 0, 0.6);
-  color: white;
-  text-align: center;
   font-size: 18px;
-}
-
-.textAuth {
-  position: absolute;
-  top: 0;
-  padding-top: 180px;
-  z-index: 2;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-  color: rgb(255, 155, 208);
-  text-align: center;
-  font-size: 25px;
   font-weight: 500;
-  text-shadow: 0px 1px 20px black;
-}
-
-.imgAuth {
-  position: fixed;
-  z-index: 1;
-  width: 120%;
-  height: 100%;
-}
-
-.btnMain {
-  position: absolute;
-  width: 70%;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 80px;
-  padding: 3px 6px 5px 6px;
-  font-size: 16px;
-  font-weight: 500;
-  color: rgba(0, 0, 0, 0.8);
-  border-radius: 10px;
-  background-color: #c990ff;
-  box-shadow: 0px 5px 15px black;
-}
-.btnMain:active,
-.btnMain:focus {
-  outline: none;
-}
-
-.streamView {
-  position: relative;
-  width: 100%;
-  height: 350px;
-  margin: 25px 0;
-  border-radius: 10px;
-  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.8);
-  text-align: center;
-}
-
-@media (min-width: 900px) {
-  .streamView {
-    height: 400px;
-  }
-}
-
-.streamPicBlackout {
-  position: absolute;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  padding: 5px 20px;
-  border-radius: 10px;
-  top: 0;
-  left: 0;
-  text-align: center;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.streamTitle {
-  position: relative;
-  z-index: 1;
-  max-width: 100%;
-  margin-top: 10px;
-  font-weight: 500;
-  font-size: 24px;
-  color: white;
-}
-
-@media (min-width: 900px) {
-  .streamTitle {
-    font-weight: 600;
-    font-size: 30px;
-  }
-}
-
-.streamText {
-  position: relative;
-  z-index: 1;
-  overflow-x: hidden;
-  overflow-y: auto;
-  max-height: 200px;
-  max-width: 100%;
-  margin-top: 5px;
-  font-size: 17px;
-  color: white;
-}
-
-@media (min-width: 900px) {
-  .streamText {
-    font-size: 22px;
-  }
-}
-
-.streamDate {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  margin-top: 20px;
-  font-size: 16px;
-  font-weight: 500;
-  color: white;
-  opacity: 0.8;
-}
-
-.streamComeInBtn {
-  position: relative;
-  display: inline-block;
-  z-index: 1;
-  margin-top: 20px;
-  font-weight: 500;
-  font-size: 18px;
-  padding: 3px 15px;
-  border-radius: 6px;
-  border: 1.5px solid white;
-  padding: 3px 20px;
-  background-color: rgba(0, 0, 0, 0.5);
-  outline: none;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.8);
-}
-.streamComeInBtn:active,
-.streamComeInBtn:focus {
-  outline: none;
-}
-
-.filmView {
-  position: relative;
-  width: 100%;
-  margin: 15px 0;
-  color: black;
-  border-radius: 8px;
-  background-color: white;
-  box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.6);
-}
-
-.pageBar {
-  position: fixed;
-  z-index: 56;
-  bottom: 63px;
-  width: 100%;
-  padding: 0px 15px 10px 15px;
-  text-align: left;
+  background-color: rgb(37, 37, 51);
+  color: #cbcfff;
 }

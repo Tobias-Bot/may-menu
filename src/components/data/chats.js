@@ -2,9 +2,10 @@ const chats = [
   {
     background:
       "https://64.media.tumblr.com/b80baf770d589e89922d120591a17dbe/tumblr_pd6wvglbJk1we9f2ro2_1280.gifv",
-    text: "Свободное общение и много классных людей",
+    text: "Много классных людей, свободное общение",
     title: "Гостиная Мая *",
     url: "https://vk.me/join/2vJjlsqmTNLzvDYO/HQaBPgRmw6j1siAgNU=",
+    color: "#F0CCAA"
   },
   {
     background:
@@ -12,6 +13,7 @@ const chats = [
     text: "Еще больше общения и классных людей",
     title: "Гостиная Мая **",
     url: "https://vk.me/join/zaSAws6otA80gTrY2SETG5yXyPStJXAZho0=",
+    color: "#84ACED"
   },
   {
     background:
@@ -19,14 +21,16 @@ const chats = [
     text: "В этой беседе ты всегда сможешь найти поддержку и попросить совет",
     title: "Беседа поддержки",
     url: "https://vk.me/join/DIuOFhWBRqjFGasjonZm2lvPc9iav9sjPdQ=",
+    color: "#E4B6B1"
   },
   {
     background:
       "https://64.media.tumblr.com/e393e16e2c542a4f3949aa880980fcc5/9741c9e166cefc10-b1/s540x810/983ca0fc2a6aa7c48679cde31a14dc810272f16e.gifv",
     text:
-      "Беседа, где каждый cможет поделиться своей любимой песней или найти для себя что-нибудь новенькое",
+      "Беседа, где каждый может поделиться своей любимой песней и найти для себя что-нибудь новенькое",
     title: "Музыкальная беседа",
     url: "https://vk.me/join/FAo2ANp5R1v3_06Ve78hkHpsQzpNehEGFP4=",
+    color: "#C99AE1"
   },
 ];
 
