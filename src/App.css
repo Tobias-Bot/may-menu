@@ -118,7 +118,7 @@ body {
   padding: 2px 12px 0px 12px;
   color: #cbcfff;
   border-radius: 100px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.7);
+  box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.6);
   transition: 0.1s all;
 }
 .btnInfo:hover {
@@ -208,7 +208,8 @@ body {
   overflow: hidden;
   color: #ffa6d6;
   text-align: center;
-  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.5);
+  text-shadow: 2px 3px 6px rgba(0, 0, 0, 0.7);
   transition: 0.3s all;
 }
 .btnFooterMain:hover,
@@ -243,12 +244,6 @@ body {
 .linkStyle:hover {
   text-decoration: none;
   background-color: rgba(17, 17, 17, 0);
-}
-
-.centeredText {
-  width: 100%;
-  text-align: center;
-  font-size: 20px;
 }
 
 .icon {
@@ -289,18 +284,15 @@ body {
 }
 
 .btnsTitle {
+  position: relative;
   width: 100%;
-  margin: 35px 0px 0px 0px;
+  margin: 40px 0px 0px 0px;
   padding: 3px 10px;
   font-size: 20px;
   font-weight: 500;
-  color: white;
+  color: rgba(0, 0, 0.8);
   border-radius: 10px 10px 10px 10px;
-  background-color: rgba(0, 0, 0, 0.6);
-}
-.btnsTitle:hover,
-.btnsTitle:focus {
-  outline: none;
+  background-color: #adb4ff;
 }
 
 .spinner-border {
@@ -310,7 +302,7 @@ body {
   margin-left: 45%;
   width: 3rem;
   height: 3rem;
-  color: rgb(170, 139, 255);
+  color: #ffa6d6;
 }
 
 .pageHint {
@@ -324,3 +316,52 @@ body {
   background-color: rgb(37, 37, 51);
   color: #cbcfff;
 }
+
+.postsBar {
+  position: fixed;
+  bottom: 40px;
+  display: block;
+  z-index: 5;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 40px;
+  text-align: center;
+}
+
+.suggestCardView {
+  position: relative;
+  display: inline-block;
+  margin: 30px;
+  padding: 3px 60px 3px 15px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
+  background-color: #cbcfff;
+  color:rgba(0, 0, 0, 0.9);
+  transition: 0.1s all;
+}
+.suggestCardView:hover {
+  cursor: pointer;
+  color: #cbcfff;
+  background-color: rgb(37, 37, 51);
+}
+
+.cardIcon {
+  position: absolute;
+  top: -15px;
+  right: -10px;
+  height: 60px;
+  width: 60px;
+  padding: 6px;
+  text-align: center;
+  font-size: 28px;
+  border: 3px solid #cbcfff;
+  border-radius: 100px;
+  color: #cbcfff;
+  background-color: rgb(37, 37, 51);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
+  text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.8);
+}
+
+

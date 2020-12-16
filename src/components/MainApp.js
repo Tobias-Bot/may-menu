@@ -14,7 +14,6 @@ import StreamsPage from "./pages/StreamsPage";
 // import SuggestChatPage from "./pages/suggestPages/SuggestChatPage.js";
 import BookmarksPage from "./BookmarksPage.js";
 import PlaylistsPage from "./pages/PlaylistsPage.js";
-import SuggestPage from "./pages/SuggestPage.js";
 import AppsPage from "./pages/AppsPage";
 import SearchPage from "./pages/SearchPage";
 
@@ -37,12 +36,17 @@ class MainApp extends React.Component {
       <div>
         <NavLink className="linkStyle" to="/may-posts">
           <div className="btnInfo">
-            <i className="fas fa-signature"></i> статьи
+            <i class="fas fa-icons"></i> посты
           </div>
         </NavLink>
         <NavLink className="linkStyle" to="/may-chats">
           <div className="btnInfo">
-            <i className="fas fa-comment"></i> чаты
+            <i class="fas fa-comments"></i> чаты
+          </div>
+        </NavLink>
+        <NavLink className="linkStyle" to="/">
+          <div className="btnInfo">
+            <i class="fas fa-heart"></i> помощь психолога
           </div>
         </NavLink>
         <NavLink className="linkStyle" to="/may-playlists">
@@ -57,7 +61,7 @@ class MainApp extends React.Component {
         </NavLink>
         <a className="linkStyle" href="https://vk.com/app5748831_-160404048">
           <div className="btnInfo">
-            <i className="fas fa-envelope-open-text"></i> рассылки
+            <i className="fas fa-envelope-open-text"></i> рассылки от Май
           </div>
         </a>
       </div>
@@ -134,13 +138,39 @@ class MainApp extends React.Component {
                   <Route exact path="/may-bookmarks">
                     <BookmarksPage />
                   </Route>
-                  <Route exact path="/suggest">
-                    <SuggestPage />
-                  </Route>
                   <Route exact path="/search">
                     <SearchPage />
                   </Route>
                 </Switch>
+              </div>
+
+              <div className="collapse navbar-collapse postsBar" id="postsBar">
+                <NavLink to="/may-app" className="linkStyle">
+                  <div className="suggestCardView">
+                    статья
+                    <div className="cardIcon">
+                      <i className="fas fa-file-invoice"></i>
+                    </div>
+                  </div>
+                </NavLink>
+                {/* <div className="suggestCardView">
+                  вопрос
+                  <div className="cardIcon">
+                    <i className="fas fa-question"></i>
+                  </div>
+                </div>
+                <div className="suggestCardView">
+                  поддержка
+                  <div className="cardIcon">
+                    <i className="fas fa-heart"></i>
+                  </div>
+                </div>
+                <div className="suggestCardView">
+                  найти друга
+                  <div className="cardIcon">
+                    <i className="fas fa-user-friends"></i>
+                  </div>
+                </div> */}
               </div>
             </div>
 
@@ -155,11 +185,16 @@ class MainApp extends React.Component {
                   <i className="fas fa-home"></i>
                 </div>
               </NavLink>
-              <NavLink className="linkStyle" to="/suggest">
-                <div className="btnFooterMain">
-                  <i className="fas fa-pencil-alt"></i>
-                </div>
-              </NavLink>
+              <div
+                className="btnFooterMain"
+                data-toggle="collapse"
+                data-target="#postsBar"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <i className="fas fa-pencil-alt"></i>
+              </div>
               <NavLink className="linkStyle" to="/may-apps">
                 <div className="btnFooter">
                   <i className="fas fa-th-large"></i>

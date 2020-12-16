@@ -4,6 +4,7 @@ import info from "./data/modalInfo";
 import hellos from "./data/Hellos";
 
 import "../styles/MainWidget.css";
+import "../App.css";
 
 class Main extends React.Component {
   constructor(props) {
@@ -79,6 +80,9 @@ class Main extends React.Component {
         <div className="DateBlock">
           <div className="Timer">{time}</div>
           <div className="Day">{day}</div>
+        </div>
+        <div className="btnsTitle">
+          Сообщество
         </div>
         <div className="row mt-4 mb-2 pl-2 pr-2">
           <div className="col">

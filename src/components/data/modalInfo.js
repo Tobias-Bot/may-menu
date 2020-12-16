@@ -77,19 +77,14 @@ const info = {
         <b>#look_for_you@warmay</b> — найти друга, человека, с которым можно поговорить или провести время;
         <br/> 
         <br/>
-        <b>#article@warmay</b> — статьи;
+        <b>#article@warmay</b> — статьи в виде фотокарточек;
         <br/> 
         <br/>
         <b>#compilation@warmay</b> — подборки полезностей;
         <br/> 
         <br/>
-        <b>#photocards@warmay</b> — фотокарточки;
-        <br/> 
-        <br/>
         <b>#textpost@warmay</b> — текстовые посты;
-        <br/> 
         <br/>
-        <b>#upd@warmay</b> — обновления и анонсы в сообществе.
         `,
   },
 };
