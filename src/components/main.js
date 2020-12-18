@@ -1,4 +1,5 @@
 import React from "react";
+import bridge from "@vkontakte/vk-bridge";
 
 import info from "./data/modalInfo";
 import hellos from "./data/Hellos";
@@ -58,6 +59,8 @@ class Main extends React.Component {
     let lastOpenedApp = JSON.parse(localStorage.getItem("frame-app"));
 
     this.setState({ lastOpenedApp });
+
+    /* vk-brige */
   }
 
   componentWillUnmount() {
@@ -121,12 +124,16 @@ class Main extends React.Component {
           </div>
         </NavLink>
 
-        <NavLink to="/may-app">
-          <div className="btnInfoRe">
-            <i className="fas fa-th-large"></i> открыть{" "}
-            {"«" + lastApp.name + "»"}
-          </div>
-        </NavLink>
+        {lastApp ? (
+          <NavLink to="/may-app">
+            <div className="btnInfoRe">
+              <i className="fas fa-th-large"></i> открыть{" "}
+              {"«" + lastApp.name + "»"}
+            </div>
+          </NavLink>
+        ) : (
+          ""
+        )}
         <div className="btnsTitle">Сообщество</div>
         <div className="row mt-4 mb-2 pl-2 pr-2">
           <div className="col">
@@ -186,7 +193,7 @@ class Main extends React.Component {
           <div className="col">
             <a href="https://vk.com/warmay" className="linkStyle">
               <div className="icon">
-                <i class="fab fa-vk"></i>
+                <i className="fab fa-vk"></i>
                 <span className="iconTitle">группа</span>
               </div>
             </a>

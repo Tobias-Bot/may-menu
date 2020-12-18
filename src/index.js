@@ -4,6 +4,14 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import bridge from '@vkontakte/vk-bridge';
+
+// Отправляет событие нативному клиенту
+bridge.send("VKWebAppInit", {});
+
+// Subscribes to event, sended by client
+bridge.subscribe(e => console.log(e));
+
 ReactDOM.render(
   <React.StrictMode>
     <App />

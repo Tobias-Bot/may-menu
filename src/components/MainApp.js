@@ -49,17 +49,17 @@ class MainApp extends React.Component {
       <div>
         <NavLink className="linkStyle" to="/may-posts">
           <div className="btnInfo">
-            <i class="fas fa-icons"></i> посты
+            <i className="fas fa-icons"></i> посты
           </div>
         </NavLink>
         <NavLink className="linkStyle" to="/may-chats">
           <div className="btnInfo">
-            <i class="fas fa-comments"></i> чаты
+            <i className="fas fa-comments"></i> чаты
           </div>
         </NavLink>
         <NavLink className="linkStyle" to="/">
           <div className="btnInfo">
-            <i class="fas fa-heart"></i> помощь психолога
+            <i className="fas fa-heart"></i> помощь психолога
           </div>
         </NavLink>
         <NavLink className="linkStyle" to="/may-playlists">
@@ -121,6 +121,7 @@ class MainApp extends React.Component {
         <div>
           <HashRouter>
             <div className="headerLineTop"></div>
+            <div className="headerLineTopSecond"></div>
             <div className="headerLineBot">{bar}</div>
             <div className="header">
               <a className="linkStyle" href="https://vk.com/warmay">
