@@ -30,7 +30,7 @@ class StreamsPage extends React.Component {
           className="streamView"
           key={stream.title + i}
           style={{
-            background: `url(${stream.cover}) center/150% no-repeat`,
+            background: `url(${stream.cover}) center/100% no-repeat`,
           }}
         >
           <div className="streamPicBlackout">

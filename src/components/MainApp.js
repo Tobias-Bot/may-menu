@@ -16,6 +16,7 @@ import BookmarksPage from "./BookmarksPage.js";
 import PlaylistsPage from "./pages/PlaylistsPage.js";
 import AppsPage from "./pages/AppsPage";
 import SearchPage from "./pages/SearchPage";
+import MailingPage from "./pages/MailingPage";
 
 class MainApp extends React.Component {
   constructor(props) {
@@ -25,6 +26,18 @@ class MainApp extends React.Component {
     };
 
     this.setModal = this.setModal.bind(this);
+    this.setFrameUrl = this.setFrameUrl.bind(this);
+  }
+
+  setFrameUrl() {
+    let app = {
+      name: "май-статья",
+      url: "https://tobias-bot.github.io/may_articles",
+    }
+
+    let str = JSON.stringify(app);
+
+    localStorage.setItem("frame-app", str);
   }
 
   setModal(modal) {
@@ -59,11 +72,16 @@ class MainApp extends React.Component {
             <i className="fas fa-mug-hot"></i> трансляции
           </div>
         </NavLink>
-        <a className="linkStyle" href="https://vk.com/app5748831_-160404048">
+        <NavLink className="linkStyle" to="/mailing">
           <div className="btnInfo">
             <i className="fas fa-envelope-open-text"></i> рассылки от Май
           </div>
-        </a>
+        </NavLink>
+        {/* <a className="linkStyle" href="https://vk.com/app5748831_-160404048">
+          <div className="btnInfo">
+            <i className="fas fa-envelope-open-text"></i> рассылки от Май
+          </div>
+        </a> */}
       </div>
     );
 
@@ -141,6 +159,9 @@ class MainApp extends React.Component {
                   <Route exact path="/search">
                     <SearchPage />
                   </Route>
+                  <Route exact path="/mailing">
+                    <MailingPage />
+                  </Route>
                 </Switch>
               </div>
 
@@ -192,6 +213,7 @@ class MainApp extends React.Component {
                 aria-controls="navbarSupportedContent"
                 aria-expanded="false"
                 aria-label="Toggle navigation"
+                onClick={this.setFrameUrl}
               >
                 <i className="fas fa-pencil-alt"></i>
               </div>

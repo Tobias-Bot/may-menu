@@ -295,16 +295,6 @@ body {
   background-color: #adb4ff;
 }
 
-.spinner-border {
-  position: relative;
-  font-size: 15px;
-  margin-top: 15%;
-  margin-left: 45%;
-  width: 3rem;
-  height: 3rem;
-  color: #ffa6d6;
-}
-
 .pageHint {
   width: 100%;
   margin: 20px 0px 5px 0px;
@@ -362,6 +352,12 @@ body {
   background-color: rgb(37, 37, 51);
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.8);
   text-shadow: 4px 4px 5px rgba(0, 0, 0, 0.8);
+}
+
+.copyrightText {
+  width: 100%;
+  color: rgba(255, 255, 255, 0.2);
+  text-align: center;
 }
 
 

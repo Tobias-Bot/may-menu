@@ -1,9 +1,47 @@
 iframe {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    padding-right: -20px;
-    overflow: hidden;
-    border: none;
-    background-color: rgba(0, 0, 0, 0);
+  position: fixed;
+  width: 100%;
+  height: calc(100% - 30px);
+  overflow: hidden;
+  border: 2px solid black;
+  background-color: rgba(0, 0, 0, 0);
 }
+
+.Loading {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 40%;
+  text-align: center;
+}
+
+.spinner-border {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  color: #ffa6d6;
+}
+
+.LoadingText {
+  position: relative;
+  font-size: 18px;
+  color: #cbcfff;
+  margin: 5px;
+}
+
+.FrameFooter {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 30px;
+  background-color: black;
+  color: #cbcfff;
+  text-align: center;
+  transition: 0.2s all;
+}
+.FrameFooter:hover {
+    cursor: pointer;
+    background-color: #cbcfff;
+    color: rgba(0, 0, 0, 0.8);
+    font-weight: 500;
+  }

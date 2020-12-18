@@ -4,6 +4,7 @@ import info from "./data/modalInfo";
 import hellos from "./data/Hellos";
 
 import "../styles/MainWidget.css";
+import "../styles/StreamsPage.css";
 import "../App.css";
 
 class Main extends React.Component {
@@ -12,12 +13,29 @@ class Main extends React.Component {
     this.state = {
       info,
       date: new Date(),
+
+      inviteText: "Скопируй ссылку на приложение и отправь друзьям. Поддержи проект.",
+      inviteTextBtn: "скопировать ссылку",
     };
 
     this.hello = "";
 
     this.getModalData = this.getModalData.bind(this);
     this.tick = this.tick.bind(this);
+    this.copyAppUrl = this.copyAppUrl.bind(this);
+  }
+
+  copyAppUrl() {
+    let str = "vk.link/warmay";
+    let area = document.createElement("textarea");
+
+    document.body.appendChild(area);
+    area.value = str;
+    area.select();
+    document.execCommand("copy");
+    document.body.removeChild(area);
+
+    this.setState({ inviteTextBtn: "-ˋссылка скопированаˊ-", inviteText: "спасибо!" });
   }
 
   getModalData(modal) {
@@ -57,22 +75,24 @@ class Main extends React.Component {
     let moment = parseInt(time.substring(0, 2));
 
     if (moment >= 6 && moment < 10) {
-      src = "https://64.media.tumblr.com/f0c4e58d302d28e09e07c95020e4405e/a0478a781f60be2f-5f/s540x810/352a38c08ec5cc847945c79cbbddfbec98a5eb11.gifv";
+      src =
+        "https://64.media.tumblr.com/f0c4e58d302d28e09e07c95020e4405e/a0478a781f60be2f-5f/s540x810/352a38c08ec5cc847945c79cbbddfbec98a5eb11.gifv";
     }
 
     if (moment >= 10 && moment < 16) {
-      src = "https://64.media.tumblr.com/b876ea93a22c86bc5b78c7b78eff97f5/15397bd7e8d2a434-37/s540x810/40efb0e5aafbcbfe08fbdec5278ac720a9d2aba2.gifv";
+      src =
+        "https://64.media.tumblr.com/b876ea93a22c86bc5b78c7b78eff97f5/15397bd7e8d2a434-37/s540x810/40efb0e5aafbcbfe08fbdec5278ac720a9d2aba2.gifv";
     }
 
     if (moment >= 16 && moment < 22) {
-      src = "https://64.media.tumblr.com/fb6257322a3e73e7aa7247ba2b678163/tumblr_pp3mmshJhz1xvjko7o1_1280.gifv";
+      src =
+        "https://64.media.tumblr.com/fb6257322a3e73e7aa7247ba2b678163/tumblr_pp3mmshJhz1xvjko7o1_1280.gifv";
     }
 
     if (moment >= 22 || moment < 6) {
-      src = "https://64.media.tumblr.com/e393e16e2c542a4f3949aa880980fcc5/9741c9e166cefc10-b1/s540x810/983ca0fc2a6aa7c48679cde31a14dc810272f16e.gifv";
+      src =
+        "https://64.media.tumblr.com/e393e16e2c542a4f3949aa880980fcc5/9741c9e166cefc10-b1/s540x810/983ca0fc2a6aa7c48679cde31a14dc810272f16e.gifv";
     }
-
-    console.log(src);
 
     return (
       <div>
@@ -81,9 +101,7 @@ class Main extends React.Component {
           <div className="Timer">{time}</div>
           <div className="Day">{day}</div>
         </div>
-        <div className="btnsTitle">
-          Сообщество
-        </div>
+        <div className="btnsTitle">Сообщество</div>
         <div className="row mt-4 mb-2 pl-2 pr-2">
           <div className="col">
             <div
@@ -140,7 +158,28 @@ class Main extends React.Component {
             </a>
           </div>
         </div>
+        <div
+          className="streamView"
+          style={{
+            background: `url(https://64.media.tumblr.com/d29f37a271afe4a1319d93c6a6e6d73d/tumblr_pq1du6Av5T1we9f2ro1_r2_640.gifv) center/110% no-repeat`,
+          }}
+        >
+          <div className="streamPicBlackout">
+            <div className="streamTitle">пригласительная ссылка</div>
+            <div className="streamText">
+              {this.state.inviteText}
+            </div>
+            <button
+              className="streamComeInBtn"
+              style={{ borderColor: "#FFAA9D", color: "#FFAA9D" }}
+              onClick={this.copyAppUrl}
+            >
+              {this.state.inviteTextBtn}
+            </button>
+          </div>
+        </div>
         <br />
+        <div className="copyrightText">сделано в Мае с любовью</div>
       </div>
     );
   }
