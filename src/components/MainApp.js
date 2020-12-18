@@ -31,7 +31,7 @@ class MainApp extends React.Component {
 
   setFrameUrl() {
     let app = {
-      name: "май-статья",
+      name: "написать пост",
       url: "https://tobias-bot.github.io/may_articles",
     }
 

@@ -6,6 +6,7 @@ import hellos from "./data/Hellos";
 import "../styles/MainWidget.css";
 import "../styles/StreamsPage.css";
 import "../App.css";
+import { NavLink } from "react-router-dom";
 
 class Main extends React.Component {
   constructor(props) {
@@ -14,8 +15,11 @@ class Main extends React.Component {
       info,
       date: new Date(),
 
-      inviteText: "Скопируй ссылку на приложение и отправь друзьям. Поддержи проект.",
+      inviteText:
+        "Скопируй ссылку на приложение и отправь друзьям. Поддержи проект.",
       inviteTextBtn: "скопировать ссылку",
+
+      lastOpenedApp: {},
     };
 
     this.hello = "";
@@ -35,7 +39,10 @@ class Main extends React.Component {
     document.execCommand("copy");
     document.body.removeChild(area);
 
-    this.setState({ inviteTextBtn: "-ˋссылка скопированаˊ-", inviteText: "спасибо!" });
+    this.setState({
+      inviteTextBtn: "-ˋссылка скопированаˊ-",
+      inviteText: "спасибо!",
+    });
   }
 
   getModalData(modal) {
@@ -47,6 +54,10 @@ class Main extends React.Component {
 
     let index = Math.round(Math.random() * (hellos.length - 1));
     this.hello = hellos[index];
+
+    let lastOpenedApp = JSON.parse(localStorage.getItem("frame-app"));
+
+    this.setState({ lastOpenedApp });
   }
 
   componentWillUnmount() {
@@ -94,6 +105,8 @@ class Main extends React.Component {
         "https://64.media.tumblr.com/e393e16e2c542a4f3949aa880980fcc5/9741c9e166cefc10-b1/s540x810/983ca0fc2a6aa7c48679cde31a14dc810272f16e.gifv";
     }
 
+    let lastApp = this.state.lastOpenedApp;
+
     return (
       <div>
         <img src={src} alt="cover" className="MainPageCover" />
@@ -101,6 +114,19 @@ class Main extends React.Component {
           <div className="Timer">{time}</div>
           <div className="Day">{day}</div>
         </div>
+
+        <NavLink to="/may-bookmarks">
+          <div className="btnInfoRe">
+            <i className="fas fa-bookmark"></i> закладки
+          </div>
+        </NavLink>
+
+        <NavLink to="/may-app">
+          <div className="btnInfoRe">
+            <i className="fas fa-th-large"></i> открыть{" "}
+            {"«" + lastApp.name + "»"}
+          </div>
+        </NavLink>
         <div className="btnsTitle">Сообщество</div>
         <div className="row mt-4 mb-2 pl-2 pr-2">
           <div className="col">
@@ -142,7 +168,7 @@ class Main extends React.Component {
             <a href="https://vk.com/im?sel=-160404048" className="linkStyle">
               <div className="icon">
                 <i className="fas fa-feather-alt"></i>
-                <span className="iconTitle">написать в лс</span>
+                <span className="iconTitle">написать</span>
               </div>
             </a>
           </div>
@@ -153,7 +179,15 @@ class Main extends React.Component {
             >
               <div className="icon">
                 <i className="fas fa-heart"></i>
-                <span className="iconTitle">оставить отзыв</span>
+                <span className="iconTitle">лайк</span>
+              </div>
+            </a>
+          </div>
+          <div className="col">
+            <a href="https://vk.com/warmay" className="linkStyle">
+              <div className="icon">
+                <i class="fab fa-vk"></i>
+                <span className="iconTitle">группа</span>
               </div>
             </a>
           </div>
@@ -166,9 +200,7 @@ class Main extends React.Component {
         >
           <div className="streamPicBlackout">
             <div className="streamTitle">пригласительная ссылка</div>
-            <div className="streamText">
-              {this.state.inviteText}
-            </div>
+            <div className="streamText">{this.state.inviteText}</div>
             <button
               className="streamComeInBtn"
               style={{ borderColor: "#FFAA9D", color: "#FFAA9D" }}

@@ -117,6 +117,7 @@ body {
   margin: 5px 6px 0px 6px;
   padding: 2px 12px 0px 12px;
   color: #cbcfff;
+  background-color: rgb(37, 37, 51);
   border-radius: 100px;
   box-shadow: 2px 3px 8px rgba(0, 0, 0, 0.6);
   transition: 0.1s all;
@@ -131,12 +132,12 @@ body {
 .btnInfoRe {
   position: relative;
   display: inline-block;
-  height: 30px;
+  height: 35px;
   text-align: center;
   font-size: 16px;
   font-weight: 500;
-  margin: 5px 5px 0px 3px;
-  padding: 2px 12px 0px 12px;
+  margin: 15px 5px 0px 3px;
+  padding: 5px 12px 0px 12px;
   background-color: rgb(50, 50, 75);
   border-radius: 10px;
   color: #d2d5ff;
