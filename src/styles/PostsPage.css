@@ -112,3 +112,25 @@
     height: 15px;
   }
 }
+
+.Loading {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding-top: 50px;
+  text-align: center;
+}
+
+.spinner-border {
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+  color: #ffa6d6;
+}
+
+.LoadingText {
+  position: relative;
+  font-size: 18px;
+  color: #cbcfff;
+  margin: 5px;
+}

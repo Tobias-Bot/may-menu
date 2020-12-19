@@ -21,14 +21,10 @@ class App extends React.Component {
     return (
       <div>
         <HashRouter>
-          <Switch>
-            <Route exact path="/may-app">
+          {/* <Route exact path="/may-app">
               <FrameAppPage />
-            </Route>
-            <Route path="/">
-              <MainApp />
-            </Route>
-          </Switch>
+            </Route> */}
+          <MainApp />
         </HashRouter>
       </div>
     );

@@ -33,7 +33,7 @@ class MainApp extends React.Component {
     let app = {
       name: "написать пост",
       url: "https://tobias-bot.github.io/may_articles",
-    }
+    };
 
     let str = JSON.stringify(app);
 
@@ -45,46 +45,6 @@ class MainApp extends React.Component {
   }
 
   render() {
-    let bar = (
-      <div>
-        <NavLink className="linkStyle" to="/may-posts">
-          <div className="btnInfo">
-            <i className="fas fa-icons"></i> посты
-          </div>
-        </NavLink>
-        <NavLink className="linkStyle" to="/may-chats">
-          <div className="btnInfo">
-            <i className="fas fa-comments"></i> чаты
-          </div>
-        </NavLink>
-        <NavLink className="linkStyle" to="/">
-          <div className="btnInfo">
-            <i className="fas fa-heart"></i> помощь психолога
-          </div>
-        </NavLink>
-        <NavLink className="linkStyle" to="/may-playlists">
-          <div className="btnInfo">
-            <i className="fas fa-music"></i> плейлисты
-          </div>
-        </NavLink>
-        <NavLink className="linkStyle" to="/may-streams">
-          <div className="btnInfo">
-            <i className="fas fa-mug-hot"></i> трансляции
-          </div>
-        </NavLink>
-        <NavLink className="linkStyle" to="/mailing">
-          <div className="btnInfo">
-            <i className="fas fa-envelope-open-text"></i> рассылки от Май
-          </div>
-        </NavLink>
-        {/* <a className="linkStyle" href="https://vk.com/app5748831_-160404048">
-          <div className="btnInfo">
-            <i className="fas fa-envelope-open-text"></i> рассылки от Май
-          </div>
-        </a> */}
-      </div>
-    );
-
     let modal = this.state.currentModal;
 
     return (
@@ -121,8 +81,18 @@ class MainApp extends React.Component {
         <div>
           <HashRouter>
             <div className="headerLineTop"></div>
-            <div className="headerLineTopSecond"></div>
-            <div className="headerLineBot">{bar}</div>
+            <div className="headerLineTopSecond">
+              <NavLink to="/may-bookmarks">
+                <div className="btnHeader">
+                  <i className="fas fa-bookmark"></i>
+                </div>
+              </NavLink>
+              <NavLink to="/may-bookmarks">
+                <div className="btnHeader">
+                  <i className="fas fa-bookmark"></i>
+                </div>
+              </NavLink>
+            </div>
             <div className="header">
               <a className="linkStyle" href="https://vk.com/warmay">
                 <img id="logo" src={logo} alt="logo" />
@@ -145,9 +115,9 @@ class MainApp extends React.Component {
                   <Route exact path="/may-chats">
                     <ChatsPage />
                   </Route>
-                  <Route exact path="/may-playlists">
+                  {/* <Route exact path="/may-playlists">
                     <PlaylistsPage />
-                  </Route>
+                  </Route> */}
                   <Route exact path="/may-streams">
                     <StreamsPage />
                   </Route>

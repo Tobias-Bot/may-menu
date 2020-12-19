@@ -2,8 +2,11 @@ import React from "react";
 
 import Post from "../Post";
 
-import articles from "../../components/data/articles";
 import { NavLink } from "react-router-dom";
+
+import bridge from "@vkontakte/vk-bridge";
+
+import colors from "../data/post_colors";
 
 import "../../styles/PostsPage.css";
 
@@ -13,8 +16,18 @@ class PostsPage extends React.Component {
     this.state = {
       posts: [],
       savedPosts: [],
+      colors: [],
+
+      postCards: true,
+      postsLoad: true,
     };
 
+    this.offset = 20;
+    this.currOffset = 0;
+
+    this.getRandom = this.getRandom.bind(this);
+    this.getBestPhoto = this.getBestPhoto.bind(this);
+    this.loadPosts = this.loadPosts.bind(this);
     this.getPosts = this.getPosts.bind(this);
     this.updateDB = this.updateDB.bind(this);
     this.savePost = this.savePost.bind(this);
@@ -27,6 +40,13 @@ class PostsPage extends React.Component {
     this.loadPosts();
   }
 
+  // componentDidUpdate() {
+  //   if (this.props.load) {
+  //     this.loadPosts();
+  //     this.props.stopLoad();
+  //   }
+  // }
+
   loadPosts() {
     let obj = {
       store: "may-app",
@@ -34,6 +54,98 @@ class PostsPage extends React.Component {
     };
 
     this.getPostsFromStorage(obj);
+
+    let posts = this.state.posts;
+    let newPosts = [];
+
+    bridge
+      .send("VKWebAppGetAuthToken", {
+        app_id: 7646928,
+        scope: "wall",
+      })
+      .then((data) => {
+        let token = data.access_token;
+
+        bridge
+          .send("VKWebAppCallAPIMethod", {
+            method: "wall.get",
+            request_id: this.currOffset,
+            params: {
+              owner_id: "-160404048",
+              count: this.offset,
+              offset: this.currOffset,
+              filter: "owner",
+              v: "5.73",
+              access_token: token,
+            },
+          })
+          .then((r) => {
+            if (r.response && r.response.items[0]) {
+              r.response.items.map((post) => {
+                if (!post.copy_history && !post.marked_as_ads) {
+                  let i = this.getRandom(0, colors.length - 1);
+                  let color = colors[i];
+                  let photos = this.getBestPhoto(post);
+
+                  let data = {
+                    title: post.text,
+                    postColor: color,
+                    id: `${post.id}`,
+                    source: `https://vk.com/wall${post.owner_id}_${post.id}`,
+                    photos,
+                    views: post.views.count,
+                    likes: post.likes.count,
+                    comms: post.comments.count,
+                    reps: post.reposts.count,
+                  };
+
+                  newPosts.push(data);
+
+                  this.setState({
+                    posts: [...posts, ...newPosts],
+                    postsLoad: false,
+                  });
+                }
+
+                return 1;
+              });
+            }
+          });
+      });
+
+    this.currOffset += this.offset;
+  }
+
+  getBestPhoto(item) {
+    let best = "";
+    let res = [];
+    let nums = [];
+
+    if (item.attachments) {
+      for (let i = 0; i < 1; i++) {
+        if (item.attachments[i] && item.attachments[i].photo) {
+          for (let key in item.attachments[i].photo) {
+            if (~key.indexOf("photo_")) {
+              let str = key.substring(6);
+              nums.push(str);
+            }
+          }
+
+          best = "photo_" + Math.max.apply(null, nums);
+          res.push(item.attachments[i].photo[best]);
+        }
+
+        nums = [];
+      }
+    }
+
+    return res;
+  }
+
+  getRandom(min, max) {
+    let rand = min - 0.5 + Math.random() * (max - min + 1);
+
+    return Math.round(rand);
   }
 
   updateDB(obj) {
@@ -134,7 +246,7 @@ class PostsPage extends React.Component {
   }
 
   getPosts() {
-    let posts = articles;
+    let posts = this.state.posts;
     let savedPosts = this.state.savedPosts;
     let response = [];
 
@@ -164,22 +276,16 @@ class PostsPage extends React.Component {
       else posts2.push(posts[i]);
     }
 
+    let isShow = this.state.postsLoad;
+
     return (
       <div>
-        <div className="headerRe">
-          <a className="linkStyle" href="https://vk.com/warmay/article">
-            <div className="btnInfoRe">
-              <i className="fas fa-rss"></i> новые
-            </div>
-          </a>
-          <NavLink className="linkStyle" to="/may-bookmarks">
-            <div className="btnInfoRe">
-              <i className="fas fa-bookmark"></i> сохраненные
-            </div>
-          </NavLink>
+        <div className="Loading" hidden={!isShow}>
+          <div className="spinner-border" role="status"></div>{" "}
+          <span className="LoadingText">секундочку...</span>
         </div>
         <div className="postsWrapper">
-          <div className="row">
+          <div className="row" hidden={isShow}>
             <div className="col">{posts1}</div>
             <div className="col">{posts2}</div>
           </div>

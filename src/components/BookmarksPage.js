@@ -104,16 +104,17 @@ class BookmarksPage extends React.Component {
 
   setPosts() {
     let posts = this.state.posts;
+    let response = [];
 
-    let response = posts.map((post) => {
+    response = posts.map((post, i) => {
       return (
         <Post
-          key={post.id}
+          key={post.title + i}
           content={post}
           savedPosts={posts}
           onPostSave={this.savePost}
           onPostDelete={this.deletePost}
-        />
+        ></Post>
       );
     });
 

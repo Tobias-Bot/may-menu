@@ -9,15 +9,16 @@ class Image extends React.Component {
   }
 
   render() {
-    let data = this.props.data;
+    let photo = this.props.photo;
+    let source = this.props.source;
 
     return (
       <div>
         <div>
-          <a className="linkStyle" href={data.url}>
+          <a className="linkStyle" href={source}>
             <img
               className="postCover"
-              src={data.img}
+              src={photo}
               alt="Первая страничка статьи"
             />
           </a>

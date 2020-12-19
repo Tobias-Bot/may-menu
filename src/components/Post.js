@@ -6,12 +6,18 @@ class Post extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.content.id,
-      title: this.props.content.title,
-      color: this.props.content.color,
-      img: this.props.content.img,
-      url: this.props.content.url,
+      title: props.content.title,
+      postColor: props.content.postColor,
+      id: props.content.id,
+      source: props.content.source,
+      photos: props.content.photos,
+      views: props.content.views,
+      likes: props.content.likes,
+      comms: props.content.comms,
+      reps: props.content.reps,
     };
+
+    this.maxTextLen = 150;
 
     this.savePost = this.savePost.bind(this);
     this.isImportant = this.isImportant.bind(this);
@@ -48,7 +54,7 @@ class Post extends React.Component {
     const mark = this.isImportant() ? (
       <button
         className="postReadBtn"
-        style={{ borderColor: data.color }}
+        style={{ borderColor: data.postColor }}
         onClick={this.deletePost}
       >
         <i className="fas fa-bookmark"></i>
@@ -56,32 +62,45 @@ class Post extends React.Component {
     ) : (
       <button
         className="postReadBtn"
-        style={{ borderColor: data.color }}
+        style={{ borderColor: data.postColor }}
         onClick={this.savePost}
       >
         <i className="far fa-bookmark"></i>
       </button>
     );
 
+    let text =
+      data.title.length > this.maxTextLen
+        ? data.title.substring(0, this.maxTextLen) + "..."
+        : data.title;
+
     return (
       <div>
-        <div className="postView" style={{ backgroundColor: data.color }}>
+        <div className="postView" style={{ backgroundColor: data.postColor }}>
           <div className="postHeader">
             {mark}
             <a
               style={{ textDecoration: "none", color: "white" }}
-              href={data.url}
+              href={data.source}
             >
               <button
                 className="postReadBtn"
-                style={{ borderColor: data.color }}
+                style={{ borderColor: data.postColor }}
               >
                 читать
               </button>
             </a>
           </div>
-          <div className="postTitle">{data.title}</div>
-          <Image data={data} alt="article's cover" />
+          <div className="postTitle">{text}</div>
+          {data.photos && data.photos.length ? (
+            <Image
+              photo={data.photos[0]}
+              source={data.source}
+              alt="article's cover"
+            />
+          ) : (
+            ""
+          )}
           <div className="postFooter"></div>
         </div>
       </div>

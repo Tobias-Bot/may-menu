@@ -56,10 +56,6 @@ class Main extends React.Component {
     let index = Math.round(Math.random() * (hellos.length - 1));
     this.hello = hellos[index];
 
-    let lastOpenedApp = JSON.parse(localStorage.getItem("frame-app"));
-
-    this.setState({ lastOpenedApp });
-
     /* vk-brige */
   }
 
@@ -110,21 +106,61 @@ class Main extends React.Component {
 
     let lastApp = this.state.lastOpenedApp;
 
+    let bar = (
+      <div>
+        <NavLink className="linkStyle" to="/">
+          <div className="btnInfo">
+            <i className="fas fa-home"></i>
+          </div>
+        </NavLink>
+        <NavLink className="linkStyle" to="/may-posts">
+          <div className="btnInfo">
+            <i className="fas fa-icons"></i> публикации
+          </div>
+        </NavLink>
+        <NavLink className="linkStyle" to="/may-chats">
+          <div className="btnInfo">
+            <i className="fas fa-comments"></i> чаты
+          </div>
+        </NavLink>
+        <NavLink className="linkStyle" to="/">
+          <div className="btnInfo">
+            <i className="fas fa-heart"></i> помощь психолога
+          </div>
+        </NavLink>
+        {/* <NavLink className="linkStyle" to="/may-playlists">
+          <div className="btnInfo">
+            <i className="fas fa-music"></i> плейлисты
+          </div>
+        </NavLink> */}
+        <NavLink className="linkStyle" to="/may-streams">
+          <div className="btnInfo">
+            <i className="fas fa-mug-hot"></i> трансляции
+          </div>
+        </NavLink>
+        <NavLink className="linkStyle" to="/mailing">
+          <div className="btnInfo">
+            <i className="fas fa-envelope-open-text"></i> рассылки от Май
+          </div>
+        </NavLink>
+        {/* <a className="linkStyle" href="https://vk.com/app5748831_-160404048">
+          <div className="btnInfo">
+            <i className="fas fa-envelope-open-text"></i> рассылки от Май
+          </div>
+        </a> */}
+      </div>
+    );
+
     return (
       <div>
+        <div className="headerLineBot">{bar}</div>
         <img src={src} alt="cover" className="MainPageCover" />
         <div className="DateBlock">
           <div className="Timer">{time}</div>
           <div className="Day">{day}</div>
         </div>
 
-        <NavLink to="/may-bookmarks">
-          <div className="btnInfoRe">
-            <i className="fas fa-bookmark"></i> закладки
-          </div>
-        </NavLink>
-
-        {lastApp ? (
+        {/* {lastApp ? (
           <NavLink to="/may-app">
             <div className="btnInfoRe">
               <i className="fas fa-th-large"></i> открыть{" "}
@@ -133,7 +169,7 @@ class Main extends React.Component {
           </NavLink>
         ) : (
           ""
-        )}
+        )} */}
         <div className="btnsTitle">Сообщество</div>
         <div className="row mt-4 mb-2 pl-2 pr-2">
           <div className="col">
