@@ -2,8 +2,6 @@ import React from "react";
 
 import Post from "../Post";
 
-import { NavLink } from "react-router-dom";
-
 import bridge from "@vkontakte/vk-bridge";
 
 import colors from "../data/post_colors";
@@ -34,6 +32,7 @@ class PostsPage extends React.Component {
     this.getPostsFromStorage = this.getPostsFromStorage.bind(this);
     this.deletePost = this.deletePost.bind(this);
     this.loadPosts = this.loadPosts.bind(this);
+    this.getPhotosId = this.getPhotosId.bind(this);
   }
 
   componentDidMount() {
@@ -116,27 +115,40 @@ class PostsPage extends React.Component {
     this.currOffset += this.offset;
   }
 
+  getPhotosId(photos) {
+    let len = photos.length;
+    let ids = [];
+
+    for (let i = 0; i < len; i++) {
+      if (photos[i] && photos[i].photo) {
+        ids.push(photos[i].photo.id);
+      }
+    }
+
+    return ids;
+  }
+
   getBestPhoto(item) {
     let best = "";
-    let res = [];
+    let res = { best: "", ids: [] };
     let nums = [];
 
     if (item.attachments) {
-      for (let i = 0; i < 1; i++) {
-        if (item.attachments[i] && item.attachments[i].photo) {
-          for (let key in item.attachments[i].photo) {
-            if (~key.indexOf("photo_")) {
-              let str = key.substring(6);
-              nums.push(str);
-            }
-          }
+      res.ids = this.getPhotosId(item.attachments);
 
-          best = "photo_" + Math.max.apply(null, nums);
-          res.push(item.attachments[i].photo[best]);
+      if (item.attachments[0] && item.attachments[0].photo) {
+        for (let key in item.attachments[0].photo) {
+          if (~key.indexOf("photo_")) {
+            let str = key.substring(6);
+            nums.push(str);
+          }
         }
 
-        nums = [];
+        best = "photo_" + Math.max.apply(null, nums);
+        res.best = item.attachments[0].photo[best];
       }
+
+      nums = [];
     }
 
     return res;

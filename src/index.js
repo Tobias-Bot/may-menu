@@ -9,9 +9,6 @@ import bridge from '@vkontakte/vk-bridge';
 // Отправляет событие нативному клиенту
 bridge.send("VKWebAppInit", {});
 
-// Subscribes to event, sended by client
-bridge.subscribe(e => console.log(e));
-
 ReactDOM.render(
   <React.StrictMode>
     <App />

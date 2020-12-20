@@ -1,4 +1,5 @@
 import React from "react";
+import qs from "querystring";
 
 import { Route, HashRouter, Switch, NavLink } from "react-router-dom";
 
@@ -13,7 +14,7 @@ import StreamsPage from "./pages/StreamsPage";
 // import MoviePage from "./pages/MoviePage";
 // import SuggestChatPage from "./pages/suggestPages/SuggestChatPage.js";
 import BookmarksPage from "./BookmarksPage.js";
-import PlaylistsPage from "./pages/PlaylistsPage.js";
+// import PlaylistsPage from "./pages/PlaylistsPage.js";
 import AppsPage from "./pages/AppsPage";
 import SearchPage from "./pages/SearchPage";
 import MailingPage from "./pages/MailingPage";
@@ -23,21 +24,48 @@ class MainApp extends React.Component {
     super(props);
     this.state = {
       currentModal: "",
+
+      headerStyles: {},
     };
 
     this.setModal = this.setModal.bind(this);
-    this.setFrameUrl = this.setFrameUrl.bind(this);
+    this.getHeaderStyle = this.getHeaderStyle.bind(this);
   }
 
-  setFrameUrl() {
-    let app = {
-      name: "написать пост",
-      url: "https://tobias-bot.github.io/may_articles",
-    };
+  componentDidMount() {
+    this.setState({ headerStyles: this.getHeaderStyle() });
+  }
 
-    let str = JSON.stringify(app);
+  getHeaderStyle() {
+    const str = window.location.search.slice(1);
+    const objParams = qs.parse(str);
 
-    localStorage.setItem("frame-app", str);
+    let platform = objParams.vk_platform;
+
+    if (platform === "mobile_iphone") {
+      return {
+        header: {
+          top: "17px",
+        },
+        headerLineTop: {
+          height: "22px",
+        },
+        headerLineBot: {
+          top: "67px",
+        },
+        headerLineTopSecond: {
+          height: "67px",
+          paddingTop: "28px",
+        },
+        body: {
+          marginTop: "67px",
+          paddingTop: "50px",
+          height: "calc(100% - 68px)",
+        },
+      };
+    } else {
+      return {};
+    }
   }
 
   setModal(modal) {
@@ -46,6 +74,52 @@ class MainApp extends React.Component {
 
   render() {
     let modal = this.state.currentModal;
+    let styles = this.state.headerStyles;
+
+    let bar = (
+      <div>
+        <NavLink className="linkStyle" to="/">
+          <div className="btnInfo">
+            <i className="fas fa-home"></i>
+          </div>
+        </NavLink>
+        <NavLink className="linkStyle" to="/may-posts">
+          <div className="btnInfo">
+            <i className="fas fa-icons"></i> публикации
+          </div>
+        </NavLink>
+        <NavLink className="linkStyle" to="/may-chats">
+          <div className="btnInfo">
+            <i className="fas fa-comments"></i> чаты
+          </div>
+        </NavLink>
+        {/* <NavLink className="linkStyle" to="/">
+          <div className="btnInfo">
+            <i className="fas fa-heart"></i> помощь психолога
+          </div>
+        </NavLink> */}
+        {/* <NavLink className="linkStyle" to="/may-playlists">
+          <div className="btnInfo">
+            <i className="fas fa-music"></i> плейлисты
+          </div>
+        </NavLink> */}
+        <NavLink className="linkStyle" to="/may-streams">
+          <div className="btnInfo">
+            <i className="fas fa-mug-hot"></i> трансляции
+          </div>
+        </NavLink>
+        <NavLink className="linkStyle" to="/mailing">
+          <div className="btnInfo">
+            <i className="fas fa-envelope-open-text"></i> рассылки от Май
+          </div>
+        </NavLink>
+        {/* <a className="linkStyle" href="https://vk.com/app5748831_-160404048">
+          <div className="btnInfo">
+            <i className="fas fa-envelope-open-text"></i> рассылки от Май
+          </div>
+        </a> */}
+      </div>
+    );
 
     return (
       <div>
@@ -80,9 +154,14 @@ class MainApp extends React.Component {
 
         <div>
           <HashRouter>
-            <div className="headerLineTop"></div>
-            <div className="headerLineTopSecond">
-              <NavLink to="/may-bookmarks">
+            <div className="headerLineTop" style={styles.headerLineTop}></div>
+            <div className="headerLineBot" style={styles.headerLineBot}>{bar}</div>
+            <div
+              className="headerLineTopSecond"
+              style={styles.headerLineTopSecond}
+            >
+              <span className="logoTitle">Мαú</span>
+              {/* <NavLink to="/may-bookmarks">
                 <div className="btnHeader">
                   <i className="fas fa-bookmark"></i>
                 </div>
@@ -91,9 +170,9 @@ class MainApp extends React.Component {
                 <div className="btnHeader">
                   <i className="fas fa-bookmark"></i>
                 </div>
-              </NavLink>
+              </NavLink> */}
             </div>
-            <div className="header">
+            <div className="header" style={styles.header}>
               <a className="linkStyle" href="https://vk.com/warmay">
                 <img id="logo" src={logo} alt="logo" />
               </a>
@@ -101,6 +180,7 @@ class MainApp extends React.Component {
 
             <div
               className="body"
+              style={styles.body}
               id="contentWindow"
               onScroll={this.PostsLoader}
             >
@@ -164,40 +244,6 @@ class MainApp extends React.Component {
                   </div>
                 </div> */}
               </div>
-            </div>
-
-            <div className="footer">
-              <NavLink className="linkStyle" to="/search">
-                <div className="btnFooter">
-                  <i className="fas fa-search"></i>
-                </div>
-              </NavLink>
-              <NavLink className="linkStyle" to="/">
-                <div className="btnFooter">
-                  <i className="fas fa-home"></i>
-                </div>
-              </NavLink>
-              <div
-                className="btnFooterMain"
-                data-toggle="collapse"
-                data-target="#postsBar"
-                aria-controls="navbarSupportedContent"
-                aria-expanded="false"
-                aria-label="Toggle navigation"
-                onClick={this.setFrameUrl}
-              >
-                <i className="fas fa-pencil-alt"></i>
-              </div>
-              <NavLink className="linkStyle" to="/may-apps">
-                <div className="btnFooter">
-                  <i className="fas fa-th-large"></i>
-                </div>
-              </NavLink>
-              <NavLink className="linkStyle" to="/">
-                <div className="btnFooter">
-                  <i className="fas fa-info-circle"></i>
-                </div>
-              </NavLink>
             </div>
           </HashRouter>
         </div>

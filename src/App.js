@@ -1,8 +1,8 @@
 import React from "react";
 
-import { Route, HashRouter, Switch } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 
-import FrameAppPage from "./components/pages/FrameAppPage.js";
+// import FrameAppPage from "./components/pages/FrameAppPage.js";
 import MainApp from "./components/MainApp.js";
 
 class App extends React.Component {

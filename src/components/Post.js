@@ -1,4 +1,5 @@
 import React from "react";
+import bridge from "@vkontakte/vk-bridge";
 
 import Image from "./Image";
 
@@ -22,6 +23,7 @@ class Post extends React.Component {
     this.savePost = this.savePost.bind(this);
     this.isImportant = this.isImportant.bind(this);
     this.deletePost = this.deletePost.bind(this);
+    this.sharePost = this.sharePost.bind(this);
   }
 
   savePost() {
@@ -46,6 +48,29 @@ class Post extends React.Component {
       }
 
     return 0;
+  }
+
+  sharePost() {
+    let post = this.props.content;
+    let ids = this.props.content.photos.ids;
+    let copyright = this.props.content.source;
+    let type = "photo-160404048_";
+
+    let attachments = "";
+
+    for (let i = 0; i < ids.length; i++) {
+      attachments += type + ids[i] + ",";
+    }
+
+    attachments += "https://vk.com/warmay";
+
+    let sharedPost = {
+      message: post.title,
+      attachments,
+      copyright,
+    };
+
+    bridge.send("VKWebAppShowWallPostBox", sharedPost);
   }
 
   render() {
@@ -78,7 +103,16 @@ class Post extends React.Component {
       <div>
         <div className="postView" style={{ backgroundColor: data.postColor }}>
           <div className="postHeader">
+            <button
+              className="postReadBtn"
+              style={{ borderColor: data.postColor }}
+              onClick={this.sharePost}
+            >
+              <i className="fas fa-share"></i>
+            </button>
+
             {mark}
+
             <a
               style={{ textDecoration: "none", color: "white" }}
               href={data.source}
@@ -92,9 +126,9 @@ class Post extends React.Component {
             </a>
           </div>
           <div className="postTitle">{text}</div>
-          {data.photos && data.photos.length ? (
+          {data.photos.best ? (
             <Image
-              photo={data.photos[0]}
+              photo={data.photos.best}
               source={data.source}
               alt="article's cover"
             />

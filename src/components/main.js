@@ -19,31 +19,14 @@ class Main extends React.Component {
       inviteText:
         "Скопируй ссылку на приложение и отправь друзьям. Поддержи проект.",
       inviteTextBtn: "скопировать ссылку",
-
-      lastOpenedApp: {},
     };
 
     this.hello = "";
 
     this.getModalData = this.getModalData.bind(this);
     this.tick = this.tick.bind(this);
-    this.copyAppUrl = this.copyAppUrl.bind(this);
-  }
-
-  copyAppUrl() {
-    let str = "vk.link/warmay";
-    let area = document.createElement("textarea");
-
-    document.body.appendChild(area);
-    area.value = str;
-    area.select();
-    document.execCommand("copy");
-    document.body.removeChild(area);
-
-    this.setState({
-      inviteTextBtn: "-ˋссылка скопированаˊ-",
-      inviteText: "спасибо!",
-    });
+    this.shareApp = this.shareApp.bind(this);
+    this.shareToTheWall = this.shareToTheWall.bind(this);
   }
 
   getModalData(modal) {
@@ -55,8 +38,6 @@ class Main extends React.Component {
 
     let index = Math.round(Math.random() * (hellos.length - 1));
     this.hello = hellos[index];
-
-    /* vk-brige */
   }
 
   componentWillUnmount() {
@@ -66,6 +47,19 @@ class Main extends React.Component {
   tick() {
     this.setState({
       date: new Date(),
+    });
+  }
+
+  shareApp() {
+    bridge.send("VKWebAppShare");
+  }
+
+  shareToTheWall() {
+    bridge.send("VKWebAppShowWallPostBox", {
+      message: `Поддержка, мотивация, подборки полезностей
+        и статьи по саморазвитию и заботе о себе
+        можно найти в этом сообществе: https://vk.com/warmay,
+        присоединяйтесь.`,
     });
   }
 
@@ -104,72 +98,13 @@ class Main extends React.Component {
         "https://64.media.tumblr.com/e393e16e2c542a4f3949aa880980fcc5/9741c9e166cefc10-b1/s540x810/983ca0fc2a6aa7c48679cde31a14dc810272f16e.gifv";
     }
 
-    let lastApp = this.state.lastOpenedApp;
-
-    let bar = (
-      <div>
-        <NavLink className="linkStyle" to="/">
-          <div className="btnInfo">
-            <i className="fas fa-home"></i>
-          </div>
-        </NavLink>
-        <NavLink className="linkStyle" to="/may-posts">
-          <div className="btnInfo">
-            <i className="fas fa-icons"></i> публикации
-          </div>
-        </NavLink>
-        <NavLink className="linkStyle" to="/may-chats">
-          <div className="btnInfo">
-            <i className="fas fa-comments"></i> чаты
-          </div>
-        </NavLink>
-        <NavLink className="linkStyle" to="/">
-          <div className="btnInfo">
-            <i className="fas fa-heart"></i> помощь психолога
-          </div>
-        </NavLink>
-        {/* <NavLink className="linkStyle" to="/may-playlists">
-          <div className="btnInfo">
-            <i className="fas fa-music"></i> плейлисты
-          </div>
-        </NavLink> */}
-        <NavLink className="linkStyle" to="/may-streams">
-          <div className="btnInfo">
-            <i className="fas fa-mug-hot"></i> трансляции
-          </div>
-        </NavLink>
-        <NavLink className="linkStyle" to="/mailing">
-          <div className="btnInfo">
-            <i className="fas fa-envelope-open-text"></i> рассылки от Май
-          </div>
-        </NavLink>
-        {/* <a className="linkStyle" href="https://vk.com/app5748831_-160404048">
-          <div className="btnInfo">
-            <i className="fas fa-envelope-open-text"></i> рассылки от Май
-          </div>
-        </a> */}
-      </div>
-    );
-
     return (
       <div>
-        <div className="headerLineBot">{bar}</div>
         <img src={src} alt="cover" className="MainPageCover" />
         <div className="DateBlock">
           <div className="Timer">{time}</div>
           <div className="Day">{day}</div>
         </div>
-
-        {/* {lastApp ? (
-          <NavLink to="/may-app">
-            <div className="btnInfoRe">
-              <i className="fas fa-th-large"></i> открыть{" "}
-              {"«" + lastApp.name + "»"}
-            </div>
-          </NavLink>
-        ) : (
-          ""
-        )} */}
         <div className="btnsTitle">Сообщество</div>
         <div className="row mt-4 mb-2 pl-2 pr-2">
           <div className="col">
@@ -206,7 +141,7 @@ class Main extends React.Component {
             </div>
           </div>
         </div>
-        <div className="row mt-3 mb-2 pl-2 pr-2">
+        <div className="row mt-3 mb-4 pl-2 pr-2">
           <div className="col">
             <a href="https://vk.com/im?sel=-160404048" className="linkStyle">
               <div className="icon">
@@ -235,26 +170,23 @@ class Main extends React.Component {
             </a>
           </div>
         </div>
-        <div
-          className="streamView"
-          style={{
-            background: `url(https://64.media.tumblr.com/d29f37a271afe4a1319d93c6a6e6d73d/tumblr_pq1du6Av5T1we9f2ro1_r2_640.gifv) center/110% no-repeat`,
-          }}
-        >
-          <div className="streamPicBlackout">
-            <div className="streamTitle">пригласительная ссылка</div>
-            <div className="streamText">{this.state.inviteText}</div>
-            <button
-              className="streamComeInBtn"
-              style={{ borderColor: "#FFAA9D", color: "#FFAA9D" }}
-              onClick={this.copyAppUrl}
-            >
-              {this.state.inviteTextBtn}
-            </button>
+        <div className="btnsTitle">Поддержать Май</div>
+        <div className="row mt-4 mb-2 pl-2 pr-2">
+          <div className="col">
+            <div className="icon" onClick={this.shareApp}>
+              <i className="fas fa-user-friends"></i>
+              <span className="iconTitle">отправить друзьям</span>
+            </div>
+          </div>
+          <div className="col">
+            <div className="icon" onClick={this.shareToTheWall}>
+              <i className="fas fa-share-square"></i>
+              <span className="iconTitle">пост на стену</span>
+            </div>
           </div>
         </div>
         <br />
-        <div className="copyrightText">сделано в Мае с любовью</div>
+        <div className="copyrightText">сделано в Май с любовью</div>
       </div>
     );
   }

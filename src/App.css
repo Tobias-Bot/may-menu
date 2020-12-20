@@ -42,6 +42,12 @@ body {
   left: -7px;
 }
 
+.logoTitle {
+  margin: 0px 15px;
+  font-size: 23px;
+  color: #cbd0ff;
+}
+
 .modal {
   padding: 0 15px;
 }
@@ -49,7 +55,7 @@ body {
 .wrapper {
   position: relative;
   width: 100%;
-  padding: 5px 10px 20px 10px;
+  padding: 10px 10px 20px 10px;
   left: 50%;
   transform: translateX(-50%);
   max-width: 750px;
@@ -71,7 +77,7 @@ body {
   top: 0;
   width: 62px;
   height: 50px;
-  background: linear-gradient(180deg, #ff8fcb, #a6adfd);
+  background: linear-gradient(175deg, #ff8fcb, #a6adfd);
   border-radius: 0 0 100px 0;
 }
 
@@ -92,7 +98,6 @@ body {
   height: 50px;
   padding: 10px 100px 0px 60px;
   background-color: rgb(37, 37, 51);
-  box-shadow: 0px 3px 10px black;
 }
 
 .btnHeader {
@@ -117,8 +122,9 @@ body {
 }
 
 .headerLineBot {
-  position: relative;
-  z-index: 1;
+  position: fixed;
+  z-index: 2;
+  top: 55px;
   width: 100%;
   height: 53px;
   white-space: nowrap;
@@ -126,6 +132,7 @@ body {
   -webkit-overflow-scrolling: touch;
   overflow: hidden;
   overflow-x: scroll;
+  background-color: rgb(25, 25, 34);;
 }
 
 .MainPageCover {
@@ -189,73 +196,11 @@ body {
   position: fixed;
   width: 100%;
   height: calc(100% - 110px);
-  margin-top: 50px;
+  margin-top: 110px;
   overflow-x: hidden;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
-  background-color: rgb(25, 25, 34);
-}
-
-.footer {
-  position: fixed;
-  z-index: 1;
-  bottom: 0;
-  text-align: center;
-  border-radius: 15px 15px 0 0;
-  border-top: 2px solid #ff9dd1;
-  width: 100%;
-  padding: 1px 0 2px 0;
   background-color: rgb(37, 37, 51);
-  box-shadow: 0px -3px 10px black;
-}
-
-.btnFooter {
-  position: relative;
-  display: inline-block;
-  min-width: 55px;
-  min-height: 30px;
-  margin: 0 5px;
-  padding: 4px 0;
-  font-size: 20px;
-  border-radius: 15px;
-  overflow: hidden;
-  color: #d2d5ff;
-  text-align: center;
-  transition: 0.1s all;
-}
-.btnFooter:hover {
-  cursor: pointer;
-  color: rgba(0, 0, 0, 0.9);
-  background-color: rgb(255, 150, 206);
-  outline: none;
-}
-
-.btnFooterMain {
-  position: relative;
-  display: inline-block;
-  width: 65px;
-  margin: 2px 10px;
-  font-size: 28px;
-  border-radius: 18px;
-  overflow: hidden;
-  color: #ffa6d6;
-  text-align: center;
-  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.5);
-  text-shadow: 2px 3px 6px rgba(0, 0, 0, 0.7);
-  transition: 0.3s all;
-}
-.btnFooterMain:hover,
-.btnFooterMain:focus {
-  cursor: pointer;
-  color: rgba(0, 0, 0, 0.9);
-  background-color: #d2d5ff;
-  outline: none;
-}
-
-.btnFooterMainTitle {
-  position: relative;
-  font-size: 13px;
-  font-weight: 500;
 }
 
 .modal-content {
@@ -288,7 +233,7 @@ body {
   padding: 10px 10px;
   background-color: rgb(37, 37, 51);
   color: #cbcfff;
-  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.8);
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.7);
   transition: 0.2s all;
 }
 .icon:hover {
