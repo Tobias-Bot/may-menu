@@ -73,6 +73,16 @@ class SearchPage extends React.Component {
             </a>
           </div>
           <div className="col">
+            <a className="linkStyle" href="https://vk.com/warmay/note">
+              <div className="icon">
+                <i className="fas fa-sticky-note"></i>
+                <span className="iconTitle">заметки</span>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div className="row mt-3 mb-2 pl-2 pr-2">
+          <div className="col">
             <a className="linkStyle" href="https://vk.com/warmay/textpost">
               <div className="icon">
                 <i className="fas fa-signature"></i>
@@ -80,8 +90,6 @@ class SearchPage extends React.Component {
               </div>
             </a>
           </div>
-        </div>
-        <div className="row mt-3 mb-2 pl-2 pr-2">
           <div className="col">
             <a className="linkStyle" href="https://vk.com/warmay/help">
               <div className="icon">

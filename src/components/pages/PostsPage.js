@@ -60,7 +60,7 @@ class PostsPage extends React.Component {
     bridge
       .send("VKWebAppGetAuthToken", {
         app_id: 7646928,
-        scope: "wall",
+        scope: "wall, groups",
       })
       .then((data) => {
         let token = data.access_token;

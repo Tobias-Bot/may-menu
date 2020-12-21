@@ -19,6 +19,8 @@ class Main extends React.Component {
       inviteText:
         "Скопируй ссылку на приложение и отправь друзьям. Поддержи проект.",
       inviteTextBtn: "скопировать ссылку",
+
+      username: "",
     };
 
     this.hello = "";
@@ -27,6 +29,7 @@ class Main extends React.Component {
     this.tick = this.tick.bind(this);
     this.shareApp = this.shareApp.bind(this);
     this.shareToTheWall = this.shareToTheWall.bind(this);
+    this.getUsername = this.getUsername.bind(this);
   }
 
   getModalData(modal) {
@@ -38,6 +41,14 @@ class Main extends React.Component {
 
     let index = Math.round(Math.random() * (hellos.length - 1));
     this.hello = hellos[index];
+
+    this.getUsername();
+  }
+
+  getUsername() {
+    bridge.send("VKWebAppGetUserInfo").then(response => {
+      this.setState({ username: response.first_name });
+    });
   }
 
   componentWillUnmount() {
@@ -100,11 +111,28 @@ class Main extends React.Component {
 
     return (
       <div>
-        <img src={src} alt="cover" className="MainPageCover" />
-        <div className="DateBlock">
-          <div className="Timer">{time}</div>
-          <div className="Day">{day}</div>
+        <div
+          className="DateBlock"
+          style={{
+            background: `url(${src}) center/100% no-repeat`,
+          }}
+        >
+          <div className="picBlackout">
+            <div className="Day">{this.state.username}, привет!</div>
+          </div>
         </div>
+
+        <div className="BtnsBlock">
+          <NavLink to="/may-bookmarks">
+            <button className="MainBtn">
+              <i className="fas fa-bookmark"></i> закладки
+            </button>
+          </NavLink>
+          {/* <button className="MainBtn">
+            <i className="fas fa-pencil-alt"></i> пост
+          </button> */}
+        </div>
+
         <div className="btnsTitle">Сообщество</div>
         <div className="row mt-4 mb-2 pl-2 pr-2">
           <div className="col">

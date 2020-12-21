@@ -12,7 +12,7 @@ import PostsPage from "./pages/PostsPage";
 import ChatsPage from "./pages/ChatsPage";
 import StreamsPage from "./pages/StreamsPage";
 // import MoviePage from "./pages/MoviePage";
-// import SuggestChatPage from "./pages/suggestPages/SuggestChatPage.js";
+import PsyHelpPage from "./pages/PsyHelpPage.js";
 import BookmarksPage from "./BookmarksPage.js";
 // import PlaylistsPage from "./pages/PlaylistsPage.js";
 import AppsPage from "./pages/AppsPage";
@@ -83,6 +83,11 @@ class MainApp extends React.Component {
             <i className="fas fa-home"></i>
           </div>
         </NavLink>
+        <NavLink className="linkStyle" to="/search">
+          <div className="btnInfo">
+            <i className="fas fa-search"></i> поиск
+          </div>
+        </NavLink>
         <NavLink className="linkStyle" to="/may-posts">
           <div className="btnInfo">
             <i className="fas fa-icons"></i> публикации
@@ -93,11 +98,11 @@ class MainApp extends React.Component {
             <i className="fas fa-comments"></i> чаты
           </div>
         </NavLink>
-        {/* <NavLink className="linkStyle" to="/">
+        <NavLink className="linkStyle" to="/help">
           <div className="btnInfo">
             <i className="fas fa-heart"></i> помощь психолога
           </div>
-        </NavLink> */}
+        </NavLink>
         {/* <NavLink className="linkStyle" to="/may-playlists">
           <div className="btnInfo">
             <i className="fas fa-music"></i> плейлисты
@@ -155,7 +160,9 @@ class MainApp extends React.Component {
         <div>
           <HashRouter>
             <div className="headerLineTop" style={styles.headerLineTop}></div>
-            <div className="headerLineBot" style={styles.headerLineBot}>{bar}</div>
+            <div className="headerLineBot" style={styles.headerLineBot}>
+              {bar}
+            </div>
             <div
               className="headerLineTopSecond"
               style={styles.headerLineTopSecond}
@@ -195,9 +202,9 @@ class MainApp extends React.Component {
                   <Route exact path="/may-chats">
                     <ChatsPage />
                   </Route>
-                  {/* <Route exact path="/may-playlists">
-                    <PlaylistsPage />
-                  </Route> */}
+                  <Route exact path="/help">
+                    <PsyHelpPage />
+                  </Route>
                   <Route exact path="/may-streams">
                     <StreamsPage />
                   </Route>
