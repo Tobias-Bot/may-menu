@@ -130,7 +130,7 @@ class Post extends React.Component {
             <Image
               photo={data.photos.best}
               source={data.source}
-              alt="article's cover"
+              alt="post's cover"
             />
           ) : (
             ""

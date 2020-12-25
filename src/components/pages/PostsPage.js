@@ -16,7 +16,6 @@ class PostsPage extends React.Component {
       savedPosts: [],
       colors: [],
 
-      postCards: true,
       postsLoad: true,
     };
 
@@ -37,14 +36,15 @@ class PostsPage extends React.Component {
 
   componentDidMount() {
     this.loadPosts();
+    this.props.startLoad();
   }
 
-  // componentDidUpdate() {
-  //   if (this.props.load) {
-  //     this.loadPosts();
-  //     this.props.stopLoad();
-  //   }
-  // }
+  componentDidUpdate() {
+    if (this.props.load) {
+      this.loadPosts();
+      this.props.stopLoad();
+    }
+  }
 
   loadPosts() {
     let obj = {
@@ -59,8 +59,8 @@ class PostsPage extends React.Component {
 
     bridge
       .send("VKWebAppGetAuthToken", {
-        app_id: 7646928,
-        scope: "wall, groups",
+        app_id: 7646928, //7706189,
+        scope: "wall",
       })
       .then((data) => {
         let token = data.access_token;
@@ -74,7 +74,7 @@ class PostsPage extends React.Component {
               count: this.offset,
               offset: this.currOffset,
               filter: "owner",
-              v: "5.73",
+              v: "5.76",
               access_token: token,
             },
           })

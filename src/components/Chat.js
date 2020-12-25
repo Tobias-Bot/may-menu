@@ -13,7 +13,6 @@ class Chat extends React.Component {
       <div>
         <div
           className="chatView"
-          key={chat.title}
           style={{
             background: `url(${chat.background}) center/100% no-repeat`,
           }}

@@ -26,10 +26,17 @@ class MainApp extends React.Component {
       currentModal: "",
 
       headerStyles: {},
+      load: false,
+      scroll: false,
     };
+
+    this.currPercent = 0;
 
     this.setModal = this.setModal.bind(this);
     this.getHeaderStyle = this.getHeaderStyle.bind(this);
+    this.PostsLoader = this.PostsLoader.bind(this);
+    this.stopLoad = this.stopLoad.bind(this);
+    this.startLoad = this.startLoad.bind(this);
   }
 
   componentDidMount() {
@@ -70,6 +77,35 @@ class MainApp extends React.Component {
 
   setModal(modal) {
     this.setState({ currentModal: modal });
+  }
+
+  PostsLoader() {
+    let content = document.getElementById("contentWindow");
+
+    let H = content.scrollHeight;
+    let currH = content.scrollTop;
+
+    this.currPercent = (100 * currH) / H;
+
+    console.log(this.currPercent);
+
+    if (this.currPercent <= 70) {
+      this.startLoad();
+    }
+
+    if (this.state.scroll) {
+      if (this.currPercent >= 70) {
+        this.setState({ load: true, scroll: false });
+      }
+    }
+  }
+
+  stopLoad() {
+    this.setState({ load: false });
+  }
+
+  startLoad() {
+    this.setState({ scroll: true });
   }
 
   render() {
@@ -197,7 +233,11 @@ class MainApp extends React.Component {
                     <Main onModal={this.setModal} />
                   </Route>
                   <Route exact path="/may-posts">
-                    <PostsPage />
+                    <PostsPage
+                      load={this.state.load}
+                      stopLoad={this.stopLoad}
+                      startLoad={this.startLoad}
+                    />
                   </Route>
                   <Route exact path="/may-chats">
                     <ChatsPage />

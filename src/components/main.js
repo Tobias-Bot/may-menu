@@ -79,12 +79,12 @@ class Main extends React.Component {
       .toLocaleTimeString("ru", { hour12: false })
       .substring(0, 5);
 
-    let date = new Date();
-    let day = date.toLocaleString("ru", {
-      month: "long",
-      day: "numeric",
-      weekday: "long",
-    });
+    // let date = new Date();
+    // let day = date.toLocaleString("ru", {
+    //   month: "long",
+    //   day: "numeric",
+    //   weekday: "long",
+    // });
 
     let src = "";
     let moment = parseInt(time.substring(0, 2));
