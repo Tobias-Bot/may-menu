@@ -222,7 +222,7 @@ class Main extends React.Component {
         <div className="row mt-3 mb-2 pl-2 pr-2">
           <div className="col">
             <a
-              href="https://vk.com/donate_app?mid=-160404048&ref=group_menu"
+              href="https://vk.com/app6471849_-160404048"
               className="linkStyle"
             >
               <div className="icon">
