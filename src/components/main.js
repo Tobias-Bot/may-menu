@@ -128,7 +128,7 @@ class Main extends React.Component {
               <i className="fas fa-bookmark"></i> закладки
             </button>
           </NavLink> */}
-          <a href="https://yadi.sk/d/5Shg_PsDtaRHJQ">
+          <a href="https://yadi.sk/d/5Shg_PsDtaRHJQ" target="_blank">
             <button className="MainBtn" style={{ borderColor: "#ff9dde" }}>
               <i className="fas fa-gift"></i> открыть подарок
             </button>
