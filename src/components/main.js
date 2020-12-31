@@ -232,13 +232,12 @@ class Main extends React.Component {
           </div>
         </div>
         <div className="row mt-3 mb-2 pl-2 pr-2">
+          <a
+            href="https://vk.com/donate_app?mid=-160404048"
+            className="linkStyle"
+          ></a>
           <div className="col">
-            <div
-              className="icon"
-              onClick={() =>
-                bridge.send("VKWebAppOpenApp", { app_id: 6471849 })
-              }
-            >
+            <div className="icon">
               <i className="fab fa-gratipay"></i>
               <span className="iconTitle">поддержать проект</span>
             </div>
