@@ -134,20 +134,8 @@ class Main extends React.Component {
               <i className="fas fa-gift"></i> открыть подарок
             </button>
           </a>
-          <button
-            className="MainBtn"
-            onClick={() => {
-              bridge.send("VKWebAppShowWallPostBox", {
-                message:
-                  "Твои подарочки уже ждут тебя: https://vk.com/app7646928_-160404048",
-                attachments: "photo-160404048_457257317",
-              });
-            }}
-          >
-            <i className="fas fa-user-friends"></i> поделиться с друзьями
-          </button>
           <button className="MainBtn" onClick={this.shareApp}>
-            <i className="fas fa-paper-plane"></i> отправить в сообщении
+            <i className="fas fa-paper-plane"></i> отправить друзьям
           </button>
         </div>
 
