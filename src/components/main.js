@@ -223,13 +223,14 @@ class Main extends React.Component {
           <a
             href="https://vk.com/donate_app?mid=-160404048"
             className="linkStyle"
-          ></a>
-          <div className="col">
-            <div className="icon">
-              <i className="fab fa-gratipay"></i>
-              <span className="iconTitle">поддержать проект</span>
+          >
+            <div className="col">
+              <div className="icon">
+                <i className="fab fa-gratipay"></i>
+                <span className="iconTitle">поддержать проект</span>
+              </div>
             </div>
-          </div>
+          </a>
         </div>
         <br />
         <div className="copyrightText">сделано в Май с любовью</div>
