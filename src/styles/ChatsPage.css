@@ -30,15 +30,8 @@
   z-index: 1;
   max-width: 80%;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 20px;
   color: white;
-}
-
-@media (min-width: 750px) {
-  .chatTitle {
-    font-weight: 600;
-    font-size: 30px;
-  }
 }
 
 .chatText {
@@ -51,12 +44,6 @@
   margin-top: 15px;
   font-size: 18px;
   color: white;
-}
-
-@media (min-width: 750px) {
-  .chatText {
-    font-size: 20px;
-  }
 }
 
 .chatComeInBtn {

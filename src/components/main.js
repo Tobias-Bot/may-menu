@@ -67,10 +67,11 @@ class Main extends React.Component {
 
   shareToTheWall() {
     bridge.send("VKWebAppShowWallPostBox", {
-      message: `Поддержка, мотивация, подборки полезностей
-        и статьи по саморазвитию и заботе о себе
-        можно найти в этом сообществе: https://vk.com/warmay,
-        присоединяйтесь.`,
+      message: `Май это психология, саморазвитие,
+      поддержка и забота о себе. Это одна большая
+      семья, в которой мы все учимся разбираться в
+      себе, своих эмоциях и чувствах. Присоединяйтесь
+      : https://vk.com/warmay`,
     });
   }
 
@@ -133,9 +134,21 @@ class Main extends React.Component {
               <i className="fas fa-gift"></i> открыть подарок
             </button>
           </a>
-          {/* <button className="MainBtn">
-            <i className="fas fa-pencil-alt"></i> пост
-          </button> */}
+          <button
+            className="MainBtn"
+            onClick={() => {
+              bridge.send("VKWebAppShowWallPostBox", {
+                message:
+                  "Твои подарочки уже ждут тебя: https://vk.com/app7646928_-160404048",
+                attachments: "photo-160404048_457257317",
+              });
+            }}
+          >
+            <i className="fas fa-user-friends"></i> поделиться с друзьями
+          </button>
+          <button className="MainBtn" onClick={this.shareApp}>
+            <i className="fas fa-paper-plane"></i> отправить в сообщении
+          </button>
         </div>
 
         <div className="btnsTitle">Сообщество</div>
