@@ -1,4 +1,5 @@
 import React from "react";
+import bridge from "@vkontakte/vk-bridge";
 import qs from "querystring";
 
 import { Route, HashRouter, Switch, NavLink } from "react-router-dom";
@@ -28,6 +29,8 @@ class MainApp extends React.Component {
       headerStyles: {},
       load: false,
       scroll: false,
+
+      isFavorite: false,
     };
 
     this.currPercent = 0;
@@ -41,6 +44,14 @@ class MainApp extends React.Component {
 
   componentDidMount() {
     this.setState({ headerStyles: this.getHeaderStyle() });
+  }
+
+  addToHomeScreen() {
+    bridge.send("VKWebAppAddToHomeScreenInfo").then((res) => {
+      if (res.data.is_added_to_home_screen) {
+        this.setState({ isFavorite: true });
+      }
+    });
   }
 
   getHeaderStyle() {
@@ -87,8 +98,6 @@ class MainApp extends React.Component {
 
     this.currPercent = (100 * currH) / H;
 
-    console.log(this.currPercent);
-
     if (this.currPercent <= 70) {
       this.startLoad();
     }
@@ -114,16 +123,16 @@ class MainApp extends React.Component {
 
     let bar = (
       <div>
-        <NavLink className="linkStyle" to="/">
+        {/* <NavLink className="linkStyle" to="/">
           <div className="btnInfo">
             <i className="fas fa-home"></i>
           </div>
-        </NavLink>
-        <NavLink className="linkStyle" to="/search">
+        </NavLink> */}
+        {/* <NavLink className="linkStyle" to="/search">
           <div className="btnInfo">
             <i className="fas fa-search"></i> поиск
           </div>
-        </NavLink>
+        </NavLink> */}
         <NavLink className="linkStyle" to="/may-posts">
           <div className="btnInfo">
             <i className="fas fa-icons"></i> публикации
@@ -134,6 +143,12 @@ class MainApp extends React.Component {
             <i className="fas fa-comments"></i> чаты
           </div>
         </NavLink>
+        <div
+          className="btnInfo"
+          onClick={() => bridge.send("VKWebAppOpenApp", { app_id: 7713167 })}
+        >
+          <i className="fas fa-brain"></i> тесты
+        </div>
         <NavLink className="linkStyle" to="/help">
           <div className="btnInfo">
             <i className="fas fa-heart"></i> помощь психолога
@@ -154,11 +169,6 @@ class MainApp extends React.Component {
             <i className="fas fa-envelope-open-text"></i> рассылки от Май
           </div>
         </NavLink>
-        {/* <a className="linkStyle" href="https://vk.com/app5748831_-160404048">
-          <div className="btnInfo">
-            <i className="fas fa-envelope-open-text"></i> рассылки от Май
-          </div>
-        </a> */}
       </div>
     );
 
@@ -204,16 +214,9 @@ class MainApp extends React.Component {
               style={styles.headerLineTopSecond}
             >
               <span className="logoTitle">Мαú</span>
-              {/* <NavLink to="/may-bookmarks">
-                <div className="btnHeader">
-                  <i className="fas fa-bookmark"></i>
-                </div>
-              </NavLink>
-              <NavLink to="/may-bookmarks">
-                <div className="btnHeader">
-                  <i className="fas fa-bookmark"></i>
-                </div>
-              </NavLink> */}
+              {/* <div className="btnHeader">
+                  <i className="fas fa-star"></i>
+                </div> */}
             </div>
             <div className="header" style={styles.header}>
               <a className="linkStyle" href="https://vk.com/warmay">
@@ -272,25 +275,24 @@ class MainApp extends React.Component {
                     </div>
                   </div>
                 </NavLink>
-                {/* <div className="suggestCardView">
-                  вопрос
-                  <div className="cardIcon">
-                    <i className="fas fa-question"></i>
-                  </div>
-                </div>
-                <div className="suggestCardView">
-                  поддержка
-                  <div className="cardIcon">
-                    <i className="fas fa-heart"></i>
-                  </div>
-                </div>
-                <div className="suggestCardView">
-                  найти друга
-                  <div className="cardIcon">
-                    <i className="fas fa-user-friends"></i>
-                  </div>
-                </div> */}
               </div>
+            </div>
+            <div className="footer">
+              <NavLink className="linkStyle" to="/search">
+                <div className="btnFooter">
+                  <i className="fas fa-search"></i>
+                </div>
+              </NavLink>
+              <NavLink className="linkStyle" to="/">
+                <div className="btnFooter">
+                  <i className="fas fa-home"></i>
+                </div>
+              </NavLink>
+              <NavLink className="linkStyle" to="/may-bookmarks">
+                <div className="btnFooter">
+                  <i className="fas fa-bookmark"></i>
+                </div>
+              </NavLink>
             </div>
           </HashRouter>
         </div>

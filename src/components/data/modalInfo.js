@@ -84,6 +84,9 @@ const info = {
         <br/> 
         <br/>
         <b>#textpost@warmay</b> — текстовые посты;
+        <br/> 
+        <br/>
+        <b>#note@warmay</b> — заметки с советами, идеями.
         <br/>
         `,
   },

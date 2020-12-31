@@ -46,7 +46,7 @@ class Main extends React.Component {
   }
 
   getUsername() {
-    bridge.send("VKWebAppGetUserInfo").then(response => {
+    bridge.send("VKWebAppGetUserInfo").then((response) => {
       this.setState({ username: response.first_name });
     });
   }
@@ -79,12 +79,12 @@ class Main extends React.Component {
       .toLocaleTimeString("ru", { hour12: false })
       .substring(0, 5);
 
-    // let date = new Date();
-    // let day = date.toLocaleString("ru", {
-    //   month: "long",
-    //   day: "numeric",
-    //   weekday: "long",
-    // });
+    let date = new Date();
+    let day = date.toLocaleString("ru", {
+      month: "long",
+      day: "numeric",
+      weekday: "long",
+    });
 
     let src = "";
     let moment = parseInt(time.substring(0, 2));
@@ -118,16 +118,21 @@ class Main extends React.Component {
           }}
         >
           <div className="picBlackout">
-            <div className="Day">{this.state.username}, привет!</div>
+            <div className="Day">{this.state.username}, с Новым годом!</div>
           </div>
         </div>
 
         <div className="BtnsBlock">
-          <NavLink to="/may-bookmarks">
+          {/* <NavLink to="/may-bookmarks">
             <button className="MainBtn">
               <i className="fas fa-bookmark"></i> закладки
             </button>
-          </NavLink>
+          </NavLink> */}
+          <a href="https://yadi.sk/d/5Shg_PsDtaRHJQ">
+            <button className="MainBtn" style={{ borderColor: "#ff9dde" }}>
+              <i className="fas fa-gift"></i> открыть подарок
+            </button>
+          </a>
           {/* <button className="MainBtn">
             <i className="fas fa-pencil-alt"></i> пост
           </button> */}
@@ -198,7 +203,7 @@ class Main extends React.Component {
             </a>
           </div>
         </div>
-        <div className="btnsTitle">Поддержать Май</div>
+        <div className="btnsTitle">Рассказать о Май</div>
         <div className="row mt-4 mb-2 pl-2 pr-2">
           <div className="col">
             <div className="icon" onClick={this.shareApp}>
