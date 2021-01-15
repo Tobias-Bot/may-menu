@@ -7,7 +7,7 @@ import hellos from "./data/Hellos";
 import "../styles/MainWidget.css";
 import "../styles/StreamsPage.css";
 import "../App.css";
-import { NavLink } from "react-router-dom";
+//import { NavLink } from "react-router-dom";
 
 class Main extends React.Component {
   constructor(props) {
@@ -15,10 +15,6 @@ class Main extends React.Component {
     this.state = {
       info,
       date: new Date(),
-
-      inviteText:
-        "Скопируй ссылку на приложение и отправь друзьям. Поддержи проект.",
-      inviteTextBtn: "скопировать ссылку",
 
       username: "",
     };
@@ -80,12 +76,14 @@ class Main extends React.Component {
       .toLocaleTimeString("ru", { hour12: false })
       .substring(0, 5);
 
+    let text = "привет";
+
     let date = new Date();
-    let day = date.toLocaleString("ru", {
-      month: "long",
-      day: "numeric",
-      weekday: "long",
-    });
+    // let day = date.toLocaleString("ru", {
+    //   month: "long",
+    //   day: "numeric",
+    //   weekday: "long",
+    // });
 
     let src = "";
     let moment = parseInt(time.substring(0, 2));
@@ -93,21 +91,29 @@ class Main extends React.Component {
     if (moment >= 6 && moment < 10) {
       src =
         "https://64.media.tumblr.com/f0c4e58d302d28e09e07c95020e4405e/a0478a781f60be2f-5f/s540x810/352a38c08ec5cc847945c79cbbddfbec98a5eb11.gifv";
+
+      text = "утречка!";
     }
 
     if (moment >= 10 && moment < 16) {
       src =
         "https://64.media.tumblr.com/b876ea93a22c86bc5b78c7b78eff97f5/15397bd7e8d2a434-37/s540x810/40efb0e5aafbcbfe08fbdec5278ac720a9d2aba2.gifv";
+
+      text = "привет!";
     }
 
     if (moment >= 16 && moment < 22) {
       src =
         "https://64.media.tumblr.com/fb6257322a3e73e7aa7247ba2b678163/tumblr_pp3mmshJhz1xvjko7o1_1280.gifv";
+
+      text = "доброго вечера!";
     }
 
     if (moment >= 22 || moment < 6) {
       src =
         "https://64.media.tumblr.com/e393e16e2c542a4f3949aa880980fcc5/9741c9e166cefc10-b1/s540x810/983ca0fc2a6aa7c48679cde31a14dc810272f16e.gifv";
+
+      text = "доброй ночи!";
     }
 
     return (
@@ -119,7 +125,9 @@ class Main extends React.Component {
           }}
         >
           <div className="picBlackout">
-            <div className="Day">{this.state.username}, с Новым годом!</div>
+            <div className="Day">
+              {this.state.username}, {text}
+            </div>
           </div>
         </div>
 
@@ -129,14 +137,6 @@ class Main extends React.Component {
               <i className="fas fa-bookmark"></i> закладки
             </button>
           </NavLink> */}
-          <a href="https://yadi.sk/d/5Shg_PsDtaRHJQ" target="_blank">
-            <button className="MainBtn" style={{ borderColor: "#ff9dde" }}>
-              <i className="fas fa-gift"></i> открыть подарок
-            </button>
-          </a>
-          <button className="MainBtn" onClick={this.shareApp}>
-            <i className="fas fa-paper-plane"></i> отправить друзьям
-          </button>
         </div>
 
         <div className="btnsTitle">Сообщество</div>
@@ -177,7 +177,12 @@ class Main extends React.Component {
         </div>
         <div className="row mt-3 mb-4 pl-2 pr-2">
           <div className="col">
-            <a href="https://vk.com/im?sel=-160404048" className="linkStyle">
+            <a
+              href="https://vk.com/im?sel=-160404048"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="linkStyle"
+            >
               <div className="icon">
                 <i className="fas fa-feather-alt"></i>
                 <span className="iconTitle">написать</span>
@@ -188,6 +193,8 @@ class Main extends React.Component {
             <a
               className="linkStyle"
               href="https://vk.com/topic-160404048_36674451"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <div className="icon">
                 <i className="fas fa-heart"></i>
@@ -196,7 +203,12 @@ class Main extends React.Component {
             </a>
           </div>
           <div className="col">
-            <a href="https://vk.com/warmay" className="linkStyle">
+            <a
+              href="https://vk.com/warmay"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="linkStyle"
+            >
               <div className="icon">
                 <i className="fab fa-vk"></i>
                 <span className="iconTitle">группа</span>
@@ -223,6 +235,8 @@ class Main extends React.Component {
           <div className="col">
             <a
               href="https://vk.com/app6471849_-160404048"
+              target="_blank"
+              rel="noopener noreferrer"
               className="linkStyle"
             >
               <div className="icon">

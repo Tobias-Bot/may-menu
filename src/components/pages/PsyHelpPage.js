@@ -25,13 +25,13 @@ class PsyHelpPage extends React.Component {
         >
           <div className="streamPicBlackout">
             <div className="streamTitle">психологическая помощь</div>
-            <div className="streamText">
+            <div className="streamText" style={{fontSize: "16px"}}>
               В этом разделе ты сможешь выбрать себе психолога и записаться к
               нему на консультацию, которая может быть даже бесплатной. В
               обсуждении будут представлены описания каждого психолога и указаны
               его контакты.
             </div>
-            <a href="https://vk.com/topic-160404048_46675469">
+            <a href="https://vk.com/topic-160404048_46675469" target="_blank" rel="noopener noreferrer">
               <button className="streamComeInBtn">перейти в обсуждение</button>
             </a>
           </div>

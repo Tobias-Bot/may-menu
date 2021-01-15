@@ -40,6 +40,7 @@ class MainApp extends React.Component {
     this.PostsLoader = this.PostsLoader.bind(this);
     this.stopLoad = this.stopLoad.bind(this);
     this.startLoad = this.startLoad.bind(this);
+    this.getMobilePlatform = this.getMobilePlatform.bind(this);
   }
 
   componentDidMount() {
@@ -54,13 +55,15 @@ class MainApp extends React.Component {
     });
   }
 
-  getHeaderStyle() {
+  getMobilePlatform() {
     const str = window.location.search.slice(1);
     const objParams = qs.parse(str);
 
-    let platform = objParams.vk_platform;
+    return objParams.vk_platform;
+  }
 
-    if (platform === "mobile_iphone") {
+  getHeaderStyle() {
+    if (this.getMobilePlatform() === "mobile_iphone") {
       return {
         header: {
           top: "17px",
@@ -78,7 +81,7 @@ class MainApp extends React.Component {
         body: {
           marginTop: "67px",
           paddingTop: "50px",
-          height: "calc(100% - 68px)",
+          height: "calc(100% - 122px)",
         },
       };
     } else {
@@ -120,6 +123,7 @@ class MainApp extends React.Component {
   render() {
     let modal = this.state.currentModal;
     let styles = this.state.headerStyles;
+    let platform = this.getMobilePlatform();
 
     let bar = (
       <div>
@@ -258,7 +262,7 @@ class MainApp extends React.Component {
                     <BookmarksPage />
                   </Route>
                   <Route exact path="/search">
-                    <SearchPage />
+                    <SearchPage platform={platform} />
                   </Route>
                   <Route exact path="/mailing">
                     <MailingPage />

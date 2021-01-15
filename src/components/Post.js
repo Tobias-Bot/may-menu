@@ -116,6 +116,8 @@ class Post extends React.Component {
             <a
               style={{ textDecoration: "none", color: "white" }}
               href={data.source}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <button
                 className="postReadBtn"

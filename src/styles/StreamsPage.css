@@ -19,7 +19,7 @@
   top: 0;
   left: 0;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .streamTitle {
@@ -32,13 +32,6 @@
   color: white;
 }
 
-@media (min-width: 900px) {
-  .streamTitle {
-    font-weight: 600;
-    font-size: 30px;
-  }
-}
-
 .streamText {
   position: relative;
   z-index: 1;
@@ -49,12 +42,6 @@
   margin-top: 5px;
   font-size: 17px;
   color: white;
-}
-
-@media (min-width: 900px) {
-  .streamText {
-    font-size: 20px;
-  }
 }
 
 .streamDate {

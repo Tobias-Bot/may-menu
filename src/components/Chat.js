@@ -23,6 +23,8 @@ class Chat extends React.Component {
             <a
               className="linkStyle"
               href={chat.url}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <button className="chatComeInBtn" style={{ borderColor: chat.color }}>
                 <span style={{ color: chat.color }}>войти</span>
