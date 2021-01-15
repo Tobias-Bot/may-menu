@@ -210,7 +210,7 @@ class Main extends React.Component {
               className="linkStyle"
             >
               <div className="icon">
-                <i className="fab fa-vk"></i>
+                <i className="fas fa-door-open"></i>
                 <span className="iconTitle">группа</span>
               </div>
             </a>
@@ -240,7 +240,7 @@ class Main extends React.Component {
               className="linkStyle"
             >
               <div className="icon">
-                <i className="fab fa-gratipay"></i>
+                <i className="fas fa-pizza-slice"></i>
                 <span className="iconTitle">поддержать проект</span>
               </div>
             </a>
