@@ -1,4 +1,4 @@
-.streamView {
+/* .streamView {
   position: relative;
   width: 95%;
   height: 350px;
@@ -19,7 +19,7 @@
   top: 0;
   left: 0;
   text-align: center;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.35);
 }
 
 .streamTitle {
@@ -89,4 +89,4 @@
   cursor: pointer;
   outline: none;
   background-color: black;
-}
+} */

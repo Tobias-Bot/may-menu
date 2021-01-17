@@ -4,7 +4,7 @@ import streams from "../data/streams";
 
 import randArr from "../functions/randArr";
 
-import "../../styles/StreamsPage.css";
+//import "../../styles/StreamsPage.css";
 
 class StreamsPage extends React.Component {
   constructor(props) {
@@ -57,7 +57,23 @@ class StreamsPage extends React.Component {
   render() {
     let streams = this.getStreams();
 
-    return <div>{streams}</div>;
+    return (
+      <div>
+        {streams}
+        <br />
+        <a
+          className="linkStyle"
+          href="https://yadi.sk/d/cZHSqCmlNZ3MmA?w=1"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div className="icon" style={{ maxWidth: "90%" }}>
+            <i className="fas fa-cloud"></i>
+            <div className="iconTitle">запись последнего стрима</div>
+          </div>
+        </a>
+      </div>
+    );
   }
 }
 
