@@ -30,7 +30,6 @@ class PostsPage extends React.Component {
     this.savePost = this.savePost.bind(this);
     this.getPostsFromStorage = this.getPostsFromStorage.bind(this);
     this.deletePost = this.deletePost.bind(this);
-    this.loadPosts = this.loadPosts.bind(this);
     this.getPhotosId = this.getPhotosId.bind(this);
   }
 

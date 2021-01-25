@@ -15,7 +15,12 @@ class Image extends React.Component {
     return (
       <div>
         <div>
-          <a className="linkStyle" href={source}>
+          <a
+            className="linkStyle"
+            href={source}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img
               className="postCover"
               src={photo}

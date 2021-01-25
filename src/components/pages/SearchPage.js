@@ -202,6 +202,23 @@ class SearchPage extends React.Component {
               </div>
             </a>
           </div>
+          <div className="col">
+            <a
+              className="linkStyle"
+              href={
+                platform !== "mobile_iphone"
+                  ? "https://vk.com/warmay/sketch"
+                  : "https://vk.com/wall-160404048?owners_only=1&q=#sketch"
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="icon">
+                <i className="fas fa-images"></i>
+                <span className="iconTitle">скетчи</span>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
     );

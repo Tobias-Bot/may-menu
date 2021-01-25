@@ -78,7 +78,7 @@ class Main extends React.Component {
 
     let text = "привет";
 
-    let date = new Date();
+    // let date = new Date();
     // let day = date.toLocaleString("ru", {
     //   month: "long",
     //   day: "numeric",
@@ -113,7 +113,7 @@ class Main extends React.Component {
       src =
         "https://64.media.tumblr.com/e393e16e2c542a4f3949aa880980fcc5/9741c9e166cefc10-b1/s540x810/983ca0fc2a6aa7c48679cde31a14dc810272f16e.gifv";
 
-      text = "доброй ночи!";
+      text = "сладких снов!";
     }
 
     return (
@@ -139,7 +139,7 @@ class Main extends React.Component {
           </NavLink> */}
         </div>
 
-        <div className="btnsTitle">Сообщество</div>
+        <div className="btnsTitle">сообщество</div>
         <div className="row mt-4 mb-2 pl-2 pr-2">
           <div className="col">
             <div
@@ -216,7 +216,28 @@ class Main extends React.Component {
             </a>
           </div>
         </div>
-        <div className="btnsTitle">Рассказать о Май</div>
+        <div className="btnsTitle">добавить Май</div>
+        <div className="row mt-4 mb-2 pl-2 pr-2">
+          <div className="col">
+            <div
+              className="icon"
+              onClick={() => bridge.send("VKWebAppAddToHomeScreen")}
+            >
+              <i className="fas fa-mobile-alt"></i>
+              <span className="iconTitle">на раб. стол</span>
+            </div>
+          </div>
+          <div className="col">
+            <div
+              className="icon"
+              onClick={() => bridge.send("VKWebAppAddToFavorites")}
+            >
+              <i className="fas fa-star"></i>
+              <span className="iconTitle">в избранное</span>
+            </div>
+          </div>
+        </div>
+        <div className="btnsTitle">поделиться</div>
         <div className="row mt-4 mb-2 pl-2 pr-2">
           <div className="col">
             <div className="icon" onClick={this.shareApp}>
@@ -231,7 +252,8 @@ class Main extends React.Component {
             </div>
           </div>
         </div>
-        <div className="row mt-3 mb-2 pl-2 pr-2">
+        <div className="btnsTitle">денежка на развитие проекта</div>
+        <div className="row mt-4 mb-2 pl-2 pr-2">
           <div className="col">
             <a
               href="https://vk.com/app6471849_-160404048"
@@ -241,7 +263,7 @@ class Main extends React.Component {
             >
               <div className="icon">
                 <i className="fas fa-pizza-slice"></i>
-                <span className="iconTitle">поддержать проект</span>
+                <span className="iconTitle">поддержать Май</span>
               </div>
             </a>
           </div>

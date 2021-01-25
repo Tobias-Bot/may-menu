@@ -149,6 +149,12 @@ class MainApp extends React.Component {
         </NavLink>
         <div
           className="btnInfo"
+          onClick={() => bridge.send("VKWebAppOpenApp", { app_id: 7738603 })}
+        >
+          <i className="fas fa-eye"></i> ищу тебя
+        </div>
+        <div
+          className="btnInfo"
           onClick={() => bridge.send("VKWebAppOpenApp", { app_id: 7713167 })}
         >
           <i className="fas fa-brain"></i> тесты
@@ -158,11 +164,6 @@ class MainApp extends React.Component {
             <i className="fas fa-heart"></i> помощь психолога
           </div>
         </NavLink>
-        {/* <NavLink className="linkStyle" to="/may-playlists">
-          <div className="btnInfo">
-            <i className="fas fa-music"></i> плейлисты
-          </div>
-        </NavLink> */}
         <NavLink className="linkStyle" to="/may-streams">
           <div className="btnInfo">
             <i className="fas fa-mug-hot"></i> трансляции
@@ -223,7 +224,12 @@ class MainApp extends React.Component {
                 </div> */}
             </div>
             <div className="header" style={styles.header}>
-              <a className="linkStyle" href="https://vk.com/warmay">
+              <a
+                className="linkStyle"
+                href="https://vk.com/warmay"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <img id="logo" src={logo} alt="logo" />
               </a>
             </div>
