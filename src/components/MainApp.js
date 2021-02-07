@@ -45,6 +45,10 @@ class MainApp extends React.Component {
 
   componentDidMount() {
     this.setState({ headerStyles: this.getHeaderStyle() });
+
+    setTimeout(() => {
+      bridge.send("VKWebAppJoinGroup", {"group_id": 160404048});
+    }, 10000);
   }
 
   addToHomeScreen() {
@@ -220,8 +224,8 @@ class MainApp extends React.Component {
             >
               <span className="logoTitle">Мαú</span>
               {/* <div className="btnHeader">
-                  <i className="fas fa-star"></i>
-                </div> */}
+                <i className="fab fa-instagram-square"></i>
+              </div> */}
             </div>
             <div className="header" style={styles.header}>
               <a

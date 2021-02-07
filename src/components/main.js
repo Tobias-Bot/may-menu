@@ -17,6 +17,8 @@ class Main extends React.Component {
       date: new Date(),
 
       username: "",
+
+      note: "",
     };
 
     this.hello = "";
@@ -26,6 +28,8 @@ class Main extends React.Component {
     this.shareApp = this.shareApp.bind(this);
     this.shareToTheWall = this.shareToTheWall.bind(this);
     this.getUsername = this.getUsername.bind(this);
+    this.saveNote = this.saveNote.bind(this);
+    this.getNote = this.getNote.bind(this);
   }
 
   getModalData(modal) {
@@ -39,6 +43,8 @@ class Main extends React.Component {
     this.hello = hellos[index];
 
     this.getUsername();
+
+    this.getNote();
   }
 
   getUsername() {
@@ -63,12 +69,19 @@ class Main extends React.Component {
 
   shareToTheWall() {
     bridge.send("VKWebAppShowWallPostBox", {
-      message: `Май это психология, саморазвитие,
-      поддержка и забота о себе. Это одна большая
-      семья, в которой мы все учимся разбираться в
-      себе, своих эмоциях и чувствах. Присоединяйтесь
+      message: `Май это одна большая семья, в которой мы все учимся понимать себя и других 👾 Присоединяйтесь
       : https://vk.com/warmay`,
     });
+  }
+
+  saveNote(e) {
+    localStorage.setItem("may-note", e.target.value);
+  }
+
+  getNote() {
+    let note = localStorage.getItem("may-note");
+
+    this.setState({ note });
   }
 
   render() {
@@ -118,154 +131,205 @@ class Main extends React.Component {
 
     return (
       <div>
-        <div
-          className="DateBlock"
-          style={{
-            background: `url(${src}) center/100% no-repeat`,
-          }}
-        >
-          <div className="picBlackout">
-            <div className="Day">
-              {this.state.username}, {text}
+        <div className="mainNote">
+          <div
+            className="DateBlock"
+            style={{
+              background: `url(${src}) center/100% no-repeat`,
+            }}
+          >
+            <div className="picBlackout">
+              <div className="Day">
+                {this.state.username}, {text}
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className="BtnsBlock">
-          {/* <NavLink to="/may-bookmarks">
-            <button className="MainBtn">
-              <i className="fas fa-bookmark"></i> закладки
-            </button>
-          </NavLink> */}
+          <textarea
+            className="noteText"
+            placeholder="Добавить записку"
+            defaultValue={this.state.note}
+            onChange={this.saveNote}
+          ></textarea>
         </div>
 
         <div className="btnsTitle">сообщество</div>
-        <div className="row mt-4 mb-2 pl-2 pr-2">
-          <div className="col">
-            <div
-              className="icon"
-              data-toggle="modal"
-              data-target="#textModal"
-              onClick={(e) => this.getModalData("aboutModal")}
-            >
-              <i className="fas fa-info-circle"></i>
-              <span className="iconTitle">о Май</span>
+        <div className="btnsBackground">
+          <div className="row">
+            <div className="col">
+              <div
+                className="icon"
+                data-toggle="modal"
+                data-target="#textModal"
+                onClick={(e) => this.getModalData("aboutModal")}
+              >
+                <i className="fas fa-info-circle"></i>
+                <span className="iconTitle">о Май</span>
+              </div>
+            </div>
+            <div className="col">
+              <div
+                className="icon"
+                data-toggle="modal"
+                data-target="#textModal"
+                onClick={(e) => this.getModalData("rulesModal")}
+              >
+                <i className="fas fa-hand-sparkles"></i>
+                <span className="iconTitle">правила</span>
+              </div>
+            </div>
+            <div className="col">
+              <div
+                className="icon"
+                data-toggle="modal"
+                data-target="#textModal"
+                onClick={(e) => this.getModalData("tagsModal")}
+              >
+                <i className="fas fa-hashtag"></i>
+                <span className="iconTitle">хэштеги</span>
+              </div>
             </div>
           </div>
-          <div className="col">
-            <div
-              className="icon"
-              data-toggle="modal"
-              data-target="#textModal"
-              onClick={(e) => this.getModalData("rulesModal")}
-            >
-              <i className="fas fa-hand-sparkles"></i>
-              <span className="iconTitle">правила</span>
+          <div className="row mt-3 mb-4">
+            <div className="col">
+              <a
+                href="https://vk.com/im?sel=-160404048"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="linkStyle"
+              >
+                <div className="icon">
+                  <i className="fas fa-feather-alt"></i>
+                  <span className="iconTitle">написать</span>
+                </div>
+              </a>
+            </div>
+            <div className="col">
+              <a
+                className="linkStyle"
+                href="https://vk.com/topic-160404048_36674451"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="icon">
+                  <i className="fas fa-heart"></i>
+                  <span className="iconTitle">лайк</span>
+                </div>
+              </a>
+            </div>
+            <div className="col">
+              <a
+                href="https://vk.com/warmay"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="linkStyle"
+              >
+                <div className="icon">
+                  <i className="fas fa-door-open"></i>
+                  <span className="iconTitle">группа</span>
+                </div>
+              </a>
             </div>
           </div>
-          <div className="col">
-            <div
-              className="icon"
-              data-toggle="modal"
-              data-target="#textModal"
-              onClick={(e) => this.getModalData("tagsModal")}
-            >
-              <i className="fas fa-hashtag"></i>
-              <span className="iconTitle">хэштеги</span>
+          <div className="row mb-4">
+            <div className="col">
+              <a
+                href="https://instagram.com/warmay_inst"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="linkStyle"
+              >
+                <div className="icon">
+                  <i className="fab fa-instagram-square"></i>
+                  <span className="iconTitle">Май в инстаграме</span>
+                </div>
+              </a>
             </div>
           </div>
         </div>
-        <div className="row mt-3 mb-4 pl-2 pr-2">
-          <div className="col">
-            <a
-              href="https://vk.com/im?sel=-160404048"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="linkStyle"
-            >
-              <div className="icon">
-                <i className="fas fa-feather-alt"></i>
-                <span className="iconTitle">написать</span>
+        <div className="btnsTitle">приложения</div>
+        <div className="btnsBackground">
+          <div className="row mb-4">
+            <div className="col">
+              <div
+                className="icon"
+                onClick={() =>
+                  bridge.send("VKWebAppOpenApp", { app_id: 7738603 })
+                }
+              >
+                <i className="fas fa-eye"></i>
+                <span className="iconTitle">май-френдс</span>
               </div>
-            </a>
-          </div>
-          <div className="col">
-            <a
-              className="linkStyle"
-              href="https://vk.com/topic-160404048_36674451"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div className="icon">
-                <i className="fas fa-heart"></i>
-                <span className="iconTitle">лайк</span>
+            </div>
+            <div className="col">
+              <div
+                className="icon"
+                onClick={() =>
+                  bridge.send("VKWebAppOpenApp", { app_id: 7713167 })
+                }
+              >
+                <i className="fas fa-brain"></i>
+                <span className="iconTitle">май-тесты</span>
               </div>
-            </a>
-          </div>
-          <div className="col">
-            <a
-              href="https://vk.com/warmay"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="linkStyle"
-            >
-              <div className="icon">
-                <i className="fas fa-door-open"></i>
-                <span className="iconTitle">группа</span>
-              </div>
-            </a>
+            </div>
           </div>
         </div>
         <div className="btnsTitle">добавить Май</div>
-        <div className="row mt-4 mb-2 pl-2 pr-2">
-          <div className="col">
-            <div
-              className="icon"
-              onClick={() => bridge.send("VKWebAppAddToHomeScreen")}
-            >
-              <i className="fas fa-mobile-alt"></i>
-              <span className="iconTitle">на раб. стол</span>
+        <div className="btnsBackground">
+          <div className="row mb-4">
+            <div className="col">
+              <div
+                className="icon"
+                onClick={() => bridge.send("VKWebAppAddToHomeScreen")}
+              >
+                <i className="fas fa-mobile-alt"></i>
+                <span className="iconTitle">на раб. стол</span>
+              </div>
             </div>
-          </div>
-          <div className="col">
-            <div
-              className="icon"
-              onClick={() => bridge.send("VKWebAppAddToFavorites")}
-            >
-              <i className="fas fa-star"></i>
-              <span className="iconTitle">в избранное</span>
+            <div className="col">
+              <div
+                className="icon"
+                onClick={() => bridge.send("VKWebAppAddToFavorites")}
+              >
+                <i className="fas fa-star"></i>
+                <span className="iconTitle">в избранное</span>
+              </div>
             </div>
           </div>
         </div>
         <div className="btnsTitle">поделиться</div>
-        <div className="row mt-4 mb-2 pl-2 pr-2">
-          <div className="col">
-            <div className="icon" onClick={this.shareApp}>
-              <i className="fas fa-user-friends"></i>
-              <span className="iconTitle">отправить друзьям</span>
+        <div className="btnsBackground">
+          <div className="row mb-4">
+            <div className="col">
+              <div className="icon" onClick={this.shareApp}>
+                <i className="fas fa-user-friends"></i>
+                <span className="iconTitle">отправить друзьям</span>
+              </div>
             </div>
-          </div>
-          <div className="col">
-            <div className="icon" onClick={this.shareToTheWall}>
-              <i className="fas fa-share-square"></i>
-              <span className="iconTitle">пост на стену</span>
+            <div className="col">
+              <div className="icon" onClick={this.shareToTheWall}>
+                <i className="fas fa-share-square"></i>
+                <span className="iconTitle">пост на стену</span>
+              </div>
             </div>
           </div>
         </div>
         <div className="btnsTitle">денежка на развитие проекта</div>
-        <div className="row mt-4 mb-2 pl-2 pr-2">
-          <div className="col">
-            <a
-              href="https://vk.com/app6471849_-160404048"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="linkStyle"
-            >
-              <div className="icon">
-                <i className="fas fa-pizza-slice"></i>
-                <span className="iconTitle">поддержать Май</span>
-              </div>
-            </a>
+        <div className="btnsBackground">
+          <div className="row mb-4">
+            <div className="col">
+              <a
+                href="https://vk.com/app6471849_-160404048"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="linkStyle"
+              >
+                <div className="icon">
+                  <i className="fas fa-pizza-slice"></i>
+                  <span className="iconTitle">поддержать Май</span>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
         <br />

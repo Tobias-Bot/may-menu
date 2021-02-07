@@ -60,18 +60,37 @@ class StreamsPage extends React.Component {
     return (
       <div>
         {streams}
-        <br />
-        <a
-          className="linkStyle"
-          href="https://yadi.sk/d/cZHSqCmlNZ3MmA?w=1"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div className="icon" style={{ maxWidth: "90%" }}>
-            <i className="fas fa-cloud"></i>
-            <div className="iconTitle">запись последнего стрима</div>
+        <div className="btnsTitle">трансляции</div>
+        <div className="btnsBackground">
+          <div className="row mb-4">
+            <div className="col">
+              <a
+                className="linkStyle"
+                href="https://yadi.sk/d/cZHSqCmlNZ3MmA?w=1"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="icon">
+                  <i className="fas fa-cloud"></i>
+                  <div className="iconTitle">запись стрима</div>
+                </div>
+              </a>
+            </div>
+            <div className="col">
+              <a
+                className="linkStyle"
+                href="https://vk.com/music/playlist/161010789_84331120"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <div className="icon">
+                  <i className="fas fa-music"></i>
+                  <div className="iconTitle">песни со стримов</div>
+                </div>
+              </a>
+            </div>
           </div>
-        </a>
+        </div>
       </div>
     );
   }
