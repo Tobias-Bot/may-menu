@@ -2,5 +2,5 @@ module.exports = {
   transpileDependencies: [
     'vuetify'
   ],
-  publicPath: '/may-home/'
+  publicPath: '/may-menu/'
 }
