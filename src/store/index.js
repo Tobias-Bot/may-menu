@@ -7,7 +7,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    appid: 7646928,
+    appid: 7706189, //7646928,
     groupid: 160404048,
     psyTopicid: 46675469,
     token: "",
@@ -16,6 +16,8 @@ export default new Vuex.Store({
 
     today: "",
     isDon: "",
+
+    notes: [],
 
     currentTest: {},
     favoriteTests: [],
@@ -30,6 +32,9 @@ export default new Vuex.Store({
     },
     getToday(state) {
       return state.today;
+    },
+    getNotes(state) {
+      return state.notes;
     },
     getCurrentTest(state) {
       return state.currentTest;
@@ -51,6 +56,9 @@ export default new Vuex.Store({
     },
   },
   mutations: {
+    setNotes(state, payload) {
+      state.notes = payload;
+    },
     setCurrentTest(state, payload) {
       state.currentTest = payload;
     },
@@ -94,6 +102,11 @@ export default new Vuex.Store({
           let value = JSON.parse(res.keys[0].value);
           commit("setCurrentTestValue", value);
         }
+      });
+    },
+    getNotes({ state }) {
+      bridge.send("VKWebAppStorageGet", { keys: ["notes"] }).then((res) => {
+        state.notes = JSON.parse(res.keys[0].value);
       });
     },
     saveTestResults({ state }, data) {

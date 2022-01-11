@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div><NoteBar :notes.sync="notes" /></div>
+    <div><NoteBar :notes="Notes" /></div>
     <br />
     <br />
     <v-card class="cardCover" style="text-align: left">
@@ -48,18 +48,21 @@ export default {
     NoteBar,
   },
   data: () => ({
-    notes: [],
-
     moodValue: [],
   }),
   created() {
     this.getNotes();
   },
+  computed: {
+    Notes() {
+      return this.$store.getters.getNotes;
+    },
+  },
   methods: {
     getNotes() {
-      bridge.send("VKWebAppStorageGet", { keys: ["notes"] }).then((res) => {
-        this.notes = JSON.parse(res.keys[0].value);
-      });
+      if (!this.Notes.length) {
+        this.$store.dispatch("getNotes");
+      }
     },
     setMoodTrackerPoint() {
       // let date = this.$store.getters.getToday;

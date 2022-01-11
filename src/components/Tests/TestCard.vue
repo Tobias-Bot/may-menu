@@ -35,13 +35,10 @@
         <div v-show="show">
           <v-divider></v-divider>
 
-          <v-card-text>
-            {{ test.text }}
-          </v-card-text>
+          <v-card-text v-html="test.text"> </v-card-text>
         </div>
-      </v-expand-transition>
-    </v-card></v-container
-  >
+      </v-expand-transition> </v-card
+  ></v-container>
 </template>
 
 <script>

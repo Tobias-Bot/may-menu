@@ -22,13 +22,12 @@
               @click="
                 () => {
                   toggle();
-                  editNoteText = false;
                 }
               "
             >
               <div v-if="!active" class="noteText">
                 <div v-if="isFull(note.text)">
-                  {{ note.text.substring(0, 55) }}...
+                  {{ note.text.substring(0, maxCardLen) }}...
                 </div>
                 <div v-else>{{ note.text }}</div>
               </div>
@@ -164,6 +163,7 @@ export default {
   props: ["notes"],
   data: () => ({
     maxNotesCount: 10,
+    maxCardLen: 45,
     model: null,
     colorMenu: false,
     editNoteText: false,
@@ -192,7 +192,7 @@ export default {
   },
   methods: {
     isFull(text) {
-      return text.length > 55;
+      return text.length > this.maxCardLen;
     },
     addNote() {
       this.noteCurrentLength = this.noteMaxLength;
@@ -220,6 +220,8 @@ export default {
         key: "notes",
         value: JSON.stringify(notes),
       });
+
+      this.$store.commit("setNotes", notes);
     },
     deleteNote(index) {
       this.notes.splice(index, 1);

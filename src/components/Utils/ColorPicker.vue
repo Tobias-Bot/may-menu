@@ -10,16 +10,15 @@
 
         <v-card-text>
           <v-row class="fill-height my-5" align="center" justify="center">
-            <div v-for="(color, i) in colors">
-              <div
-                :key="i"
-                :class="
-                  currentColor === color ? 'colorSquareActive' : 'colorSquare'
-                "
-                :style="`background-color: ${color}`"
-                @click="setCardColor(color)"
-              ></div>
-            </div>
+            <div
+              v-for="(color, i) in colors"
+              :key="i"
+              :class="
+                currentColor === color ? 'colorSquareActive' : 'colorSquare'
+              "
+              :style="`background-color: ${color}`"
+              @click="setCardColor(color)"
+            ></div>
           </v-row>
         </v-card-text>
       </v-card>
