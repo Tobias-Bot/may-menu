@@ -74,6 +74,16 @@
     <div class="headerLineTop"></div>
     <div class="headerLineTopSecond">
       <span class="logoTitle">Мαú</span>
+      <span v-if="isDon">
+        <v-tooltip bottom color="pink">
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="pink" dark v-bind="attrs" v-on="on">
+              mdi-crown-circle
+            </v-icon>
+          </template>
+          <span>Оформлена подписка на Май</span>
+        </v-tooltip>
+      </span>
     </div>
     <div class="header">
       <a
@@ -146,6 +156,9 @@ export default {
   computed: {
     appId() {
       return this.$store.getters.getAppId;
+    },
+    isDon() {
+      return this.$store.getters.isPremium;
     },
   },
   methods: {
