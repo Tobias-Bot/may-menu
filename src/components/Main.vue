@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <div><NoteBar :notes="Notes" /></div>
+    <NoteBar :notes="Notes" />
     <br />
     <br />
     <v-card class="cardCover" style="text-align: left">
@@ -33,6 +33,9 @@
       >
         <v-icon dark> mdi-forum </v-icon> Написать в Май
       </v-btn>
+      <v-btn class="mr-2" light small color="white" @click="shareApp">
+        <v-icon dark> mdi-share </v-icon>
+      </v-btn>
     </div>
   </v-container>
 </template>
@@ -59,6 +62,13 @@ export default {
     },
   },
   methods: {
+    shareApp() {
+      let appId = this.$store.getters.getAppId;
+
+      bridge.send("VKWebAppShare", {
+        link: `https://vk.com/app${appId}`,
+      });
+    },
     getNotes() {
       if (!this.Notes.length) {
         this.$store.dispatch("getNotes");
