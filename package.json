@@ -1,12 +1,20 @@
 {
+<<<<<<< Updated upstream
   "name": "may-home",
+=======
+  "name": "may-menu",
+>>>>>>> Stashed changes
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+<<<<<<< Updated upstream
     "deploy": "node scripts/gh-pages-deploy.js"
+=======
+    "deploy": "node scripts/gh-pages-deploy.mjs"
+>>>>>>> Stashed changes
   },
   "dependencies": {
     "@vkontakte/vk-bridge": "^2.4.8",

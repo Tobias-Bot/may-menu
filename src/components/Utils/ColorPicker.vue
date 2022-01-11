@@ -10,9 +10,14 @@
 
         <v-card-text>
           <v-row class="fill-height my-5" align="center" justify="center">
+<<<<<<< Updated upstream
             <div v-for="(color, i) in colors">
               <div
                 :key="i"
+=======
+            <div v-for="(color, i) in colors" :key="i">
+              <div
+>>>>>>> Stashed changes
                 :class="
                   currentColor === color ? 'colorSquareActive' : 'colorSquare'
                 "

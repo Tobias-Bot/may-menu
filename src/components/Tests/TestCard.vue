@@ -35,6 +35,7 @@
         <div v-show="show">
           <v-divider></v-divider>
 
+<<<<<<< Updated upstream
           <v-card-text>
             {{ test.text }}
           </v-card-text>
@@ -42,6 +43,12 @@
       </v-expand-transition>
     </v-card></v-container
   >
+=======
+          <v-card-text v-html="test.text"> </v-card-text>
+        </div>
+      </v-expand-transition> </v-card
+  ></v-container>
+>>>>>>> Stashed changes
 </template>
 
 <script>

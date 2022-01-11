@@ -7,7 +7,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+<<<<<<< Updated upstream
     appid: 7646928,
+=======
+    appid: 7706189, //7646928,
+>>>>>>> Stashed changes
     groupid: 160404048,
     psyTopicid: 46675469,
     token: "",
