@@ -1,112 +1,110 @@
 <template>
   <v-container>
-    <div v-if="notes.length">
-      <ColorPicker
-        :colorMenu.sync="colorMenu"
-        :currentColor.sync="currentColor"
-      />
+    <ColorPicker
+      :colorMenu.sync="colorMenu"
+      :currentColor.sync="currentColor"
+    />
 
-      <v-dialog v-if="index !== null" dark v-model="noteModal">
-        <v-card tile light :color="notes[index].color">
-          <v-card-title>
-            <v-btn icon light @click="noteModal = false">
-              <v-icon>mdi-close</v-icon>
-            </v-btn>
-
-            <v-spacer></v-spacer>
-
-            <v-btn class="my-1 mx-2" icon @click="colorMenu = true">
-              <v-icon> mdi-palette </v-icon>
-            </v-btn>
-            <v-btn class="my-1 mx-2" icon @click="deleteNote(index)">
-              <v-icon> mdi-trash-can </v-icon>
-            </v-btn>
-          </v-card-title>
-
-          <v-card-text style="padding: 10px 20px 30px 20px; color: black">
-            <div
-              class="fullCardText"
-              ref="noteText"
-              :contenteditable="editNoteText"
-              @click="editMode"
-              @blur="saveNoteText"
-              @input="isMaxLength"
-              @paste="clearText"
-              @keydown="
-                (e) => {
-                  if (e.code === 'Enter') {
-                    e.preventDefault();
-                  }
-                }
-              "
-            >
-              {{ notes[index].text }}
-            </div>
-          </v-card-text>
-
-          <v-card-actions style="width: 100%; text-align: center">
-            <v-row justify="center" class="mb-4">
-              <div class="inputHint">
-                {{ editNoteText ? noteCurrentLength : "* * *" }}
-              </div>
-            </v-row>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-
-      <v-row justify="center" no-gutters class="mt-3">
-        <v-col cols="6" style="padding-right: 5px">
-          <v-btn
-            v-if="!noteModal && notes.length < maxNotesCount"
-            class="card"
-            style="height: 60px"
-            color="black"
-            outlined
-            @click="addNote"
-          >
-            <v-icon light>mdi-note-plus-outline</v-icon>
+    <v-dialog v-if="index !== null" dark v-model="noteModal">
+      <v-card tile light :color="notes[index].color">
+        <v-card-title>
+          <v-btn icon light @click="noteModal = false">
+            <v-icon>mdi-close</v-icon>
           </v-btn>
-          <div v-for="(note, i) in notes" :key="i">
-            <div
-              v-if="i % 2 == 0"
-              class="card"
-              :style="`background-color: ${note.color}`"
-              @click="
-                noteModal = true;
-                index = i;
-              "
-            >
-              <div class="noteText">
-                <div v-if="isFull(note.text)">
-                  {{ note.text.substring(0, maxCardLen) }}...
-                </div>
-                <div v-else>{{ note.text }}</div>
+
+          <v-spacer></v-spacer>
+
+          <v-btn class="my-1 mx-2" icon @click="colorMenu = true">
+            <v-icon> mdi-palette </v-icon>
+          </v-btn>
+          <v-btn class="my-1 mx-2" icon @click="deleteNote(index)">
+            <v-icon> mdi-trash-can </v-icon>
+          </v-btn>
+        </v-card-title>
+
+        <v-card-text style="padding: 10px 20px 30px 20px; color: black">
+          <div
+            class="fullCardText"
+            ref="noteText"
+            :contenteditable="editNoteText"
+            @click="editMode"
+            @blur="saveNoteText"
+            @input="isMaxLength"
+            @paste="clearText"
+            @keydown="
+              (e) => {
+                if (e.code === 'Enter') {
+                  e.preventDefault();
+                }
+              }
+            "
+          >
+            {{ notes[index].text }}
+          </div>
+        </v-card-text>
+
+        <v-card-actions style="width: 100%; text-align: center">
+          <v-row justify="center" class="mb-4">
+            <div class="inputHint">
+              {{ editNoteText ? noteCurrentLength : "* * *" }}
+            </div>
+          </v-row>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <v-row justify="center" no-gutters class="mt-3">
+      <v-col cols="6" style="padding-right: 5px">
+        <v-btn
+          v-if="!noteModal && notes.length < maxNotesCount"
+          class="card"
+          style="height: 60px"
+          color="black"
+          outlined
+          @click="addNote"
+        >
+          <v-icon light>mdi-note-plus-outline</v-icon>
+        </v-btn>
+        <div v-for="(note, i) in notes" :key="i">
+          <div
+            v-if="i % 2 == 0"
+            class="card"
+            :style="`background-color: ${note.color}`"
+            @click="
+              noteModal = true;
+              index = i;
+            "
+          >
+            <div class="noteText">
+              <div v-if="isFull(note.text)">
+                {{ note.text.substring(0, maxCardLen) }}...
               </div>
+              <div v-else>{{ note.text }}</div>
             </div>
           </div>
-        </v-col>
-        <v-col cols="6" style="padding-left: 5px">
-          <div v-for="(note, i) in notes" :key="i">
-            <div
-              v-if="i % 2 !== 0"
-              class="card"
-              :style="`background-color: ${note.color}`"
-              @click="
-                noteModal = true;
-                index = i;
-              "
-            >
-              <div class="noteText">
-                <div v-if="isFull(note.text)">
-                  {{ note.text.substring(0, maxCardLen) }}...
-                </div>
-                <div v-else>{{ note.text }}</div>
+        </div>
+      </v-col>
+      <v-col cols="6" style="padding-left: 5px">
+        <div v-for="(note, i) in notes" :key="i">
+          <div
+            v-if="i % 2 !== 0"
+            class="card"
+            :style="`background-color: ${note.color}`"
+            @click="
+              noteModal = true;
+              index = i;
+            "
+          >
+            <div class="noteText">
+              <div v-if="isFull(note.text)">
+                {{ note.text.substring(0, maxCardLen) }}...
               </div>
+              <div v-else>{{ note.text }}</div>
             </div>
-          </div></v-col
-        >
-      </v-row>
-    </div>
+          </div>
+        </div></v-col
+      >
+    </v-row>
   </v-container>
 </template>
 
