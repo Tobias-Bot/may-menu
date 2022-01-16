@@ -55,6 +55,17 @@
       </v-card>
     </v-dialog>
 
+    <!-- <v-dialog dark scrollable v-model="rolesModal">
+      <v-card tile light color="white">
+        <v-card-title>
+          <v-btn icon light @click="menu = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-card-title>
+        <v-card-text></v-card-text>
+      </v-card>
+    </v-dialog> -->
+
     <v-dialog dark scrollable persistent v-model="acceptModal">
       <v-card tile light color="white">
         <v-card-text style="padding: 30px 10px; text-align: center">
@@ -84,6 +95,16 @@
           <span>Админ Май</span>
         </v-tooltip>
       </span>
+      <span v-else-if="role == 'user' && !isDon">
+        <v-tooltip bottom color="grey">
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="grey" dark v-bind="attrs" v-on="on">
+              mdi-account-circle
+            </v-icon>
+          </template>
+          <span>Обычный профиль</span>
+        </v-tooltip></span
+      >
       <span v-if="isDon">
         <v-tooltip bottom color="pink">
           <template v-slot:activator="{ on, attrs }">
@@ -94,6 +115,11 @@
           <span>Оформлена подписка на Май</span>
         </v-tooltip>
       </span>
+      <!-- <span @click="rolesModal = true"
+        ><v-icon class="ml-2" color="black" size="16" dark>
+          mdi-dots-horizontal
+        </v-icon></span
+      > -->
     </div>
     <div class="header">
       <a
@@ -151,6 +177,7 @@ export default {
 
     menu: false,
     acceptModal: false,
+    rolesModal: false,
     acceptModalText: `Добро пожаловать в Май! Прежде чем мы продолжим, нам потребуется
           информация из твоего профиля Вконтакте для корректной работы
           приложения`,

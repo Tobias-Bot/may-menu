@@ -7,14 +7,14 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    appid: 7706189, //7646928,
+    appid: 7646928, //7706189
     groupid: 160404048,
     psyTopicid: 46675469,
     token: "",
     role: "user",
     isGroupMember: 0,
 
-    maxSavePoints: 2,
+    maxSavePoints: 60,
 
     today: "",
     isDon: "",
@@ -167,8 +167,9 @@ export default new Vuex.Store({
       else {
         test.value.push(newTestDataPoint);
 
-        if (test.value.length >= state.maxSavePoints)
-          test.value.slice(1, test.value.length - 1);
+        let d = test.value;
+
+        if (d.length >= state.maxSavePoints) test.value = d.slice(1);
       }
 
       bridge.send("VKWebAppStorageSet", {
