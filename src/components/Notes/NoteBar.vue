@@ -1,11 +1,12 @@
 <template>
   <v-container>
     <ColorPicker
+      v-if="notes.length"
       :colorMenu.sync="colorMenu"
       :currentColor.sync="currentColor"
     />
 
-    <v-dialog v-if="index !== null" dark v-model="noteModal">
+    <v-dialog v-if="notes.length && index !== null" dark v-model="noteModal">
       <v-card tile light :color="notes[index].color">
         <v-card-title>
           <v-btn icon light @click="noteModal = false">
