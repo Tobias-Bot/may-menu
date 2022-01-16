@@ -74,11 +74,21 @@
     <div class="headerLineTop"></div>
     <div class="headerLineTopSecond">
       <span class="logoTitle">Мαú</span>
+      <span v-if="role == 'admin'">
+        <v-tooltip bottom color="purple">
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="purple" dark v-bind="attrs" v-on="on">
+              mdi-crown-circle
+            </v-icon>
+          </template>
+          <span>Админ Май</span>
+        </v-tooltip>
+      </span>
       <span v-if="isDon">
         <v-tooltip bottom color="pink">
           <template v-slot:activator="{ on, attrs }">
             <v-icon color="pink" dark v-bind="attrs" v-on="on">
-              mdi-crown-circle
+              mdi-charity
             </v-icon>
           </template>
           <span>Оформлена подписка на Май</span>
@@ -160,11 +170,15 @@ export default {
     isDon() {
       return this.$store.getters.isPremium;
     },
+    role() {
+      return this.$store.getters.getRole;
+    },
   },
   methods: {
     getInitialProps() {
       bridge.send("VKWebAppGetLaunchParams").then((r) => {
         let tokens = r.vk_access_token_settings;
+        let userId = r.vk_user_id;
 
         if (!tokens) {
           this.acceptModal = true;
@@ -174,9 +188,14 @@ export default {
               app_id: this.appId,
               scope: "groups",
             })
-            .then((r) => {
-              this.$store.dispatch("isDon", r.access_token);
-              this.$store.commit("setToken", r.access_token);
+            .then((res) => {
+              let data = {
+                token: res.access_token,
+                id: userId,
+              };
+
+              this.$store.dispatch("isDon", data);
+              this.$store.commit("setToken", res.access_token);
             });
         }
       });

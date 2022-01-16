@@ -11,6 +11,38 @@ export default new Vuex.Store({
     groupid: 160404048,
     psyTopicid: 46675469,
     token: "",
+    role: "user",
+
+    admins: [
+      {
+        name: "Влад",
+        id: 161010789,
+      },
+      {
+        name: "Булочка",
+        id: 636521223,
+      },
+      {
+        name: "Юля",
+        id: 215390988,
+      },
+      {
+        name: "Мурочка",
+        id: 306628697,
+      },
+      {
+        name: "Крапивка",
+        id: 386458263,
+      },
+      {
+        name: "Рей",
+        id: 449520771,
+      },
+      {
+        name: "Алина",
+        id: 427422274,
+      },
+    ],
 
     maxSavePoints: 2,
 
@@ -22,11 +54,16 @@ export default new Vuex.Store({
     currentTest: {},
     favoriteTests: [],
 
+    currentEx: {},
+
     psychologists: [],
 
     moodValue: [],
   },
   getters: {
+    getRole(state) {
+      return state.role;
+    },
     getAppId(state) {
       return state.appid;
     },
@@ -48,6 +85,9 @@ export default new Vuex.Store({
 
       return value;
     },
+    getCurrentEx(state) {
+      return state.currentEx;
+    },
     isPremium(state) {
       return state.isDon;
     },
@@ -65,6 +105,9 @@ export default new Vuex.Store({
     setCurrentTestValue(state, payload) {
       state.currentTest.value = payload;
     },
+    setCurrentEx(state, payload) {
+      state.currentEx = payload;
+    },
     setDate(state) {
       let date = new Date();
       let result = date.toLocaleDateString();
@@ -76,23 +119,35 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    isDon({ state }, token) {
+    isDon({ state }, data) {
       if (state.isDon == "") {
         let group_id = state.groupid;
 
-        bridge
-          .send("VKWebAppCallAPIMethod", {
-            method: "donut.isDon",
-            request_id: "info",
-            params: {
-              owner_id: "-" + group_id,
-              v: "5.131",
-              access_token: token,
-            },
-          })
-          .then((res) => {
-            state.isDon = res.response;
-          });
+        let isAdmin = state.admins.findIndex((item) => item.id == data.id);
+
+        if (~isAdmin) {
+          state.isDon = true;
+          state.role = "admin";
+
+          console.log("You're admin. I see you");
+        } else {
+          bridge
+            .send("VKWebAppCallAPIMethod", {
+              method: "donut.isDon",
+              request_id: "info",
+              params: {
+                owner_id: "-" + group_id,
+                v: "5.131",
+                access_token: data.token,
+              },
+            })
+            .then((res) => {
+              state.isDon = res.response;
+              state.role = "user";
+
+              console.log("You an't admin. But being just user isn't bad too");
+            });
+        }
       }
     },
     loadValueOfCurrentTest({ commit }, key) {

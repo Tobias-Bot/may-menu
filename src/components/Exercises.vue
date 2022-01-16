@@ -1,36 +1,60 @@
 <template>
   <v-container>
-    <v-card class="cardCover" style="text-align: left">
-      <div class="cardHintText">Что это такое?</div>
-      <span
-        >Это каталог, в котором содержатся упражнения по саморазвитию и
-        ментальному здоровью с описанием каждого упражнения. Каталог доступен
-        только по подписке на Май.</span
-      >
-    </v-card>
-    <div class="pageToolBar">
-      <v-btn
-        href="https://vk.com/app7957050"
-        target="_blank"
-        class="mr-2"
-        light
-        color="white"
-        :disabled="!isDon"
-        small
-      >
-        <v-icon dark> mdi-book-open-page-variant </v-icon> Открыть
-      </v-btn>
-      <v-btn v-if="!isDon" to="/premium" color="light" text x-small>
+    <v-dialog v-if="currentEx" dark scrollable fullscreen v-model="ExModal">
+      <v-card tile light color="white">
+        <v-card-title>
+          <v-btn icon light @click="ExModal = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-card-title>
+
+        <br />
+
+        <v-card-text
+          style="
+            color: black;
+            font-width: 500;
+            font-size: 18px;
+            max-heigth: none;
+            overflow: hidden;
+          "
+        >
+          {{ currentEx.title }}
+        </v-card-text>
+
+        <br />
+
+        <v-card-text style="padding: 10px 20px 30px 20px; color: black">
+          <div v-html="currentEx.description"></div>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+
+    <template v-for="(ex, i) in exs"
+      ><ExerciseCard :key="i" :data="ex" @openModal="ExModal = true"
+    /></template>
+
+    <!-- <div class="pageToolBar">
+      <v-btn v-if="!isDon" to="/premium" color="light" text small>
         О подписке
       </v-btn>
-    </div>
+    </div> -->
   </v-container>
 </template>
 
 <script>
+import ExerciseCard from "./Exercises/ExerciseCard";
+import exs from "../data/Exercises";
+
 export default {
   name: "Exercises",
-  data: () => ({}),
+  components: {
+    ExerciseCard,
+  },
+  data: () => ({
+    exs,
+    ExModal: false,
+  }),
   computed: {
     isDon() {
       let isDon = this.$store.getters.isPremium;
@@ -39,6 +63,9 @@ export default {
       else isDon = false;
 
       return isDon;
+    },
+    currentEx() {
+      return this.$store.getters.getCurrentEx;
     },
   },
   methods: {},
