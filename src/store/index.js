@@ -12,37 +12,7 @@ export default new Vuex.Store({
     psyTopicid: 46675469,
     token: "",
     role: "user",
-
-    admins: [
-      {
-        name: "Влад",
-        id: 161010789,
-      },
-      {
-        name: "Булочка",
-        id: 636521223,
-      },
-      {
-        name: "Юля",
-        id: 215390988,
-      },
-      {
-        name: "Мурочка",
-        id: 306628697,
-      },
-      {
-        name: "Крапивка",
-        id: 386458263,
-      },
-      {
-        name: "Рей",
-        id: 449520771,
-      },
-      {
-        name: "Алина",
-        id: 427422274,
-      },
-    ],
+    isGroupMember: 0,
 
     maxSavePoints: 2,
 
@@ -91,6 +61,9 @@ export default new Vuex.Store({
     isPremium(state) {
       return state.isDon;
     },
+    isMember(state) {
+      return state.isGroupMember;
+    },
     getPsyCards(state) {
       return state.psychologists;
     },
@@ -119,35 +92,50 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    isDon({ state }, data) {
+    loadData({ state }, data) {
       if (state.isDon == "") {
         let group_id = state.groupid;
 
-        let isAdmin = state.admins.findIndex((item) => item.id == data.id);
+        bridge
+          .send("VKWebAppCallAPIMethod", {
+            method: "groups.getById",
+            request_id: "group-info",
+            params: {
+              group_id: state.groupid,
+              v: "5.131",
+              access_token: data.token,
+            },
+          })
+          .then((r) => {
+            let data = r.response[0];
 
-        if (~isAdmin) {
-          state.isDon = true;
-          state.role = "admin";
+            if (data.is_admin) {
+              state.role = "admin";
+              state.isDon = true;
 
-          console.log("You're admin. I see you");
-        } else {
-          bridge
-            .send("VKWebAppCallAPIMethod", {
-              method: "donut.isDon",
-              request_id: "info",
-              params: {
-                owner_id: "-" + group_id,
-                v: "5.131",
-                access_token: data.token,
-              },
-            })
-            .then((res) => {
-              state.isDon = res.response;
+              console.log("You're admin. I see you");
+            } else {
               state.role = "user";
 
+              bridge
+                .send("VKWebAppCallAPIMethod", {
+                  method: "donut.isDon",
+                  request_id: "info",
+                  params: {
+                    owner_id: "-" + group_id,
+                    v: "5.131",
+                    access_token: data.token,
+                  },
+                })
+                .then((res) => {
+                  state.isDon = res.response;
+                });
+
               console.log("You an't admin. But being just user isn't bad too");
-            });
-        }
+            }
+
+            state.isGroupMember = data.is_member;
+          });
       }
     },
     loadValueOfCurrentTest({ commit }, key) {
@@ -245,6 +233,11 @@ export default new Vuex.Store({
             state.psychologists = cards;
           });
       }
+    },
+    joinCommunity({ state }) {
+      bridge.send("VKWebAppJoinGroup", { group_id: state.groupid }).then(() => {
+        state.isGroupMember = 1;
+      });
     },
   },
   modules: {},

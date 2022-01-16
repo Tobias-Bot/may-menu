@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-dialog v-model="menu" scrollable max-heigth="400px">
+    <v-dialog v-model="menu" scrollable>
       <v-card tile light color="white">
         <v-card-title>
           <v-btn icon light @click="menu = false">
@@ -33,7 +33,6 @@ export default {
   data: () => ({
     colors: [
       "#FFC0CB",
-      "#FFB6C1",
       "#FF69B4",
       "#FF1493",
       "#DB7093",
@@ -51,6 +50,7 @@ export default {
       "#F4A460",
       "#98FB98",
       "#00FA9A",
+      "#FFB6C1",
       "#9ACD32",
       "#66CDAA",
       "#00FFFF",

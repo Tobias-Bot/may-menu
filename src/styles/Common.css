@@ -113,6 +113,10 @@ body {
   border-radius: 25px;
 }
 
+.v-sheet.v-card:not(.v-sheet--outlined) {
+  box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
 .v-btn {
   box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.08);
   border-radius: 100px;

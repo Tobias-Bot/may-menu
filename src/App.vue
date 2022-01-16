@@ -156,6 +156,8 @@ export default {
           приложения`,
 
     cardBtns: MainMenuModalData,
+
+    userId: 0,
   }),
 
   created() {
@@ -178,7 +180,7 @@ export default {
     getInitialProps() {
       bridge.send("VKWebAppGetLaunchParams").then((r) => {
         let tokens = r.vk_access_token_settings;
-        let userId = r.vk_user_id;
+        this.userId = r.vk_user_id;
 
         if (!tokens) {
           this.acceptModal = true;
@@ -189,16 +191,19 @@ export default {
               scope: "groups",
             })
             .then((res) => {
-              let data = {
-                token: res.access_token,
-                id: userId,
-              };
-
-              this.$store.dispatch("isDon", data);
-              this.$store.commit("setToken", res.access_token);
+              this.loadData(res);
             });
         }
       });
+    },
+    loadData(res) {
+      let data = {
+        token: res.access_token,
+        id: this.userId,
+      };
+
+      this.$store.dispatch("loadData", data);
+      this.$store.commit("setToken", res.access_token);
     },
     goToMay() {
       this.$refs.linkRef.click();
@@ -220,15 +225,14 @@ export default {
           app_id: this.appId,
           scope: "groups",
         })
-        .then((r) => {
-          this.$store.dispatch("isDon", r.access_token);
-          this.$store.commit("setToken", r.access_token);
+        .then((res) => {
+          this.loadData(res);
 
-          this.acceptModalText = "Спасибо!";
+          this.acceptModalText = "Спасибо ♥";
 
           setTimeout(() => {
             this.acceptModal = false;
-          }, 1500);
+          }, 1400);
         });
     },
   },

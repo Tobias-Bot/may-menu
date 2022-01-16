@@ -72,112 +72,125 @@
       </div>
     </div>
 
-    <div v-show="showResults">
-      <div class="testCard">
-        <div class="cardTextResult">{{ results.scores }} из 100</div>
-        <v-progress-linear
-          color="#ff8fcb"
-          buffer-value="0"
-          :value="results.scores"
-          height="10"
-          stream
-          rounded
-        ></v-progress-linear>
+    <div v-if="isMember">
+      <div v-show="showResults">
+        <div class="testCard">
+          <div class="cardTextResult">{{ results.scores }} из 100</div>
+          <v-progress-linear
+            color="#ff8fcb"
+            buffer-value="0"
+            :value="results.scores"
+            height="10"
+            stream
+            rounded
+          ></v-progress-linear>
+        </div>
+        <div class="testCard">
+          <div class="cardHintText">Эмоциональная осведомленность</div>
+          <v-progress-linear
+            color="#a6adfd"
+            buffer-value="0"
+            :value="results.p1"
+            height="10"
+            stream
+            rounded
+          ></v-progress-linear>
+          <br />
+          <br />
+          <div class="cardHintText">Управление своими эмоциями</div>
+          <v-progress-linear
+            color="#a6adfd"
+            buffer-value="0"
+            :value="results.p2"
+            height="10"
+            stream
+            rounded
+          ></v-progress-linear>
+          <br />
+          <br />
+          <div class="cardHintText">Самомотивация</div>
+          <v-progress-linear
+            color="#a6adfd"
+            buffer-value="0"
+            :value="results.p3"
+            height="10"
+            stream
+            rounded
+          ></v-progress-linear>
+          <br />
+          <br />
+          <div class="cardHintText">Эмпатия</div>
+          <v-progress-linear
+            color="#a6adfd"
+            buffer-value="0"
+            :value="results.p4"
+            height="10"
+            stream
+            rounded
+          ></v-progress-linear>
+          <br />
+          <br />
+          <div class="cardHintText">Распознавание эмоций других людей</div>
+          <v-progress-linear
+            color="#a6adfd"
+            buffer-value="0"
+            :value="results.p5"
+            height="10"
+            stream
+            rounded
+          ></v-progress-linear>
+        </div>
+        <div
+          class="testCard"
+          :style="
+            results.text && results.text.length > 30 ? 'text-align: left;' : ''
+          "
+        >
+          <div class="cardHintText">описание</div>
+          <span v-html="results.text"></span>
+        </div>
       </div>
-      <div class="testCard">
-        <div class="cardHintText">Эмоциональная осведомленность</div>
-        <v-progress-linear
-          color="#a6adfd"
-          buffer-value="0"
-          :value="results.p1"
-          height="10"
-          stream
-          rounded
-        ></v-progress-linear>
-        <br />
-        <br />
-        <div class="cardHintText">Управление своими эмоциями</div>
-        <v-progress-linear
-          color="#a6adfd"
-          buffer-value="0"
-          :value="results.p2"
-          height="10"
-          stream
-          rounded
-        ></v-progress-linear>
-        <br />
-        <br />
-        <div class="cardHintText">Самомотивация</div>
-        <v-progress-linear
-          color="#a6adfd"
-          buffer-value="0"
-          :value="results.p3"
-          height="10"
-          stream
-          rounded
-        ></v-progress-linear>
-        <br />
-        <br />
-        <div class="cardHintText">Эмпатия</div>
-        <v-progress-linear
-          color="#a6adfd"
-          buffer-value="0"
-          :value="results.p4"
-          height="10"
-          stream
-          rounded
-        ></v-progress-linear>
-        <br />
-        <br />
-        <div class="cardHintText">Распознавание эмоций других людей</div>
-        <v-progress-linear
-          color="#a6adfd"
-          buffer-value="0"
-          :value="results.p5"
-          height="10"
-          stream
-          rounded
-        ></v-progress-linear>
-      </div>
-      <div
-        class="testCard"
-        :style="
-          results.text && results.text.length > 30 ? 'text-align: left;' : ''
-        "
-      >
-        <div class="cardHintText">описание</div>
-        <span v-html="results.text"></span>
-      </div>
-    </div>
-    <div v-if="showResults">
-      <div class="testCard">
-        <div class="cardHintText">статистика за последнее время</div>
-        <div class="cardHintText"></div>
-        <v-sparkline
-          class="mb-3"
-          :fill="grathFilled"
-          :gradient="['#ff8fcb', '#a6adfd']"
-          line-width="3"
-          padding="10"
-          smooth="6"
-          :value="value"
-          auto-draw-easing
-        ></v-sparkline>
-        <!-- <v-btn class="mr-4" light small color="white">
+      <div v-if="showResults">
+        <div class="testCard">
+          <div class="cardHintText">статистика за последнее время</div>
+          <div class="cardHintText"></div>
+          <v-sparkline
+            class="mb-3"
+            :fill="grathFilled"
+            :gradient="['#ff8fcb', '#a6adfd']"
+            line-width="3"
+            padding="10"
+            smooth="6"
+            :value="value"
+            auto-draw-easing
+          ></v-sparkline>
+          <!-- <v-btn class="mr-4" light small color="white">
           <v-icon dark> mdi-chart-timeline-variant </v-icon>
         </v-btn>
         <v-btn class="mr-4" light small color="white">
           <v-icon dark> mdi-chart-gantt </v-icon>
         </v-btn> -->
-        <v-btn
-          class="mr-4"
-          light
-          small
-          color="white"
-          @click="grathFilled = !grathFilled"
-        >
-          <v-icon v-show="!grathFilled" dark> mdi-invert-colors </v-icon>
-          <v-icon v-show="grathFilled" dark> mdi-invert-colors-off </v-icon>
+          <v-btn
+            class="mr-4"
+            light
+            small
+            color="white"
+            @click="grathFilled = !grathFilled"
+          >
+            <v-icon v-show="!grathFilled" dark> mdi-invert-colors </v-icon>
+            <v-icon v-show="grathFilled" dark> mdi-invert-colors-off </v-icon>
+          </v-btn>
+        </div>
+      </div>
+    </div>
+    <div v-else-if="showResults">
+      <div class="testCard">
+        <div class="cardHintText">
+          Описание и статистика по результатам теста доступна только
+          пользователям, которые подписаны на сообщество Май
+        </div>
+        <v-btn class="mr-4" light small color="white" @click="subscribe">
+          Подписаться
         </v-btn>
       </div>
     </div>
@@ -236,6 +249,9 @@ export default {
   computed: {
     test() {
       return this.$store.getters.getCurrentTest;
+    },
+    isMember() {
+      return this.$store.getters.isMember;
     },
   },
   methods: {
@@ -347,6 +363,9 @@ export default {
     },
     shareTest() {
       this.$store.dispatch("shareTest", null);
+    },
+    subscribe() {
+      this.$store.dispatch("joinCommunity");
     },
   },
 };

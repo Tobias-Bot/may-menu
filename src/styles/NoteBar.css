@@ -1,20 +1,12 @@
-.v-slide-group__next,
-.v-slide-group__prev {
-  min-width: 30px;
-}
-
 .card {
   display: inline-block;
-  margin: 15px 5px;
-}
-
-.v-sheet.v-card:not(.v-sheet--outlined) {
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 10px;
   box-shadow: 3px 5px 10px rgba(0, 0, 0, 0.1);
 }
-
-.activeCard {
-  display: inline-block;
-  margin: 25px 5px 0px 5px;
+.card:hover {
+  cursor: pointer;
 }
 
 .addCardBtn {
@@ -27,30 +19,27 @@
 
 .noteText {
   width: 100%;
-  padding: 6px 8px 6px 6px;
+  padding: 18px 9px;
+  line-height: 1.4;
   font-size: 13px;
+  word-break: break-all;
 }
 
 .fullCardText {
-  display: inline-block;
-  overflow-y: auto;
-  overflow-x: hidden;
-  width: 100%;
-  max-height: 180px;
-  height: 180px;
-  padding: 10px 30px;
+  padding: 0px 8px 0px 12px;
+  min-height: 300px;
   outline: none;
-  font-size: 18px;
+  line-height: 1.5;
+  font-size: 16px;
 }
 
 .inputHint {
   position: relative;
   width: 100%;
-  padding: 0px 10px 0px 30px;
-  text-align: left;
-  font-size: 13px;
+  text-align: center;
+  font-size: 14px;
   font-weight: 500;
-  opacity: 0.4;
+  opacity: 0.7;
 }
 
 .v-btn--is-elevated.v-btn--fab {

@@ -2,7 +2,6 @@
   <v-container>
     <NoteBar :notes="Notes" />
     <br />
-    <br />
     <v-card class="cardCover" style="text-align: left">
       <div class="cardHintText">О Приложении</div>
       <span
