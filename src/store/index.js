@@ -14,7 +14,7 @@ export default new Vuex.Store({
     role: "user",
     isGroupMember: 0,
 
-    maxSavePoints: 60,
+    maxSavePoints: 31,
 
     today: "",
     isDon: "",
@@ -26,9 +26,9 @@ export default new Vuex.Store({
 
     currentEx: {},
 
-    psychologists: [],
+    currentTracker: {},
 
-    moodValue: [],
+    psychologists: [],
   },
   getters: {
     getRole(state) {
@@ -55,8 +55,20 @@ export default new Vuex.Store({
 
       return value;
     },
+    getCurrentTrackerValue(state) {
+      let points = state.currentTracker.value;
+
+      let value = [];
+
+      if (points && points.length) value = points.map((p) => p.v);
+
+      return value;
+    },
     getCurrentEx(state) {
       return state.currentEx;
+    },
+    getCurrentTracker(state) {
+      return state.currentTracker;
     },
     isPremium(state) {
       return state.isDon;
@@ -80,6 +92,12 @@ export default new Vuex.Store({
     },
     setCurrentEx(state, payload) {
       state.currentEx = payload;
+    },
+    setCurrentTracker(state, payload) {
+      state.currentTracker = payload;
+    },
+    setCurrentTrackerValue(state, payload) {
+      state.currentTracker.value = payload;
     },
     setDate(state) {
       let date = new Date();
@@ -107,9 +125,9 @@ export default new Vuex.Store({
             },
           })
           .then((r) => {
-            let data = r.response[0];
+            let d = r.response[0];
 
-            if (data.is_admin) {
+            if (d.is_admin) {
               state.role = "admin";
               state.isDon = true;
 
@@ -134,7 +152,7 @@ export default new Vuex.Store({
               console.log("You an't admin. But being just user isn't bad too");
             }
 
-            state.isGroupMember = data.is_member;
+            state.isGroupMember = d.is_member;
           });
       }
     },
@@ -144,6 +162,15 @@ export default new Vuex.Store({
           console.log(res.keys[0]);
           let value = JSON.parse(res.keys[0].value);
           commit("setCurrentTestValue", value);
+        }
+      });
+    },
+    loadValueOfCurrentTracker({ commit }, key) {
+      bridge.send("VKWebAppStorageGet", { keys: [key] }).then((res) => {
+        if (res.keys[0].value) {
+          console.log(res.keys[0]);
+          let value = JSON.parse(res.keys[0].value);
+          commit("setCurrentTrackerValue", value);
         }
       });
     },
@@ -196,11 +223,28 @@ export default new Vuex.Store({
       });
     },
     saveTrackerResults({ state }, data) {
-      state.moodValue.push(data);
+      let tracker = state.currentTracker;
+      let today = state.today;
+      let value = data;
+
+      let newDataPoint = {
+        d: today,
+        v: value,
+      };
+
+      if (tracker.value.length && today == tracker.value[tracker.value.length - 1].d)
+      tracker.value[tracker.value.length - 1].v = newDataPoint.v;
+      else {
+        tracker.value.push(newDataPoint);
+
+        let d = tracker.value;
+
+        if (d.length >= state.maxSavePoints) tracker.value = d.slice(1);
+      }
 
       bridge.send("VKWebAppStorageSet", {
         key: "tracker-mood",
-        value: JSON.stringify(state.moodValue),
+        value: JSON.stringify(tracker.value),
       });
     },
     getPsychologists({ state }) {

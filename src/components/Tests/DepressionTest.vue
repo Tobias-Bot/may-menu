@@ -91,7 +91,7 @@
             padding="10"
             smooth="6"
             :value="value"
-            auto-draw-easing
+            auto-draw
           ></v-sparkline>
           <!-- <v-btn class="mr-4" light small color="white">
           <v-icon dark> mdi-chart-timeline-variant </v-icon>

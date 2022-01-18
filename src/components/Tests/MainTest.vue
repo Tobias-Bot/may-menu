@@ -9,8 +9,8 @@
         </v-card-title>
 
         <v-card-text class="mx-1 my-2"
-          ><span v-html="test.data.text"></span>
-        </v-card-text>
+          ><span v-html="test.data.text"></span
+        ></v-card-text>
       </v-card>
     </v-dialog>
 
@@ -21,18 +21,16 @@
         <div class="cardText">
           {{ data[questionNum - 1].text }}
         </div>
-        <div style="text-align: center">
-          <v-btn
-            v-for="(btn, i) in data[questionNum - 1].btns"
-            :key="i"
-            text
-            class="my-2 mx-1"
-            style="display: inline-block; font-size: 10px"
-            color="light"
-            @click="setNextQuestion(btn.value)"
-            >{{ btn.title }}</v-btn
-          >
-        </div>
+        <v-btn
+          v-for="(btn, i) in data[questionNum - 1].btns"
+          :key="i"
+          text
+          class="mx-5"
+          style="display: inline-block"
+          color="light"
+          @click="setNextQuestion(btn.value)"
+          >{{ btn.title }}</v-btn
+        >
       </div>
     </div>
 
@@ -49,14 +47,9 @@
             rounded
           ></v-progress-linear>
         </div>
-        <div
-          class="testCard"
-          :style="
-            results.text && results.text.length > 30 ? 'text-align: left;' : ''
-          "
-        >
+        <div class="testCard">
           <div class="cardHintText">описание</div>
-          <span v-html="results.text"></span>
+          {{ results.text }}
         </div>
       </div>
       <div v-if="showResults">
@@ -72,7 +65,7 @@
             padding="10"
             smooth="6"
             :value="value"
-            auto-draw
+            auto-draw-easing
           ></v-sparkline>
           <!-- <v-btn class="mr-4" light small color="white">
           <v-icon dark> mdi-chart-timeline-variant </v-icon>
@@ -122,16 +115,16 @@
 <script>
 //import bridge from "@vkontakte/vk-bridge";
 
-import SelfValueTestData from "../../data/tests/SelfValueTestData";
+import AnxietyTestData from "../../data/tests/AnxietyTestData";
 
 export default {
-  name: "SelfValueTest",
+  name: "AnxietyTest",
   components: {},
   data: () => ({
     text: "",
     questionNum: 1,
 
-    data: SelfValueTestData,
+    data: AnxietyTestData,
 
     showResults: false,
     answerSum: 0,
@@ -147,9 +140,9 @@ export default {
   mounted() {
     this.text = `Вопрос ${this.questionNum} из ${this.data.length}`;
   },
-  //   beforeDestroy() {
-  //     this.$store.commit("resetTest", null);
-  //   },
+  // beforeDestroy() {
+  //   this.$store.commit("resetTest", null);
+  // },
   computed: {
     test() {
       return this.$store.getters.getCurrentTest;
@@ -181,29 +174,24 @@ export default {
       }
 
       let sum = this.answerSum;
-      let scores = Math.round((sum * 100) / 27);
+      let scores = Math.round((sum * 100) / 49);
       let text = "";
 
       switch (true) {
-        case sum >= 21 && sum <= 27:
-          text = `Ваша самоценность находится на достаточно высоком уровне. Вы не дадите
-        себя в обиду и сможете о себе позаботиться. Вы слышите себя и ориентируетесь
-        на свои чувства и желания в принятии решений. <br /><br /> Есть моменты над которыми еще
-        можно поработать, но в целом у вас есть ощущение, что вы себе важны и ценны.`;
+        case sum > 39 && sum <= 49:
+          text = `Очень высокий уровень тревоги`;
           break;
-        case sum >= 11 && sum <= 20:
-          text = `Ваша самоценность напоминает море в период приливов и отливов. Если
-        вокруг все спокойно и вы довольны тем, как идут дела, то вы себя цените и
-        одобряете. Как только что-то идет не так, вы склонны начать критиковать себя
-        или ругать за ошибки. <br /><br /> Если вы повысите свою самоценность, то внутри почувствуете
-        больше гармонии, спокойствия и удовлетворенности собой. А изменения к лучшему в
-        отношениях, карьере, деньгах и здоровье не заставят себя долго ждать.`;
+        case sum > 24 && sum <= 39:
+          text = `Высокий уровень тревоги`;
           break;
-        case sum >= 0 && sum <= 10:
-          text = `Вы почти не цените себя. Для этого вам нужен веский повод. Чаще всего вы
-        слышите голос внутреннего критика, который говорит о том, что вы опять все сделали
-        не так. <br /><br /> Вы уже смирились с тем, что не достаточно хороши, чтобы жить счастливо и
-        привыкли терпеть лишения. Внутри много напряжения, грусти и безысходности.`;
+        case sum > 14 && sum <= 24:
+          text = `Средний уровень тревоги (с тенденцией к высокому)`;
+          break;
+        case sum > 4 && sum <= 14:
+          text = `Средний уровень тревоги (с тенденцией к низкому)`;
+          break;
+        case sum >= 0 && sum <= 4:
+          text = `Низкий уровень тревоги`;
           break;
         default:
           break;

@@ -24,6 +24,10 @@ import EmpathyTest from "../components/Tests/EmpathyTest.vue";
 import EQTest from "../components/Tests/EQTest.vue";
 import SelfValueTest from "../components/Tests/SelfValueTest.vue";
 
+/* Trackers routing */
+
+import MoodTracker from '../components/Trackers/MoodTracker'
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -86,6 +90,11 @@ const routes = [
     path: "/donut",
     name: "Donut",
     component: Donut,
+  },
+  {
+    path: "/tracker-mood",
+    name: "MoodTracker",
+    component: MoodTracker,
   },
   {
     path: "/tests",

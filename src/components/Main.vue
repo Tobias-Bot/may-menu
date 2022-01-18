@@ -2,23 +2,30 @@
   <v-container>
     <NoteBar :notes="Notes" />
     <br />
-    <v-card class="cardCover" style="text-align: left">
-      <div class="cardHintText">О Приложении</div>
-      <span
-        >Приложение находится на этапе разработки, но ты уже можешь пользоваться
-        им. Если у тебя есть свои идеи, что можно было бы добавить в приложение,
-        пиши нам в личные сообщения, мы будем рады 🌿
-      </span>
-      <!-- <v-sparkline
-        class="mb-3"
-        :gradient="['#ff8fcb', '#a6adfd']"
-        color="#8A9EFE"
-        line-width="3"
-        padding="10"
-        smooth="6"
-        :value="value"
-        auto-draw-easing
-      ></v-sparkline> -->
+    <v-card class="cardCover">
+      <div class="cardHintText">Трекер настроения</div>
+
+      <div v-if="TrackerValue.length">
+        <v-sparkline
+          class="mb-3"
+          :gradient="['#ff8fcb', '#a6adfd']"
+          color="#8A9EFE"
+          line-width="3"
+          padding="10"
+          smooth="6"
+          :value="TrackerValue"
+          auto-draw
+        ></v-sparkline>
+      </div>
+
+      <v-btn
+        text
+        class="mx-5"
+        style="display: inline-block"
+        color="light"
+        @click="loadTrackerData"
+        >Открыть</v-btn
+      >
     </v-card>
 
     <div class="pageToolBar">
@@ -49,15 +56,16 @@ export default {
   components: {
     NoteBar,
   },
-  data: () => ({
-    moodValue: [],
-  }),
+  data: () => ({}),
   created() {
     this.getNotes();
   },
   computed: {
     Notes() {
       return this.$store.getters.getNotes;
+    },
+    TrackerValue() {
+      return this.$store.getters.getCurrentTrackerValue;
     },
   },
   methods: {
@@ -73,14 +81,14 @@ export default {
         this.$store.dispatch("getNotes");
       }
     },
-    setMoodTrackerPoint() {
-      // let date = this.$store.getters.getToday;
-      // let value =
-      // let point = {
-      //   d: date,
-      //   v:
-      // }
-      // this.$store.dispatch("saveTrackerResults", point);
+    loadTrackerData() {
+      let tracker = {
+        value: [],
+      };
+
+      this.$store.commit("setCurrentTracker", tracker);
+      this.$store.dispatch("loadValueOfCurrentTracker", "tracker-mood");
+      this.$router.push("/tracker-mood");
     },
   },
 };
