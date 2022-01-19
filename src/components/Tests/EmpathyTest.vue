@@ -21,45 +21,15 @@
         <div class="cardText">
           {{ data[questionNum - 1].text }}
         </div>
-        <v-btn
-          text
-          class="my-1 mx-1"
-          style="display: inline-block; font-size: 11px"
-          color="light"
-          @click="setNextQuestion(1)"
-          >нет, никогда</v-btn
-        >
-        <v-btn
-          text
-          class="my-1 mx-1"
-          style="display: inline-block; font-size: 11px"
-          color="light"
-          @click="setNextQuestion(2)"
-          >иногда</v-btn
-        >
-        <v-btn
-          text
-          class="my-1 mx-1"
-          style="display: inline-block; font-size: 11px"
-          color="light"
-          @click="setNextQuestion(3)"
-          >часто</v-btn
-        >
-        <v-btn
-          text
-          class="my-1 mx-1"
-          style="display: inline-block; font-size: 11px"
-          color="light"
-          @click="setNextQuestion(4)"
-          >почти всегда</v-btn
-        >
-        <v-btn
-          text
-          class="my-1 mx-1"
-          style="display: inline-block; font-size: 11px"
-          color="light"
-          @click="setNextQuestion(5)"
-          >всегда</v-btn
+
+        <b>{{ answerText }}</b>
+        <br />
+        <br />
+        <v-slider v-model="sliderValue" min="0" max="4" @input="setAnswer">
+        </v-slider>
+
+        <v-btn text color="light" @click="setNextQuestion(sliderValue + 1)"
+          >Продолжить</v-btn
         >
       </div>
     </div>
@@ -166,6 +136,10 @@ export default {
 
     grathFilled: false,
 
+    sliderValue: 1,
+    answers: ["нет, никогда", "иногда", "часто", "почти всегда", "всегда"],
+    answerText: "",
+
     results: {},
 
     value: [],
@@ -174,10 +148,9 @@ export default {
   }),
   mounted() {
     this.text = `Вопрос ${this.questionNum} из ${this.data.length}`;
+
+    this.answerText = this.answers[this.sliderValue];
   },
-  //   beforeDestroy() {
-  //     this.$store.commit("resetTest", null);
-  //   },
   computed: {
     test() {
       return this.$store.getters.getCurrentTest;
@@ -187,6 +160,9 @@ export default {
     },
   },
   methods: {
+    setAnswer() {
+      this.answerText = this.answers[this.sliderValue];
+    },
     setNextQuestion(score) {
       let tasks = [
         2, 5, 8, 9, 10, 12, 13, 15, 16, 19, 21, 22, 24, 25, 26, 27, 29, 32,

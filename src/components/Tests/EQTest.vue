@@ -21,53 +21,15 @@
         <div class="cardText">
           {{ data[questionNum - 1].text }}
         </div>
-        <v-btn
-          text
-          class="my-2 mx-1"
-          style="display: inline-block; font-size: 11px"
-          color="light"
-          @click="setNextQuestion(3)"
-          >Полностью согласен</v-btn
-        >
-        <v-btn
-          text
-          class="my-2 mx-1"
-          style="display: inline-block; font-size: 11px"
-          color="light"
-          @click="setNextQuestion(2)"
-          >В основном согласен</v-btn
-        >
-        <v-btn
-          text
-          class="my-2 mx-1"
-          style="display: inline-block; font-size: 11px"
-          color="light"
-          @click="setNextQuestion(1)"
-          >Отчасти согласен</v-btn
-        >
-        <v-btn
-          text
-          class="my-2 mx-1"
-          style="display: inline-block; font-size: 11px"
-          color="light"
-          @click="setNextQuestion(-1)"
-          >Отчасти не согласен</v-btn
-        >
-        <v-btn
-          text
-          class="my-2 mx-1"
-          style="display: inline-block; font-size: 11px"
-          color="light"
-          @click="setNextQuestion(-2)"
-          >В основном не согласен</v-btn
-        >
-        <v-btn
-          text
-          class="my-2 mx-1"
-          style="display: inline-block; font-size: 11px"
-          color="light"
-          @click="setNextQuestion(-3)"
-          >Полностью не согласен</v-btn
+
+        <b>{{ answerText }}</b>
+        <br />
+        <br />
+        <v-slider v-model="sliderValue" min="0" max="5" @input="setAnswer">
+        </v-slider>
+
+        <v-btn text color="light" @click="setNextQuestion(sliderValue + 1)"
+          >Продолжить</v-btn
         >
       </div>
     </div>
@@ -228,6 +190,17 @@ export default {
 
     grathFilled: false,
 
+    sliderValue: 2,
+    answers: [
+      "полностью согласен",
+      "в основном согласен",
+      "отчасти согласен",
+      "отчасти НЕ согласен",
+      "в основном НЕ согласен",
+      "полностью НЕ согласен",
+    ],
+    answerText: "",
+
     results: {},
 
     value: [],
@@ -242,6 +215,8 @@ export default {
   }),
   mounted() {
     this.text = `Вопрос ${this.questionNum} из ${this.data.length}`;
+
+    this.answerText = this.answers[this.sliderValue];
   },
   // beforeDestroy() {
   //   this.$store.commit("resetTest", null);
@@ -255,6 +230,9 @@ export default {
     },
   },
   methods: {
+    setAnswer() {
+      this.answerText = this.answers[this.sliderValue];
+    },
     setNextQuestion(score) {
       this.questionNum++;
 
@@ -318,24 +296,22 @@ export default {
       }
 
       let sum = this.answerSum;
-      let p1 = Math.round((this.p1 * 100) / 18);
-      let p2 = Math.round((this.p2 * 100) / 18);
-      let p3 = Math.round((this.p3 * 100) / 18);
-      let p4 = Math.round((this.p4 * 100) / 18);
-      let p5 = Math.round((this.p5 * 100) / 15);
-      let scores = Math.round((sum * 100) / 90);
+      let p1 = Math.round((this.p1 * 100) / 36);
+      let p2 = Math.round((this.p2 * 100) / 36);
+      let p3 = Math.round((this.p3 * 100) / 36);
+      let p4 = Math.round((this.p4 * 100) / 36);
+      let p5 = Math.round((this.p5 * 100) / 30);
+      let scores = Math.round((sum * 100) / 180);
       let text = "";
 
-      if (scores < 0) scores = 0;
-
       switch (true) {
-        case sum >= 70:
+        case sum >= 140:
           text = "Высокий уровень эмоционального интеллекта";
           break;
-        case sum >= 49 && sum <= 69:
+        case sum >= 98 && sum <= 138:
           text = "Средний уровень эмоционального интеллекта";
           break;
-        case sum <= 39:
+        case sum <= 78:
           text = "Низкий уровень эмоционального интеллекта";
           break;
         default:

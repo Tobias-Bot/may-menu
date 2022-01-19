@@ -21,37 +21,18 @@
         <div class="cardText">
           {{ data[questionNum - 1].text }}
         </div>
+
+        <b>{{ answerText }}</b>
+        <br />
+        <br />
+        <v-slider v-model="sliderValue" min="0" max="3" @input="setAnswer">
+        </v-slider>
+
         <v-btn
           text
-          class="my-1 mx-1"
-          style="display: inline-block; font-size: 11px"
           color="light"
-          @click="setNextQuestion(1)"
-          >никогда или изредка</v-btn
-        >
-        <v-btn
-          text
-          class="my-1 mx-1"
-          style="display: inline-block; font-size: 11px"
-          color="light"
-          @click="setNextQuestion(2)"
-          >иногда</v-btn
-        >
-        <v-btn
-          text
-          class="my-1 mx-1"
-          style="display: inline-block; font-size: 11px"
-          color="light"
-          @click="setNextQuestion(3)"
-          >часто</v-btn
-        >
-        <v-btn
-          text
-          class="my-1 mx-1"
-          style="display: inline-block; font-size: 11px"
-          color="light"
-          @click="setNextQuestion(4)"
-          >постоянно</v-btn
+          @click="setNextQuestion(sliderValue + 1)"
+          >Продолжить</v-btn
         >
       </div>
     </div>
@@ -157,6 +138,10 @@ export default {
 
     grathFilled: false,
 
+    sliderValue: 1,
+    answers: ["никогда или изредка", "иногда", "часто", "постоянно"],
+    answerText: "",
+
     results: {},
 
     value: [],
@@ -165,6 +150,8 @@ export default {
   }),
   mounted() {
     this.text = `Вопрос ${this.questionNum} из ${this.data.length}`;
+
+    this.answerText = this.answers[this.sliderValue];
   },
   // beforeDestroy() {
   //   this.$store.commit("resetTest", null);
@@ -178,6 +165,9 @@ export default {
     },
   },
   methods: {
+    setAnswer() {
+      this.answerText = this.answers[this.sliderValue];
+    },
     setNextQuestion(score) {
       this.questionNum++;
 
