@@ -18,6 +18,7 @@ import Donut from "../components/Donut.vue";
 
 /* Tests routing */
 
+import MentalTest from "../components/Tests/MentalTest.vue";
 import AnxietyTest from "../components/Tests/AnxietyTest.vue";
 import DepressionTest from "../components/Tests/DepressionTest.vue";
 import EmpathyTest from "../components/Tests/EmpathyTest.vue";
@@ -26,7 +27,7 @@ import SelfValueTest from "../components/Tests/SelfValueTest.vue";
 
 /* Trackers routing */
 
-import MoodTracker from '../components/Trackers/MoodTracker'
+import MoodTracker from "../components/Trackers/MoodTracker";
 
 Vue.use(VueRouter);
 
@@ -100,6 +101,11 @@ const routes = [
     path: "/tests",
     name: "Tests",
     component: Tests,
+  },
+  {
+    path: "/test-mental",
+    name: "MentalTest",
+    component: MentalTest,
   },
   {
     path: "/test-anxiety",

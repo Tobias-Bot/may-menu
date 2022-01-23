@@ -8,6 +8,13 @@
       ref="linkRef"
     ></a>
     <v-card class="cardCover" style="text-align: left">
+      <v-img
+        height="200"
+        style="border-radius: inherit"
+        src="https://64.media.tumblr.com/6e5850e7405582d26e4a067577d40ba2/a1ae6318e423174b-65/s640x960/645987158731d0e56da6e30d8095d8b236c1627d.gifv"
+      ></v-img>
+
+      <br />
       <div class="cardHintText">Майский фонд психологической помощи</div>
       <span
         >Все полученные деньги мы распределяем между теми, кому необходима

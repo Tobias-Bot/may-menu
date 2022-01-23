@@ -11,14 +11,9 @@
         <v-btn color="light" text @click="setCurrentTest">
           <v-icon>mdi-play</v-icon>
         </v-btn>
-        <!-- <v-btn
-          color="light"
-          text
-          style="box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.08)"
-          @click="setFavoriteTest"
-        >
-          <v-icon>mdi-heart-outline</v-icon>
-        </v-btn> -->
+        <v-btn color="light" small text @click="shareTest">
+          <v-icon>mdi-share</v-icon>
+        </v-btn>
 
         <v-spacer></v-spacer>
 
@@ -51,25 +46,22 @@ export default {
   }),
   methods: {
     setCurrentTest() {
-      let test = {
-        index: this.testIndex,
-        data: this.test,
-        value: [],
-      };
+      // let test = {
+      //   index: this.testIndex,
+      //   data: this.test,
+      //   value: [],
+      // };
 
-      this.$store.commit("setCurrentTest", test);
-      this.$store.dispatch(
-        "loadValueOfCurrentTest",
-        this.test.url.substring(1, this.test.url.length)
-      );
+      // this.$store.commit("setCurrentTest", test);
+      // this.$store.dispatch(
+      //   "loadValueOfCurrentTest",
+      //   this.test.url.substring(1, this.test.url.length)
+      // );
       this.$router.push(this.test.url);
     },
-    // setFavoriteTest() {
-    //   this.$store.dispatch(
-    //     "setFavoriteTest",
-    //     this.test.url.substring(1, this.test.url.length)
-    //   );
-    // },
+    shareTest() {
+      this.$store.dispatch("shareTest", this.test.url);
+    },
   },
 };
 </script>

@@ -122,12 +122,6 @@
       <v-btn to="/" class="mr-3 py-3" x-small light color="white">
         <v-icon dark> mdi-close </v-icon>
       </v-btn>
-      <v-btn class="mr-2" light color="white" @click="showInfo = true">
-        <v-icon dark> mdi-information-variant </v-icon>
-      </v-btn>
-      <v-btn class="mr-2" light color="white" @click="shareTracker">
-        <v-icon dark> mdi-share </v-icon>
-      </v-btn>
     </div>
   </v-container>
 </template>
@@ -175,12 +169,6 @@ export default {
       this.$store.dispatch("saveTrackerResults", value);
 
       this.getResults();
-    },
-    shareTracker() {
-      this.$store.dispatch("shareTest", null);
-    },
-    subscribe() {
-      this.$store.dispatch("joinCommunity");
     },
   },
 };

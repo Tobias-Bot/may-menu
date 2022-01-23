@@ -28,10 +28,7 @@
         <v-slider v-model="sliderValue" min="0" max="3" @input="setAnswer">
         </v-slider>
 
-        <v-btn
-          text
-          color="light"
-          @click="setNextQuestion(sliderValue + 1)"
+        <v-btn text color="light" @click="setNextQuestion(sliderValue + 1)"
           >Продолжить</v-btn
         >
       </div>
@@ -61,6 +58,37 @@
         </div>
       </div>
       <div v-if="showResults">
+        <div v-if="prevValue.length" class="testCard">
+          <div class="cardHintText">сравнение с предыдущей отметкой</div>
+          <div class="cardHintText"></div>
+          <v-sparkline
+            class="mb-3"
+            :fill="grathFilled"
+            :gradient="['#ff8fcb', '#a6adfd']"
+            color="#8A9EFE"
+            line-width="3"
+            padding="10"
+            smooth="6"
+            :value="prevValue"
+            label-size="13"
+            auto-draw
+          >
+            <template v-slot:label="item">
+              {{ item.value }}
+            </template>
+          </v-sparkline>
+          <v-btn
+            class="mr-4"
+            light
+            small
+            color="white"
+            @click="grathFilled = !grathFilled"
+          >
+            <v-icon v-show="!grathFilled" dark> mdi-invert-colors </v-icon>
+            <v-icon v-show="grathFilled" dark> mdi-invert-colors-off </v-icon>
+          </v-btn>
+        </div>
+
         <div class="testCard">
           <div class="cardHintText">статистика за последнее время</div>
           <v-sparkline
@@ -122,6 +150,7 @@
 <script>
 //import bridge from "@vkontakte/vk-bridge";
 
+import testsInfo from "../../data/tests/testsInfo";
 import DepressionTestData from "../../data/tests/DepressionTestData";
 
 export default {
@@ -145,9 +174,26 @@ export default {
     results: {},
 
     value: [],
+    prevValue: [],
 
     showInfo: false,
   }),
+  created() {
+    let i = testsInfo.findIndex((test) => test.url == "/test-depression");
+
+    let data = testsInfo[i];
+
+    let test = {
+      data,
+      value: [],
+    };
+
+    this.$store.commit("setCurrentTest", test);
+    this.$store.dispatch(
+      "loadValueOfCurrentTest",
+      data.url.substring(1, data.url.length)
+    );
+  },
   mounted() {
     this.text = `Вопрос ${this.questionNum} из ${this.data.length}`;
 
@@ -253,6 +299,10 @@ export default {
       };
 
       this.value.push(scores);
+
+      if (this.value.length > 2) {
+        this.prevValue = this.value.slice(-2);
+      }
 
       this.saveTestResults();
     },

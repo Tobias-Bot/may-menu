@@ -21,15 +21,15 @@
         <div class="cardText">
           {{ data[questionNum - 1].text }}
         </div>
-        <v-btn
-          v-for="(btn, i) in data[questionNum - 1].btns"
-          :key="i"
-          text
-          class="mx-5"
-          style="display: inline-block"
-          color="light"
-          @click="setNextQuestion(btn.value)"
-          >{{ btn.title }}</v-btn
+
+        <b>{{ answerText }}</b>
+        <br />
+        <br />
+        <v-slider v-model="sliderValue" min="0" max="2" @input="setAnswer">
+        </v-slider>
+
+        <v-btn text color="light" @click="setNextQuestion(sliderValue)"
+          >Продолжить</v-btn
         >
       </div>
     </div>
@@ -47,9 +47,65 @@
             rounded
           ></v-progress-linear>
         </div>
-        <div class="testCard">
+        <div
+          class="testCard"
+          :style="
+            results.text && results.text.length > 30 ? 'text-align: left;' : ''
+          "
+        >
           <div class="cardHintText">описание</div>
-          {{ results.text }}
+          <span v-html="results.text"></span>
+        </div>
+        <div class="testCard">
+          <div class="cardHintText">Тревожность</div>
+          <v-progress-linear
+            color="#a6adfd"
+            buffer-value="0"
+            :value="results.p1"
+            height="10"
+            stream
+            rounded
+          ></v-progress-linear>
+          <br />
+          <br />
+          <div class="cardHintText">
+            Фрустрация (негативное состояние, вызванное невозможностью
+            удовлетворения актуальных потребностей)
+          </div>
+          <v-progress-linear
+            color="#a6adfd"
+            buffer-value="0"
+            :value="results.p2"
+            height="10"
+            stream
+            rounded
+          ></v-progress-linear>
+          <br />
+          <br />
+          <div class="cardHintText">Агрессивность</div>
+          <v-progress-linear
+            color="#a6adfd"
+            buffer-value="0"
+            :value="results.p3"
+            height="10"
+            stream
+            rounded
+          ></v-progress-linear>
+          <br />
+          <br />
+          <div class="cardHintText">
+            Ригидность (черта личности, которая характеризуется сильным
+            сопротивлением или неспособностью к изменению поведения, мнения или
+            отношения)
+          </div>
+          <v-progress-linear
+            color="#a6adfd"
+            buffer-value="0"
+            :value="results.p4"
+            height="10"
+            stream
+            rounded
+          ></v-progress-linear>
         </div>
       </div>
       <div v-if="showResults">
@@ -91,7 +147,6 @@
             class="mb-3"
             :fill="grathFilled"
             :gradient="['#ff8fcb', '#a6adfd']"
-            color="#8A9EFE"
             line-width="3"
             padding="10"
             smooth="6"
@@ -147,21 +202,29 @@
 //import bridge from "@vkontakte/vk-bridge";
 
 import testsInfo from "../../data/tests/testsInfo";
-import AnxietyTestData from "../../data/tests/AnxietyTestData";
+import MentalTestData from "../../data/tests/MentalTestData";
 
 export default {
-  name: "AnxietyTest",
+  name: "MentalTest",
   components: {},
   data: () => ({
     text: "",
     questionNum: 1,
 
-    data: AnxietyTestData,
+    data: MentalTestData,
 
     showResults: false,
     answerSum: 0,
 
     grathFilled: false,
+
+    sliderValue: 1,
+    answers: [
+      "нет, совсем не про меня",
+      "такое бывает, но редко",
+      "да, это про меня",
+    ],
+    answerText: "",
 
     results: {},
 
@@ -169,9 +232,14 @@ export default {
     prevValue: [],
 
     showInfo: false,
+
+    p1: 0,
+    p2: 0,
+    p3: 0,
+    p4: 0,
   }),
   created() {
-    let i = testsInfo.findIndex((test) => test.url == "/test-anxiety");
+    let i = testsInfo.findIndex((test) => test.url == "/test-mental");
 
     let data = testsInfo[i];
 
@@ -188,6 +256,8 @@ export default {
   },
   mounted() {
     this.text = `Вопрос ${this.questionNum} из ${this.data.length}`;
+
+    this.answerText = this.answers[this.sliderValue];
   },
   // beforeDestroy() {
   //   this.$store.commit("resetTest", null);
@@ -201,11 +271,32 @@ export default {
     },
   },
   methods: {
+    setAnswer() {
+      this.answerText = this.answers[this.sliderValue];
+    },
     setNextQuestion(score) {
       this.questionNum++;
 
       if (this.questionNum <= this.data.length) {
         this.text = `Вопрос ${this.questionNum} из ${this.data.length}`;
+
+        let val = this.questionNum - 1;
+
+        if (val >= 0 && val < 10) {
+          this.p1 += score;
+        }
+
+        if (val >= 10 && val < 20) {
+          this.p2 += score;
+        }
+
+        if (val >= 20 && val < 30) {
+          this.p3 += score;
+        }
+
+        if (val >= 30 && val < 40) {
+          this.p4 += score;
+        }
 
         this.answerSum += score;
       } else {
@@ -223,24 +314,68 @@ export default {
       }
 
       let sum = this.answerSum;
-      let scores = Math.round((sum * 100) / 49);
+      let p1 = Math.round((this.p1 * 100) / 20);
+      let p2 = Math.round((this.p2 * 100) / 20);
+      let p3 = Math.round((this.p3 * 100) / 20);
+      let p4 = Math.round((this.p4 * 100) / 20);
+      let scores = Math.round((sum * 100) / 80);
       let text = "";
 
       switch (true) {
-        case sum > 39 && sum <= 49:
-          text = `Очень высокий уровень тревоги`;
+        case this.p1 >= 0 && this.p1 <= 7:
+          text += "Низкий уровень тревожности. ";
           break;
-        case sum > 24 && sum <= 39:
-          text = `Высокий уровень тревоги`;
+        case this.p1 >= 8 && this.p1 <= 14:
+          text += "Средний уровень тревожности, допустимый уровень. ";
           break;
-        case sum > 14 && sum <= 24:
-          text = `Средний уровень тревоги (с тенденцией к высокому)`;
+        case this.p1 >= 15 && this.p1 <= 20:
+          text += "Высокий уровень тревожности. ";
           break;
-        case sum > 4 && sum <= 14:
-          text = `Средний уровень тревоги (с тенденцией к низкому)`;
+        default:
           break;
-        case sum >= 0 && sum <= 4:
-          text = `Низкий уровень тревоги`;
+      }
+
+      switch (true) {
+        case this.p2 >= 0 && this.p2 <= 7:
+          text +=
+            "Не имеете высокой самооценки, устойчивы к неудачам, не боитесь трудностей. ";
+          break;
+        case this.p2 >= 8 && this.p2 <= 14:
+          text += "Средний уровень фрустрации. ";
+          break;
+        case this.p2 >= 15 && this.p2 <= 20:
+          text +=
+            "У вас низкая самооценка, вы избегаете трудностей, боитесь неудач, фрустрированы. ";
+          break;
+        default:
+          break;
+      }
+
+      switch (true) {
+        case this.p3 >= 0 && this.p3 <= 7:
+          text += "Вы спокойны и выдержаны. ";
+          break;
+        case this.p3 >= 8 && this.p3 <= 14:
+          text += "Средний уровень агрессивности. ";
+          break;
+        case this.p3 >= 15 && this.p3 <= 20:
+          text +=
+            "Вы агрессивны, не выдержаны, есть трудности при общении и работе с людьми. ";
+          break;
+        default:
+          break;
+      }
+
+      switch (true) {
+        case this.p4 >= 0 && this.p4 <= 7:
+          text += "Ригидности нет, легкая переключаемость. ";
+          break;
+        case this.p4 >= 8 && this.p4 <= 14:
+          text += "Средний уровень ригидности. ";
+          break;
+        case this.p4 >= 15 && this.p4 <= 20:
+          text +=
+            "Сильно выраженная ригидность, неизменность поведения, убеждений, взглядов, даже если они расходятся, не соответствуют реальной обстановке, жизни. ";
           break;
         default:
           break;
@@ -249,6 +384,10 @@ export default {
       this.results = {
         scores,
         text,
+        p1,
+        p2,
+        p3,
+        p4,
       };
 
       this.value.push(scores);

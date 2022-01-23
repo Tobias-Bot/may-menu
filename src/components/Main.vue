@@ -18,14 +18,23 @@
         ></v-sparkline>
       </div>
 
-      <v-btn
-        text
-        class="mx-5"
-        style="display: inline-block"
-        color="light"
-        @click="loadTrackerData"
+      <v-btn text class="mx-5" color="light" @click="loadTrackerData"
         >Открыть</v-btn
       >
+    </v-card>
+
+    <v-card v-if="isDon" class="cardCover">
+      <v-img
+        height="200"
+        style="border-radius: inherit"
+        src="https://64.media.tumblr.com/52a3e77155f041b556fe76ccbd66a1d5/tumblr_pphfez5UAu1we9f2ro1_r2_1280.gifv"
+      ></v-img>
+
+      <div class="cardHintText">
+        Полный доступ к приложению в одной подписке Май!
+      </div>
+
+      <v-btn text class="mx-5" color="light" to="/premium">Подробнее</v-btn>
     </v-card>
 
     <div class="pageToolBar">
@@ -66,6 +75,9 @@ export default {
     },
     TrackerValue() {
       return this.$store.getters.getCurrentTrackerValue;
+    },
+    isDon() {
+      return this.$store.getters.isPremium;
     },
   },
   methods: {

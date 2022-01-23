@@ -57,7 +57,7 @@
     <v-row justify="center" no-gutters class="mt-3">
       <v-col cols="6" style="padding-right: 5px">
         <v-btn
-          v-if="!noteModal && notes.length < maxNotesCount"
+          v-if="notes.length < maxNotesCount"
           class="card"
           style="height: 60px"
           color="black"

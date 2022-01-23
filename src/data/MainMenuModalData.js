@@ -47,7 +47,7 @@ const MainMenuModalData = {
       url: "/rules",
     },
     {
-      title: "Проведение соц.опросов",
+      title: "соц. опросы",
       url: "/social-quests",
     },
     {
@@ -66,6 +66,20 @@ const MainMenuModalData = {
     //   title: "Реклама",
     //   url: "/ads",
     // },
+  ],
+  social: [
+    {
+      title: "Май в vk",
+      url: "https://vk.com/warmay",
+    },
+    {
+      title: "Май в instagram",
+      url: "https://www.instagram.com/warmay_inst",
+    },
+    {
+      title: "Май в telegram",
+      url: "https://t.me/warmay",
+    },
   ],
 };
 //   {

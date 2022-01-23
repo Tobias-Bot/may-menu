@@ -1,6 +1,14 @@
 <template>
   <v-container>
     <v-card class="cardCover" style="text-align: left">
+      <v-img
+        height="200"
+        style="border-radius: inherit"
+        src="https://64.media.tumblr.com/b365621ad5d20a7cf32210a80b5ba1c9/tumblr_pokfv2NocL1we9f2ro2_500.gifv"
+      ></v-img>
+
+      <br/>
+
       <div class="cardHintText">
         Проведение социальных опросов и исследований
       </div>
@@ -28,7 +36,6 @@
 export default {
   name: "SocialQuests",
   data: () => ({}),
-  methods: {
-  },
+  methods: {},
 };
 </script>

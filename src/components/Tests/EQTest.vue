@@ -47,6 +47,15 @@
             rounded
           ></v-progress-linear>
         </div>
+        <div
+          class="testCard"
+          :style="
+            results.text && results.text.length > 30 ? 'text-align: left;' : ''
+          "
+        >
+          <div class="cardHintText">описание</div>
+          <span v-html="results.text"></span>
+        </div>
         <div class="testCard">
           <div class="cardHintText">Эмоциональная осведомленность</div>
           <v-progress-linear
@@ -102,17 +111,39 @@
             rounded
           ></v-progress-linear>
         </div>
-        <div
-          class="testCard"
-          :style="
-            results.text && results.text.length > 30 ? 'text-align: left;' : ''
-          "
-        >
-          <div class="cardHintText">описание</div>
-          <span v-html="results.text"></span>
-        </div>
       </div>
       <div v-if="showResults">
+        <div v-if="prevValue.length" class="testCard">
+          <div class="cardHintText">сравнение с предыдущей отметкой</div>
+          <div class="cardHintText"></div>
+          <v-sparkline
+            class="mb-3"
+            :fill="grathFilled"
+            :gradient="['#ff8fcb', '#a6adfd']"
+            color="#8A9EFE"
+            line-width="3"
+            padding="10"
+            smooth="6"
+            :value="prevValue"
+            label-size="13"
+            auto-draw
+          >
+            <template v-slot:label="item">
+              {{ item.value }}
+            </template>
+          </v-sparkline>
+          <v-btn
+            class="mr-4"
+            light
+            small
+            color="white"
+            @click="grathFilled = !grathFilled"
+          >
+            <v-icon v-show="!grathFilled" dark> mdi-invert-colors </v-icon>
+            <v-icon v-show="grathFilled" dark> mdi-invert-colors-off </v-icon>
+          </v-btn>
+        </div>
+
         <div class="testCard">
           <div class="cardHintText">статистика за последнее время</div>
           <div class="cardHintText"></div>
@@ -174,6 +205,7 @@
 <script>
 //import bridge from "@vkontakte/vk-bridge";
 
+import testsInfo from "../../data/tests/testsInfo";
 import EQTestData from "../../data/tests/EQTestData";
 
 export default {
@@ -204,6 +236,7 @@ export default {
     results: {},
 
     value: [],
+    prevValue: [],
 
     showInfo: false,
 
@@ -213,6 +246,22 @@ export default {
     p4: 0,
     p5: 0,
   }),
+  created() {
+    let i = testsInfo.findIndex((test) => test.url == "/test-eq");
+
+    let data = testsInfo[i];
+
+    let test = {
+      data,
+      value: [],
+    };
+
+    this.$store.commit("setCurrentTest", test);
+    this.$store.dispatch(
+      "loadValueOfCurrentTest",
+      data.url.substring(1, data.url.length)
+    );
+  },
   mounted() {
     this.text = `Вопрос ${this.questionNum} из ${this.data.length}`;
 
@@ -329,6 +378,10 @@ export default {
       };
 
       this.value.push(scores);
+
+      if (this.value.length > 2) {
+        this.prevValue = this.value.slice(-2);
+      }
 
       this.saveTestResults();
     },

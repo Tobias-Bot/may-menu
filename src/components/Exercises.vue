@@ -14,8 +14,7 @@
           style="
             color: black;
             font-width: 500;
-            font-size: 18px;
-            max-heigth: none;
+            font-size: 16px;
             overflow: hidden;
           "
         >

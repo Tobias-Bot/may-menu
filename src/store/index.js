@@ -7,7 +7,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    appid: 8039190, //7706189
+    appid: 8039190, //7706189,
     groupid: 160404048,
     psyTopicid: 46675469,
     token: "",
@@ -212,11 +212,17 @@ export default new Vuex.Store({
     //     value: data,
     //   });
     // },
-    shareTest({ state }) {
-      let test = state.currentTest;
-
-      let testUrl = test.data.url.substring(1, test.data.url.length);
+    shareTest({ state }, data) {
+      let test = "";
+      let testUrl = "";
       let appId = state.appid;
+
+      if (data) {
+        testUrl = data;
+      } else {
+        test = state.currentTest;
+        testUrl = test.data.url.substring(1, test.data.url.length);
+      }
 
       bridge.send("VKWebAppShare", {
         link: `https://vk.com/app${appId}#${testUrl}`,
@@ -232,8 +238,11 @@ export default new Vuex.Store({
         v: value,
       };
 
-      if (tracker.value.length && today == tracker.value[tracker.value.length - 1].d)
-      tracker.value[tracker.value.length - 1].v = newDataPoint.v;
+      if (
+        tracker.value.length &&
+        today == tracker.value[tracker.value.length - 1].d
+      )
+        tracker.value[tracker.value.length - 1].v = newDataPoint.v;
       else {
         tracker.value.push(newDataPoint);
 

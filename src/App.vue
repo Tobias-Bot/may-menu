@@ -31,8 +31,23 @@
             :disabled="currentPath(card.url)"
             color="light"
             text
-            x-small
+            small
             @click="goTo(card.url)"
+          >
+            {{ card.title }}
+          </v-btn>
+          <br />
+          <br />
+          <br />
+          <v-btn
+            v-for="(card, j) in cardBtns.social"
+            :key="card.url + j"
+            class="cardBtns my-2 mx-2"
+            color="light"
+            text
+            x-small
+            :href="card.url"
+            target="_blank"
           >
             {{ card.title }}
           </v-btn>
@@ -68,7 +83,7 @@
 
     <v-dialog dark scrollable persistent v-model="acceptModal">
       <v-card tile light color="white">
-        <v-card-text style="padding: 30px 10px; text-align: center">
+        <v-card-text style="padding: 35px 10px; text-align: center">
           {{ acceptModalText }}
         </v-card-text>
 
@@ -82,44 +97,42 @@
       </v-card>
     </v-dialog>
 
+    <v-dialog dark scrollable v-model="statusModal">
+      <v-card tile light color="white">
+        <v-card-title>
+          <v-btn icon light @click="statusModal = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+        </v-card-title>
+
+        <v-card-text style="padding: 20px 30px 30px 40px">
+          <div v-for="(status, i) in statuses" :key="i">
+            <v-icon :color="status.color" dark> mdi-{{ status.icon }} </v-icon>
+            — {{ status.text }} <br /><br />
+          </div>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+
     <div class="headerLineTop"></div>
-    <div class="headerLineTopSecond">
+    <div class="headerLineTopSecond" @click="statusModal = true">
       <span class="logoTitle">Мαú</span>
-      <span v-if="role == 'admin'">
-        <v-tooltip bottom color="purple">
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="purple" dark v-bind="attrs" v-on="on">
-              mdi-crown-circle
-            </v-icon>
-          </template>
-          <span>Админ Май</span>
-        </v-tooltip>
-      </span>
-      <span v-else-if="role == 'user' && !isDon">
-        <v-tooltip bottom color="grey">
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="grey" dark v-bind="attrs" v-on="on">
-              mdi-account-circle
-            </v-icon>
-          </template>
-          <span>Обычный профиль</span>
-        </v-tooltip></span
+      <template v-if="role == 'admin'">
+        <v-icon color="purple" dark> mdi-crown-circle </v-icon></template
       >
-      <span v-if="isDon">
-        <v-tooltip bottom color="pink">
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="pink" dark v-bind="attrs" v-on="on">
-              mdi-charity
-            </v-icon>
+      <template v-else>
+        <template v-if="role == 'user' && !isDon && !isMember">
+          <v-icon color="grey" dark> mdi-account-circle </v-icon>
+        </template>
+        <template v-else>
+          <template v-if="isMember"
+            ><v-icon color="green" dark> mdi-check-decagram </v-icon></template
+          >
+          <template v-if="isDon">
+            <v-icon color="pink" dark> mdi-charity </v-icon>
           </template>
-          <span>Оформлена подписка на Май</span>
-        </v-tooltip>
-      </span>
-      <!-- <span @click="rolesModal = true"
-        ><v-icon class="ml-2" color="black" size="16" dark>
-          mdi-dots-horizontal
-        </v-icon></span
-      > -->
+        </template>
+      </template>
     </div>
     <div class="header">
       <a
@@ -165,21 +178,22 @@
 import bridge from "@vkontakte/vk-bridge";
 import logo from "./pics/logo.png";
 
+import statuses from "./data/Statuses.js";
 import MainMenuModalData from "./data/MainMenuModalData.js";
-
-//const group_id = 160404048;
 
 export default {
   name: "App",
 
   data: () => ({
     logo,
+    statuses,
 
     menu: false,
     acceptModal: false,
     rolesModal: false,
+    statusModal: false,
     acceptModalText: `Добро пожаловать в Май! Прежде чем мы продолжим, нам потребуется
-          информация из твоего профиля Вконтакте для корректной работы
+          информация из твоего профиля Вконтакте (только общедоступные данные) для корректной работы
           приложения`,
 
     cardBtns: MainMenuModalData,
@@ -198,6 +212,9 @@ export default {
     },
     isDon() {
       return this.$store.getters.isPremium;
+    },
+    isMember() {
+      return this.$store.getters.isMember;
     },
     role() {
       return this.$store.getters.getRole;
