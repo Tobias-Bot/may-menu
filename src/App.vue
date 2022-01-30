@@ -167,7 +167,7 @@
     </div>
 
     <div class="headerLineBotSecond">
-      <span class="footerText">Made for u with ♥</span>
+      <span class="footerText">{{ footerText }}</span>
     </div>
 
     <div class="headerLineBot"></div>
@@ -179,6 +179,7 @@ import bridge from "@vkontakte/vk-bridge";
 import logo from "./pics/logo.png";
 
 import statuses from "./data/Statuses.js";
+import msg from "./data/MessagesForYou.js";
 import MainMenuModalData from "./data/MainMenuModalData.js";
 
 export default {
@@ -187,6 +188,7 @@ export default {
   data: () => ({
     logo,
     statuses,
+    msg,
 
     menu: false,
     acceptModal: false,
@@ -195,6 +197,7 @@ export default {
     acceptModalText: `Добро пожаловать в Май! Прежде чем мы продолжим, нам потребуется
           информация из твоего профиля Вконтакте (только общедоступные данные) для корректной работы
           приложения`,
+    footerText: "",
 
     cardBtns: MainMenuModalData,
 
@@ -205,6 +208,9 @@ export default {
     this.getInitialProps();
 
     this.$store.commit("setDate", null);
+  },
+  updated() {
+    this.getRandomMsg();
   },
   computed: {
     appId() {
@@ -278,6 +284,14 @@ export default {
             this.acceptModal = false;
           }, 1400);
         });
+    },
+    getRandomMsg() {
+      let max = msg.length;
+      let min = 0;
+
+      let index = Math.floor(Math.random() * (max - min)) + min;
+
+      this.footerText = msg[index].text;
     },
   },
 };
