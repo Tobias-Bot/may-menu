@@ -7,15 +7,15 @@
         <div class="cardText">
           {{ data[questionNum - 1].text }}
         </div>
-        <v-btn
-          v-for="(btn, i) in data[questionNum - 1].btns"
-          :key="i"
-          text
-          class="mx-5"
-          style="display: inline-block"
-          color="light"
-          @click="setNextQuestion(btn.value)"
-          >{{ btn.title }}</v-btn
+
+        <b>{{ answerText }}</b>
+        <br />
+        <br />
+        <v-slider v-model="sliderValue" min="0" max="1" @input="setAnswer">
+        </v-slider>
+
+        <v-btn text color="light" @click="setNextQuestion(sliderValue)"
+          >Продолжить</v-btn
         >
       </div>
     </div>
@@ -32,12 +32,12 @@
 
 <script>
 import testsInfo from "../../data/tests/testsInfo";
-import AnxietyTestData from "../../data/tests/AnxietyTestData";
+import StressTestData from "../../data/tests/StressTestData";
 
 import TestResults from "./TestResults";
 
 export default {
-  name: "AnxietyTest",
+  name: "StressTest",
   components: {
     TestResults,
   },
@@ -45,10 +45,14 @@ export default {
     text: "",
     questionNum: 1,
 
-    data: AnxietyTestData,
+    data: StressTestData,
 
     showResults: false,
     answerSum: 0,
+
+    sliderValue: 1,
+    answers: ["нет, ко мне это не относится", "да, это про меня"],
+    answerText: "",
 
     results: {},
     subResults: [],
@@ -57,7 +61,7 @@ export default {
     prevValue: [],
   }),
   created() {
-    let i = testsInfo.findIndex((test) => test.url == "/test-anxiety");
+    let i = testsInfo.findIndex((test) => test.url == "/test-stress");
 
     let data = testsInfo[i];
 
@@ -74,6 +78,8 @@ export default {
   },
   mounted() {
     this.text = `Вопрос ${this.questionNum} из ${this.data.length}`;
+
+    this.answerText = this.answers[this.sliderValue];
   },
   computed: {
     test() {
@@ -81,6 +87,9 @@ export default {
     },
   },
   methods: {
+    setAnswer() {
+      this.answerText = this.answers[this.sliderValue];
+    },
     setNextQuestion(score) {
       this.questionNum++;
 
@@ -103,24 +112,21 @@ export default {
       }
 
       let sum = this.answerSum;
-      let scores = Math.round((sum * 100) / 49);
+      let scores = Math.round((sum * 100) / 18);
       let text = "";
 
       switch (true) {
-        case sum > 39 && sum <= 49:
-          text = `Очень высокий уровень тревоги`;
+        case sum >= 10:
+          text = `Ваше здоровье в серьезнейшей опасности. Необходимо пункт за пунктом проанализировать ответы на тест и постараться немедленно заняться своим здоровьем.`;
           break;
-        case sum > 24 && sum <= 39:
-          text = `Высокий уровень тревоги`;
+        case sum >= 7 && sum <= 9:
+          text = `Высокий уровень стресса на данный момент. Если в самое ближайшее время вы не предпримете решительных шагов к изменению своего образа жизни, то вас ожидают, к сожалению, крупные неприятности.`;
           break;
-        case sum > 14 && sum <= 24:
-          text = `Средний уровень тревоги (с тенденцией к высокому)`;
+        case sum >= 4 && sum <= 6:
+          text = `Пока ситуация не слишком тревожная, но уже необходимо обратить внимание на пункты, где ответ был утвердительным.`;
           break;
-        case sum > 4 && sum <= 14:
-          text = `Средний уровень тревоги (с тенденцией к низкому)`;
-          break;
-        case sum >= 0 && sum <= 4:
-          text = `Низкий уровень тревоги`;
+        case sum >= 0 && sum <= 3:
+          text = `Нормальный уровень стресса. На всякий случай проверьте себя в течение еще одной недели, так как ваше субъективное восприятие «слишком много» или «слишком мало» может оказаться несамокритичным.`;
           break;
         default:
           break;

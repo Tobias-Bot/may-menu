@@ -32,12 +32,12 @@
 
 <script>
 import testsInfo from "../../data/tests/testsInfo";
-import AnxietyTestData from "../../data/tests/AnxietyTestData";
+import ShatteredNervesTestData from "../../data/tests/ShatteredNervesTestData";
 
 import TestResults from "./TestResults";
 
 export default {
-  name: "AnxietyTest",
+  name: "ShatteredNervesTest",
   components: {
     TestResults,
   },
@@ -45,7 +45,7 @@ export default {
     text: "",
     questionNum: 1,
 
-    data: AnxietyTestData,
+    data: ShatteredNervesTestData,
 
     showResults: false,
     answerSum: 0,
@@ -57,7 +57,7 @@ export default {
     prevValue: [],
   }),
   created() {
-    let i = testsInfo.findIndex((test) => test.url == "/test-anxiety");
+    let i = testsInfo.findIndex((test) => test.url == "/test-nerves");
 
     let data = testsInfo[i];
 
@@ -103,24 +103,21 @@ export default {
       }
 
       let sum = this.answerSum;
-      let scores = Math.round((sum * 100) / 49);
+      let scores = Math.round((sum * 100) / 30);
       let text = "";
 
       switch (true) {
-        case sum > 39 && sum <= 49:
-          text = `Очень высокий уровень тревоги`;
+        case sum >= 25 && sum <= 30:
+          text = `Очень неуравновешен, возбудим.`;
           break;
-        case sum > 24 && sum <= 39:
-          text = `Высокий уровень тревоги`;
+        case sum >= 10 && sum < 25:
+          text = `Средняя раздражительность.`;
           break;
-        case sum > 14 && sum <= 24:
-          text = `Средний уровень тревоги (с тенденцией к высокому)`;
+        case sum >= 5 && sum < 10:
+          text = `Спокоен, уравновешен.`;
           break;
-        case sum > 4 && sum <= 14:
-          text = `Средний уровень тревоги (с тенденцией к низкому)`;
-          break;
-        case sum >= 0 && sum <= 4:
-          text = `Низкий уровень тревоги`;
+        case sum >= 0 && sum < 5:
+          text = `Эмоционально ограничен.`;
           break;
         default:
           break;

@@ -1,5 +1,32 @@
 const testsInfo = [
   {
+    title: "Уровень стресса",
+    text: `Уровень собственного стресса.`,
+    questionsCount: 18,
+    cover:
+      "https://sun1-55.userapi.com/impg/s6Ka_H72M8UqLRPmHy70EUHARBRXtfZQdyD-yQ/rgkbtirEEro.jpg?size=1280x1031&quality=96&sign=decd7d54e4dcd39bc333aebf98758b6f&type=album",
+    url: "/test-stress",
+    results: true,
+  },
+  {
+    title: "Уверенность в себе",
+    text: `Очень неуверен в себе, уверен в себе или же слишком самоуверен? Другое название данного теста — тест Райдаса.`,
+    questionsCount: 30,
+    cover:
+      "https://sun1-87.userapi.com/impg/c855024/v855024132/1af003/5Ygo6k1R0Wc.jpg?size=1280x852&quality=96&sign=91b19d9d1b89188750a212c7dfc02131&type=album",
+    url: "/test-confidence",
+    results: true,
+  },
+  {
+    title: "Расшатанность нервов",
+    text: `Неуравновешенность. Возбудимость. Автор теста — английский психолог В. Коулман.`,
+    questionsCount: 30,
+    cover:
+      "https://sun1-55.userapi.com/impg/NjGu_aoOrbccEQ9QZTZ9Xuzx2gIKSAw8WvxhTA/eYKIlBIDA6U.jpg?size=1200x800&quality=96&sign=c77d82361a6cfe293b0ae8fd9204b543&type=album",
+    url: "/test-nerves",
+    results: true,
+  },
+  {
     title: "Оценка психического состояния",
     text: `Самооценка психических состояний Айзенка: тревожность, фрустрация, агрессивность и ригидность. <br /><br /> Айзенк, Ганс Юрген
     (род. 1916) — английский психолог, один из лидеров биологического направления в психологии, создатель факторной теории личности.`,

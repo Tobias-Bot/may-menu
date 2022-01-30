@@ -7,7 +7,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    appid: 8039190, //7706189,
+    appid: 7706189, //8039190,
     groupid: 160404048,
     psyTopicid: 46675469,
     token: "",

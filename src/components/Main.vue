@@ -23,7 +23,7 @@
       >
     </v-card>
 
-    <v-card v-if="isDon" class="cardCover">
+    <v-card v-if="!isDon" class="cardCover">
       <v-img
         height="200"
         style="border-radius: inherit"

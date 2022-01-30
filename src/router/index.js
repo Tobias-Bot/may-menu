@@ -18,6 +18,9 @@ import Donut from "../components/Donut.vue";
 
 /* Tests routing */
 
+import StressTest from "../components/Tests/StressTest.vue";
+import ConfidenceTest from "../components/Tests/ConfidenceTest.vue";
+import ShatteredNervesTest from "../components/Tests/ShatteredNervesTest.vue";
 import MentalTest from "../components/Tests/MentalTest.vue";
 import AnxietyTest from "../components/Tests/AnxietyTest.vue";
 import DepressionTest from "../components/Tests/DepressionTest.vue";
@@ -101,6 +104,21 @@ const routes = [
     path: "/tests",
     name: "Tests",
     component: Tests,
+  },
+  {
+    path: "/test-stress",
+    name: "StressTest",
+    component: StressTest,
+  },
+  {
+    path: "/test-confidence",
+    name: "ConfidenceTest",
+    component: ConfidenceTest,
+  },
+  {
+    path: "/test-nerves",
+    name: "ShatteredNervesTest",
+    component: ShatteredNervesTest,
   },
   {
     path: "/test-mental",
