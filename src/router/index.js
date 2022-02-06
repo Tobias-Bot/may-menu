@@ -7,7 +7,7 @@ import Psychologists from "../components/Psychologists.vue";
 import Exercises from "../components/Exercises.vue";
 import Questions from "../components/Questions.vue";
 import Mailing from "../components/Mailing.vue";
-import Streams from "../components/Streams.vue";
+// import Streams from "../components/Streams.vue";
 
 import Profile from "../components/Profile.vue";
 import Tests from "../components/Tests.vue";
@@ -65,11 +65,11 @@ const routes = [
     name: "Mailing",
     component: Mailing,
   },
-  {
-    path: "/streams",
-    name: "Streams",
-    component: Streams,
-  },
+  // {
+  //   path: "/streams",
+  //   name: "Streams",
+  //   component: Streams,
+  // },
   {
     path: "/profile",
     name: "Profile",

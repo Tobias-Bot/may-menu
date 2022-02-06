@@ -30,11 +30,11 @@ const MainMenuModalData = {
       url: "/mailing",
       icon: "email",
     },
-    {
-      title: "Трансляции",
-      url: "/streams",
-      icon: "coffee",
-    },
+    // {
+    //   title: "Трансляции",
+    //   url: "/streams",
+    //   icon: "coffee",
+    // },
     // {
     //   title: "Поиск друзей",
     //   url: "/not-found",
@@ -73,12 +73,16 @@ const MainMenuModalData = {
       url: "https://vk.com/warmay",
     },
     {
-      title: "Май в instagram",
-      url: "https://www.instagram.com/warmay_inst",
+      title: "Май в tiktok",
+      url: "https://www.tiktok.com/@warmay_tt",
     },
     {
       title: "Май в telegram",
       url: "https://t.me/warmay",
+    },
+    {
+      title: "Май в instagram",
+      url: "https://www.instagram.com/warmay_inst",
     },
   ],
 };

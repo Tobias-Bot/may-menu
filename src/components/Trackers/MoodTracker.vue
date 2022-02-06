@@ -1,18 +1,18 @@
 <template>
   <v-container>
-    <!-- <v-dialog dark scrollable v-model="showInfo">
+    <v-dialog dark scrollable v-model="showTimeline">
       <v-card tile light color="white">
         <v-card-title>
-          <v-btn icon light @click="showInfo = false">
+          <v-btn icon light @click="showTimeline = false">
             <v-icon>mdi-close</v-icon>
           </v-btn>
         </v-card-title>
 
-        <v-card-text class="mx-1 my-2"
-          ><span v-html="test.data.text"></span
-        ></v-card-text>
+        <v-card-text class="mx-1 my-2">
+          <Timeline :data="tracker.value" />
+        </v-card-text>
       </v-card>
-    </v-dialog> -->
+    </v-dialog>
 
     <div class="testTitle">Трекер настроения</div>
     <div v-show="!showResults">
@@ -87,12 +87,6 @@
             :value="value"
             auto-draw
           ></v-sparkline>
-          <!-- <v-btn class="mr-4" light small color="white">
-          <v-icon dark> mdi-chart-timeline-variant </v-icon>
-        </v-btn>
-        <v-btn class="mr-4" light small color="white">
-          <v-icon dark> mdi-chart-gantt </v-icon>
-        </v-btn> -->
           <v-btn
             class="mr-4"
             light
@@ -102,6 +96,15 @@
           >
             <v-icon v-show="!grathFilled" dark> mdi-invert-colors </v-icon>
             <v-icon v-show="grathFilled" dark> mdi-invert-colors-off </v-icon>
+          </v-btn>
+          <v-btn
+            class="mr-4"
+            light
+            small
+            color="white"
+            @click="showTimeline = true"
+          >
+            <v-icon dark> mdi-timeline-clock </v-icon>
           </v-btn>
         </div>
       </div>
@@ -127,13 +130,17 @@
 </template>
 
 <script>
+import Timeline from "../Timeline.vue";
+
 export default {
   name: "MoodTracker",
-  components: {},
+  components: {
+    Timeline,
+  },
   data: () => ({
     showResults: false,
     grathFilled: false,
-    showInfo: false,
+    showTimeline: false,
 
     value: [],
     prevValue: [],

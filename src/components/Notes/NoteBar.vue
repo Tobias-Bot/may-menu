@@ -24,24 +24,13 @@
         </v-card-title>
 
         <v-card-text style="padding: 10px 20px 30px 20px; color: black">
-          <div
+          <textarea
             class="fullCardText"
-            ref="noteText"
-            :contenteditable="editNoteText"
-            @click="editMode"
+            v-model="fullNoteText"
             @blur="saveNoteText"
             @input="isMaxLength"
-            @paste="clearText"
-            @keydown="
-              (e) => {
-                if (e.code === 'Enter') {
-                  e.preventDefault();
-                }
-              }
-            "
-          >
-            {{ notes[index].text }}
-          </div>
+            @paste="isMaxLength"
+          ></textarea>
         </v-card-text>
 
         <v-card-actions style="width: 100%; text-align: center">
@@ -71,10 +60,7 @@
             v-if="i % 2 == 0"
             class="card"
             :style="`background-color: ${note.color}`"
-            @click="
-              noteModal = true;
-              index = i;
-            "
+            @click="openNote(i)"
           >
             <div class="noteText">
               <div v-if="isFull(note.text)">
@@ -91,10 +77,7 @@
             v-if="i % 2 !== 0"
             class="card"
             :style="`background-color: ${note.color}`"
-            @click="
-              noteModal = true;
-              index = i;
-            "
+            @click="openNote(i)"
           >
             <div class="noteText">
               <div v-if="isFull(note.text)">
@@ -129,6 +112,8 @@ export default {
     noteMaxLength: 380,
     noteCurrentLength: 0,
 
+    fullNoteText: "",
+
     noteModal: false,
   }),
   computed: {
@@ -155,6 +140,16 @@ export default {
     isFull(text) {
       return text.length > this.maxCardLen;
     },
+    openNote(i) {
+      this.index = i;
+      this.fullNoteText = this.notes[i].text;
+
+      let text = this.fullNoteText;
+      this.noteCurrentLength = this.noteMaxLength - text.length;
+
+      this.editNoteText = true;
+      this.noteModal = true;
+    },
     addNote() {
       this.noteCurrentLength = this.noteMaxLength;
 
@@ -165,14 +160,9 @@ export default {
 
       this.notes.unshift(note);
       this.index = 0;
+      this.fullNoteText = this.notes[this.index].text;
       this.noteModal = true;
       this.editNoteText = true;
-
-      if (this.$refs.noteText) this.$refs.noteText.innerText = "";
-
-      setTimeout(() => {
-        this.$refs.noteText.focus();
-      }, 0);
 
       this.$store.commit("setNotes", this.notes);
     },
@@ -183,10 +173,6 @@ export default {
         key: "notes",
         value: JSON.stringify(notes),
       });
-
-      if (!this.noteModal) {
-        this.$refs.noteText.innerText = "";
-      }
 
       this.$store.commit("setNotes", notes);
     },
@@ -200,12 +186,9 @@ export default {
       this.saveNotes();
     },
     saveNoteText(e) {
-      let text = this.$refs.noteText.innerText;
-      this.$refs.noteText.innerText = "";
+      let text = this.fullNoteText;
 
       this.notes[this.index].text = text;
-
-      this.$refs.noteText.innerText = text;
 
       this.isMaxLength(e);
 
@@ -218,43 +201,16 @@ export default {
         e.preventDefault();
       }
 
-      let text = this.$refs.noteText.innerText;
+      let text = this.fullNoteText;
 
       this.noteCurrentLength = this.noteMaxLength - text.length;
 
       if (this.noteCurrentLength <= 0) {
-        this.$refs.noteText.innerText = text.slice(0, this.noteMaxLength);
-
-        let div = this.$refs.noteText;
-
-        const range = document.createRange();
-        range.selectNodeContents(div);
-        range.collapse(false);
-        const sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
+        this.fullNoteText = text.slice(0, this.noteMaxLength);
 
         this.noteCurrentLength =
           "Объем текста ограничен. Попробуй немного сократить.";
       }
-    },
-    editMode() {
-      this.editNoteText = true;
-
-      let text = this.$refs.noteText.innerText;
-
-      this.noteCurrentLength = this.noteMaxLength - text.length;
-
-      setTimeout(() => {
-        this.$refs.noteText.focus();
-      }, 0);
-    },
-    clearText(e) {
-      e.preventDefault();
-      let text = (e.originalEvent || e).clipboardData.getData("text/plain");
-      document.execCommand("insertText", false, text);
-
-      this.isMaxLength(e);
     },
   },
 };

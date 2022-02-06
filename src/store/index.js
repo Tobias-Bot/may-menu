@@ -7,7 +7,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    appid: 8039190, // 7706189,
+    appid: 8039190, //7706189,
     groupid: 160404048,
     psyTopicid: 46675469,
     token: "",
@@ -17,7 +17,7 @@ export default new Vuex.Store({
     maxSavePoints: 31,
 
     today: "",
-    isDon: "",
+    isDon: 1,
 
     notes: [],
 

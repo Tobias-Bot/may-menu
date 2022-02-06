@@ -8,7 +8,7 @@
           </v-btn>
         </v-card-title>
 
-        <v-card-text style="padding: 30px 5px; text-align: center">
+        <v-card-text style="padding: 50px 5px; text-align: center">
           <v-btn
             v-for="(card, i) in cardBtns.main"
             :key="i"
