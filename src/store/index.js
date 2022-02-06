@@ -111,48 +111,50 @@ export default new Vuex.Store({
   },
   actions: {
     loadData({ state }, data) {
-      let group_id = state.groupid;
+      if (state.isDon == "") {
+        let group_id = state.groupid;
 
-      bridge
-        .send("VKWebAppCallAPIMethod", {
-          method: "groups.getById",
-          request_id: "group-info",
-          params: {
-            group_id: state.groupid,
-            v: "5.131",
-            access_token: data.token,
-          },
-        })
-        .then((r) => {
-          let d = r.response[0];
+        bridge
+          .send("VKWebAppCallAPIMethod", {
+            method: "groups.getById",
+            request_id: "group-info",
+            params: {
+              group_id: state.groupid,
+              v: "5.131",
+              access_token: data.token,
+            },
+          })
+          .then((r) => {
+            let d = r.response[0];
 
-          if (d.is_admin) {
-            state.role = "admin";
-            state.isDon = true;
+            if (d.is_admin) {
+              state.role = "admin";
+              state.isDon = true;
 
-            console.log("You're admin. I see you");
-          } else {
-            state.role = "user";
+              console.log("You're admin. I see you");
+            } else {
+              state.role = "user";
 
-            bridge
-              .send("VKWebAppCallAPIMethod", {
-                method: "donut.isDon",
-                request_id: "info",
-                params: {
-                  owner_id: "-" + group_id,
-                  v: "5.131",
-                  access_token: data.token,
-                },
-              })
-              .then((res) => {
-                state.isDon = res.response;
-              });
+              bridge
+                .send("VKWebAppCallAPIMethod", {
+                  method: "donut.isDon",
+                  request_id: "info",
+                  params: {
+                    owner_id: "-" + group_id,
+                    v: "5.131",
+                    access_token: data.token,
+                  },
+                })
+                .then((res) => {
+                  state.isDon = res.response;
+                });
 
-            console.log("You an't admin. But being just user isn't bad too");
-          }
+              console.log("You an't admin. But being just user isn't bad too");
+            }
 
-          state.isGroupMember = d.is_member;
-        });
+            state.isGroupMember = d.is_member;
+          });
+      }
     },
     loadValueOfCurrentTest({ commit }, key) {
       bridge.send("VKWebAppStorageGet", { keys: [key] }).then((res) => {
