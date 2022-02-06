@@ -19,6 +19,32 @@
       </span>
     </v-card>
 
+    <v-card
+      class="mx-auto mb-4"
+      style="border-radius: 25px"
+    >
+      <v-img :src="chat.background" height="150px"></v-img>
+
+      <v-card-title> {{ chat.title }} </v-card-title>
+
+      <v-card-subtitle> {{ chat.text }} </v-card-subtitle>
+
+      <v-card-actions>
+        <v-btn
+          color="light"
+          text
+          :href="chat.url"
+          target="_blank"
+          :disabled="chat.premium && !isDon"
+        >
+          войти
+        </v-btn>
+        <v-btn v-if="chat.premium && !isDon" to="/premium" color="light" text small>
+          о подписке
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+
     <v-card class="cardCover" style="text-align: left">
       <div class="cardHintText">Дополнительные службы</div>
       <span>{{ text }}</span>
@@ -44,21 +70,21 @@
 </template>
 
 <script>
-//import PsyCard from "./Psychologists/PsyCard";
+import chats from "../data/Chats.js";
 
 export default {
   name: "Tests",
   components: {
-    //PsyCard,
+    chat: chats[0],
   },
   data: () => ({
     text: `8-800-2000-122 — телефон доверия, круглосуточно. Телефон доверия твоего города, номер которого можно найти в Интернете. Для получения неотложной медицинской помощи позвонить по номеру экстренной помощи 112. Звонок с мобильного возможен, даже если номер заблокирован.`,
   }),
-  //   computed: {
-  //     Cards() {
-  //       return this.$store.getters.getPsyCards;
-  //     },
-  //   },
+  computed: {
+    isDon() {
+      return this.$store.getters.isPremium;
+    },
+  },
   //   created() {
   //     this.$store.dispatch("getPsychologists", null);
   //   },
