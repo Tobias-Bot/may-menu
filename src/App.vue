@@ -87,7 +87,7 @@
           {{ acceptModalText }}
         </v-card-text>
 
-        <v-card-actions style="width: 100%; text-align: center">
+        <v-card-actions v-show="acceptModalText !== 'Спасибо ♥'" style="width: 100%; text-align: center">
           <v-row justify="center" class="my-4">
             <v-btn class="cardBtns" color="black" text @click="getAccess()">
               <span>Продолжить</span>
